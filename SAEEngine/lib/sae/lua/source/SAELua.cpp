@@ -1,9 +1,11 @@
 #include "SAELua.h"
 
+#include <new>
+
 namespace sae::lua
 {
 
-	void lua_newclass(lua_State* _lua, const char* _tname)
+	void lua_newclass(lua_State* _lua, const char* _tname, const luaL_Reg* _functions, int _upVals)
 	{
 		lua_pushstring(_lua, _tname);
 		lua_gettable(_lua, LUA_REGISTRYINDEX);
@@ -22,8 +24,25 @@ namespace sae::lua
 			lua_setfield(_lua, -2, _tname);
 
 			lua_setfield(_lua, -2, "__name");
+
+			lua_pushvalue(_lua, -1);
+			lua_setfield(_lua, -2, "__index");
+
+			if(_functions)
+				luaL_setfuncs(_lua, _functions, _upVals);
+
 		};
 	};
+	void lua_newclass(lua_State* _lua, const char* _tname, const luaL_Reg* _functions)
+	{
+		lua_newclass(_lua, _tname, _functions, 0);
+	};
+	void lua_newclass(lua_State* _lua, const char* _tname)
+	{
+		lua_newclass(_lua, _tname, nullptr);
+	};
+
+
 	int lua_inherit(lua_State* _lua, const char* _tname, int _idx)
 	{
 		if (_idx < 0)
@@ -69,5 +88,16 @@ namespace sae::lua
 		};
 		return _out;
 	};
+
+
+	int lua_getlen(lua_State* _lua, int _idx)
+	{
+		lua_len(_lua, _idx);
+		auto n = lua_tointeger(_lua, -1);
+		lua_pop(_lua, 1);
+		return n;
+	};
+	
+
 
 }

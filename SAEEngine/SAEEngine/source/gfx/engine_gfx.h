@@ -16,14 +16,14 @@ namespace sae::engine
 	struct WidgetObject : public GFXObject
 	{
 		void update() override {};
-		void draw(const glm::mat4& _projectionMat) {};
-		~WidgetObject();
+		void draw(const glm::mat4& _projectionMat);
+		~WidgetObject() = default;
 	};
 
 	struct WorldObject : public GFXObject
 	{
-		void update() override;
-		void draw(const glm::mat4& _projectionMat, const glm::mat4& _cameraMat);
+		void update() override {};
+		void draw(const glm::mat4& _projectionMat, const glm::mat4& _cameraMat) {};
 	};
 
 

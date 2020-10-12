@@ -4,9 +4,30 @@
 
 #include "gfx/engine_gfx.h"
 
+
+#include <vector>
+
 namespace sae::engine
 {
-	struct Scene_Data;
+	struct Scene_Data
+	{
+	public:
+
+		void push_back(WidgetObject* _obj);
+		void erase(WidgetObject* _obj);
+
+		void clear() noexcept;
+
+		void draw();
+		void update();
+
+		void activate() {};
+		void deactivate() {};
+
+		~Scene_Data();
+	private:
+		std::vector<WidgetObject*> widgets_{};
+	};
 
 	Scene_Data* lua_toscenedata(lua_State* _lua, int _idx, int _arg);
 

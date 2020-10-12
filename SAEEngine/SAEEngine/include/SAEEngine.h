@@ -28,16 +28,19 @@ namespace sae::engine
 	constexpr const static auto SAE_ENGINE_GLFW_VERSION_MAJOR = 3;
 	constexpr const static auto SAE_ENGINE_GLFW_VERSION_MINOR = 3;
 
-#if SAE_ENGINE_OVERRIDE_GLFW_VERSION == OFF
+#ifdef SAE_ENGINE_OVERRIDE_GLFW_VERSION
 	static_assert(GLFW_VERSION_MAJOR == SAE_ENGINE_GLFW_VERSION_MAJOR, "GLFW version mismatch! SAEEngine requires major version 3! Set SAE_ENGINE_OVERRIDE_GLFW_VERSION to true to override");
 	static_assert(GLFW_VERSION_MINOR >= SAE_ENGINE_GLFW_VERSION_MINOR, "GLFW version mismatch! SAEEngine requires minor version >= 3! Set SAE_ENGINE_OVERRIDE_GLFW_VERSION to true to override");
 #endif
 
 	constexpr const static auto SAE_ENGINE_LUA_VERSION = "Lua " "5" "." "4";
 	
-#if SAE_ENGINE_OVERRIDE_LUA_VERSION == OFF
+#ifdef SAE_ENGINE_OVERRIDE_LUA_VERSION 
 	static_assert(SAE_ENGINE_LUA_VERSION == LUA_VERSION, "Lua version mismatch! SAEEngine requires lua version 5.4! Set SAE_ENGINE_OVERRIDE_LUA_VERSION to true to override");
 #endif
+
+
+
 
 	/**
 	 * @brief noexcept version of lua_safecall()

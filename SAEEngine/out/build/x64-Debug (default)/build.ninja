@@ -3775,6 +3775,14 @@ build SAEEngine\CMakeFiles\SAEEngine.dir\source\os\engine_os.cpp.obj: CXX_COMPIL
   TARGET_COMPILE_PDB = SAEEngine\CMakeFiles\SAEEngine.dir\SAEEngine.pdb
   TARGET_PDB = SAEEngine\SAEEngine.pdb
 
+build SAEEngine\CMakeFiles\SAEEngine.dir\source\shader\engine_shader.cpp.obj: CXX_COMPILER__SAEEngine_Debug ..\..\..\SAEEngine\source\shader\engine_shader.cpp || cmake_object_order_depends_target_SAEEngine_Debug
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   -std:c++latest
+  INCLUDES = -I. -I..\..\..\SAEEngine\include -I..\..\..\SAEEngine\source -I..\..\..\lib\lua\src -I..\..\..\lib\glfw\include -I..\..\..\lib\glm\glm\.. -I..\..\..\lib\glad\include -I..\..\..\lib\lodepng -I..\..\..\lib\sae\. -I..\..\..\lib\sae\lua\include
+  OBJECT_DIR = SAEEngine\CMakeFiles\SAEEngine.dir
+  OBJECT_FILE_DIR = SAEEngine\CMakeFiles\SAEEngine.dir\source\shader
+  TARGET_COMPILE_PDB = SAEEngine\CMakeFiles\SAEEngine.dir\SAEEngine.pdb
+  TARGET_PDB = SAEEngine\SAEEngine.pdb
+
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target SAEEngine
@@ -3783,7 +3791,7 @@ build SAEEngine\CMakeFiles\SAEEngine.dir\source\os\engine_os.cpp.obj: CXX_COMPIL
 #############################################
 # Link the static library SAEEngine\SAEEngine.lib
 
-build SAEEngine\SAEEngine.lib: CXX_STATIC_LIBRARY_LINKER__SAEEngine_Debug SAEEngine\CMakeFiles\SAEEngine.dir\source\SAEEngine.cpp.obj SAEEngine\CMakeFiles\SAEEngine.dir\source\gfx\engine_gfx.cpp.obj SAEEngine\CMakeFiles\SAEEngine.dir\source\scene\engine_scene.cpp.obj SAEEngine\CMakeFiles\SAEEngine.dir\source\window\engine_window.cpp.obj SAEEngine\CMakeFiles\SAEEngine.dir\source\io\engine_io.cpp.obj SAEEngine\CMakeFiles\SAEEngine.dir\source\os\engine_os.cpp.obj || lib\glad\glad.lib lib\glfw\src\glfw3.lib lib\lodepng\lodepng.lib lib\lua\liblua.lib lib\sae\lua\SAELua.lib
+build SAEEngine\SAEEngine.lib: CXX_STATIC_LIBRARY_LINKER__SAEEngine_Debug SAEEngine\CMakeFiles\SAEEngine.dir\source\SAEEngine.cpp.obj SAEEngine\CMakeFiles\SAEEngine.dir\source\gfx\engine_gfx.cpp.obj SAEEngine\CMakeFiles\SAEEngine.dir\source\scene\engine_scene.cpp.obj SAEEngine\CMakeFiles\SAEEngine.dir\source\window\engine_window.cpp.obj SAEEngine\CMakeFiles\SAEEngine.dir\source\io\engine_io.cpp.obj SAEEngine\CMakeFiles\SAEEngine.dir\source\os\engine_os.cpp.obj SAEEngine\CMakeFiles\SAEEngine.dir\source\shader\engine_shader.cpp.obj || lib\glad\glad.lib lib\glfw\src\glfw3.lib lib\lodepng\lodepng.lib lib\lua\liblua.lib lib\sae\lua\SAELua.lib
   LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64
   OBJECT_DIR = SAEEngine\CMakeFiles\SAEEngine.dir

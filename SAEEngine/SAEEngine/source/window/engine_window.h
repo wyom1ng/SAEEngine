@@ -1,11 +1,13 @@
 #pragma once
 
 #include "SAEEngine.h"
+#include "scene/engine_scene.h"
 
 #include <optional>
 #include <exception>
 #include <stdexcept>
 #include <functional>
+#include <stack>
 
 namespace sae::engine
 {
@@ -59,7 +61,7 @@ namespace sae::engine
 					}
 					else
 					{
-#if SAE_ENGINE_USE_EXCEPTIONS == ON
+#ifdef SAE_ENGINE_USE_EXCEPTIONS
 						throw std::out_of_range{ "no monitors were found" };
 #else
 						return;
@@ -84,7 +86,7 @@ namespace sae::engine
 			}
 			else
 			{
-#if SAE_ENGINE_USE_EXCEPTIONS == ON
+#ifdef SAE_ENGINE_USE_EXCEPTIONS
 				throw std::runtime_error{ "glfwCreateWindow() failed" };
 #else
 				return;
@@ -241,6 +243,9 @@ namespace sae::engine
 			};
 		};
 
+		Scene_Data* active_scene() const;
+		
+		void update();
 
 
 		window_data(Window _window, lua_State* _lua) :
@@ -295,6 +300,20 @@ namespace sae::engine
 
 	// window.focus()
 	int window_focus(lua_State* _lua);
+
+	// window.push_scene(Scene_Data)
+	int window_push_scene(lua_State* _lua);
+
+	// window.pop_scene()
+	int window_pop_scene(lua_State* _lua);
+
+	// window.scene_stack_size() -> integer
+	int window_scene_stack_size(lua_State* _lua);
+
+	// window.has_active_scene() -> bool
+	int window_has_active_scene(lua_State* _lua);
+
+
 
 	// window:__gc
 	int window_destructor(lua_State* _lua);

@@ -7,6 +7,8 @@
 #include "window/engine_window.h"
 #include "scene/engine_scene.h"
 #include "gfx/engine_gfx.h"
+#include "shader/engine_shader.h"
+#include "file/engine_file.h"
 
 #include <optional>
 

@@ -52,7 +52,7 @@ namespace sae::engine
 		return lua_pcall(_lua, _args, _rets, _f);
 	};
 
-#if SAE_ENGINE_USE_EXCEPTIONS == ON
+#ifdef SAE_ENGINE_USE_EXCEPTIONS
 	int lua_safecall(lua_State* _lua, int _args, int _rets, int _f)
 	{
 		auto _err = lua_pcall(_lua, _args, _rets, _f);
@@ -86,7 +86,7 @@ namespace sae::engine
 		return lua_safecall(this->lua(), 0, LUA_MULTRET, 0, std::nothrow);
 	};
 
-#if SAE_ENGINE_USE_EXCEPTIONS == ON
+#ifdef SAE_ENGINE_USE_EXCEPTIONS
 	int SAEEngine::run_script(const std::filesystem::path& _path)
 	{
 		auto _err = luaL_loadfile(this->lua(), _path.string().c_str());
@@ -116,7 +116,7 @@ namespace sae::engine
 	void SAEEngine::update()
 	{
 		auto _ptr = lua_getwindow(this->lua());
-		_ptr->window_.update();
+		_ptr->update();
 	};
 
 	void SAEEngine::set_ostream(std::ostream* _ostr) noexcept
@@ -167,6 +167,8 @@ namespace sae::engine
 		lua_setfield(_lua, t, "scene");
 		luaopen_engine_gfx(_lua);
 		lua_setfield(_lua, t, "gfx");
+		luaopen_engine_shader(_lua);
+		lua_setfield(_lua, t, "shader");
 
 		return 1;
 	};

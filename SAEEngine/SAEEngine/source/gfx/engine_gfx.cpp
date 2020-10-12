@@ -9,6 +9,10 @@
 namespace sae::engine
 {
 
+	void WidgetObject::draw(const glm::mat4& _projectionMat)
+	{
+
+	};
 
 
 	GFXObject* lua_toGFXObject(lua_State* _lua, int _idx, int _arg)
@@ -17,7 +21,6 @@ namespace sae::engine
 		luaL_argcheck(_lua, ud != NULL, _arg, "`GFXObject' expected");
 		return (GFXObject*)ud;
 	};
-
 
 
 
@@ -36,10 +39,6 @@ namespace sae::engine
 		return 0;
 	};
 
-	WidgetObject::~WidgetObject()
-	{
-		std::cout << "~WidgetObject()\n";
-	};
 	
 
 	const luaL_Reg gfx_lib[] =
@@ -57,8 +56,6 @@ namespace sae::engine
 		lua_setfield(_lua, -2, "__index");
 
 		luaL_setfuncs(_lua, gfx_lib, 0);
-
-
 
 		luaopen_engine_gfx_widget(_lua);
 		lua_setfield(_lua, -2, "widget");
@@ -87,8 +84,6 @@ namespace sae::engine
 	int luaopen_engine_gfx_widget(lua_State* _lua)
 	{
 		lua::lua_newclass(_lua, "SAEEngine.WidgetObject");
-		lua_pushvalue(_lua, -1);
-		lua_setfield(_lua, -2, "__index");
 
 		lua::lua_inherit(_lua, "SAEEngine.GFXObject", -1);
 

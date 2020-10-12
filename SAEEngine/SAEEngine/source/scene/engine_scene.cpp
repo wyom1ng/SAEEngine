@@ -1,34 +1,40 @@
 #include "engine_scene.h"
 
+#include <glm/gtc/matrix_transform.hpp>
+
 #include <new>
-#include <vector>
+#include <algorithm>
+#include <iostream>
 
 namespace sae::engine
 {
 
-	struct Scene_Data
+	Scene_Data::~Scene_Data() { std::cout << "~Scene_Data()\n"; };
+
+	void Scene_Data::push_back(WidgetObject* _obj)
 	{
-	public:
+		this->widgets_.push_back(_obj);
+	};
+	void Scene_Data::erase(WidgetObject* _obj)
+	{
+		this->widgets_.erase(std::find(this->widgets_.begin(), this->widgets_.end(), _obj));
+	};
 
-		void push_back(WidgetObject* _obj)
-		{
-			this->widgets_.push_back(_obj);
-		};
+	void Scene_Data::clear() noexcept
+	{
+		this->widgets_.clear();
+	};
 
-
-		void draw()
-		{
-
-		};
-		void update()
-		{
-
-		};
-
-
-		~Scene_Data() = default;
-	private:
-		std::vector<WidgetObject*> widgets_{};
+	void Scene_Data::draw()
+	{
+		glm::mat4 _projectionMat = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f);
+		for (auto& w : this->widgets_)
+			w->draw(_projectionMat);
+	};
+	void Scene_Data::update()
+	{
+		for (auto& w : this->widgets_)
+			w->update();
 	};
 
 	Scene_Data* lua_toscenedata(lua_State* _lua, int _idx, int _arg)
@@ -37,6 +43,9 @@ namespace sae::engine
 		luaL_argcheck(_lua, ud != NULL, _arg, "`scene' expected");
 		return (Scene_Data*)ud;
 	};
+
+
+
 
 	int scene_new(lua_State* _lua)
 	{
@@ -49,10 +58,13 @@ namespace sae::engine
 		auto _ptr = lua_toscenedata(_lua, 1, 1);
 		if (lua::lua_isbaseof(_lua, 2, "SAEEngine.WidgetObject"))
 		{
-
+			_ptr->push_back((WidgetObject*)lua::lua_downcast(_lua, 2, "SAEEngine.WidgetObject"));
+		}
+		else if (lua::lua_isbaseof(_lua, 2, "SAEEngine.WorldObject"))
+		{
+			abort();
 		};
-
-
+		return 0;
 	};
 
 
@@ -71,19 +83,15 @@ namespace sae::engine
 	const luaL_Reg scene_lib[] =
 	{
 		luaL_Reg{ "new", &scene_new },
+		luaL_Reg{ "push", &scene_push },
 		luaL_Reg{ "__gc", &scene_destructor },
 		luaL_Reg{ NULL, NULL }
 	};
 
 	int luaopen_engine_scene(lua_State* _lua)
 	{
-		luaL_newmetatable(_lua, "SAEEngine.scene");
-
-		lua_pushvalue(_lua, -1);
-		lua_setfield(_lua, -2, "__index");
-
+		lua::lua_newclass(_lua, "SAEEngine.scene");
 		luaL_setfuncs(_lua, scene_lib, 0);
-
 
 		return 1;
 	};

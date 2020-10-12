@@ -16,7 +16,10 @@ namespace sae::lua
 	 * @param _tname name of the class
 	 * @return 
 	*/
+	void lua_newclass(lua_State* _lua, const char* _tname, const luaL_Reg* _functions, int _upVals);
+	void lua_newclass(lua_State* _lua, const char* _tname, const luaL_Reg* _functions);
 	void lua_newclass(lua_State* _lua, const char* _tname);
+
 
 
 	int lua_inherit(lua_State* _lua, const char* _tname, int _idx);
@@ -55,5 +58,15 @@ namespace sae::lua
 		lua_setmetatable(_lua, -2);
 		return _out;
 	};
+
+
+
+	int lua_getlen(lua_State* _lua, int _idx);
+
+
+
+
+
+	
 
 };
