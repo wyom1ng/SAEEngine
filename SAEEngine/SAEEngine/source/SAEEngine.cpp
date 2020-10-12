@@ -78,10 +78,6 @@ namespace sae::engine
 namespace sae::engine
 {
 
-
-
-
-
 	int SAEEngine::run_script(const std::filesystem::path& _path, std::nothrow_t)
 	{
 		auto _err = luaL_loadfile(this->lua(), _path.string().c_str());
@@ -169,6 +165,8 @@ namespace sae::engine
 		lua_setfield(_lua, t, "os");
 		luaopen_engine_scene(_lua);
 		lua_setfield(_lua, t, "scene");
+		luaopen_engine_gfx(_lua);
+		lua_setfield(_lua, t, "gfx");
 
 		return 1;
 	};

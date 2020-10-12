@@ -8,7 +8,7 @@ namespace sae::engine
 {
 	window_data* lua_towindow(lua_State* _lua, int _idx, int _arg)
 	{
-		void* ud = luaL_checkudata(_lua, _idx, "SAEEngine.window");
+		void* ud = lua::lua_downcast(_lua, _idx, "SAEEngine.window");
 		luaL_argcheck(_lua, ud != NULL, _arg, "`window' expected");
 		return (window_data*)ud;
 	};
@@ -155,7 +155,7 @@ namespace sae::engine
 
 	int luaopen_engine_window(lua_State* _lua)
 	{
-		luaL_newmetatable(_lua, "SAEEngine.window");
+		lua::lua_newclass(_lua, "SAEEngine.window");
 
 		lua_pushvalue(_lua, -1);
 		lua_setfield(_lua, -2, "__index");

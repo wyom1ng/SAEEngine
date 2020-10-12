@@ -401,6 +401,9 @@
 			"path" : "lib/sae/CMakeLists.txt"
 		},
 		{
+			"path" : "lib/sae/lua/CMakeLists.txt"
+		},
+		{
 			"path" : "SAEEngine/CMakeLists.txt"
 		},
 		{

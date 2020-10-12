@@ -84,6 +84,10 @@
 				{
 					"backtrace" : 2,
 					"path" : "C:/Users/jonat/source/repos/SAEEngine/SAEEngine/lib/sae/."
+				},
+				{
+					"backtrace" : 2,
+					"path" : "C:/Users/jonat/source/repos/SAEEngine/SAEEngine/lib/sae/lua/include"
 				}
 			],
 			"language" : "CXX",
@@ -105,11 +109,15 @@
 		},
 		{
 			"backtrace" : 2,
+			"id" : "lodepng::@85014371d6d6fefbb9c6"
+		},
+		{
+			"backtrace" : 2,
 			"id" : "liblua::@2babcaad8f47ce36e162"
 		},
 		{
 			"backtrace" : 2,
-			"id" : "lodepng::@85014371d6d6fefbb9c6"
+			"id" : "SAELua::@3324317b11ffc32bd237"
 		},
 		{
 			"backtrace" : 2,
@@ -135,10 +143,6 @@
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "..\\lib\\lua\\liblua.lib",
-				"role" : "libraries"
-			},
-			{
 				"fragment" : "..\\lib\\glfw\\src\\glfw3.lib",
 				"role" : "libraries"
 			},
@@ -148,6 +152,14 @@
 			},
 			{
 				"fragment" : "..\\lib\\lodepng\\lodepng.lib",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "..\\lib\\sae\\lua\\SAELua.lib",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "..\\lib\\lua\\liblua.lib",
 				"role" : "libraries"
 			},
 			{

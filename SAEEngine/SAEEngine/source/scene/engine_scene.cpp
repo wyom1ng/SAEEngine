@@ -1,33 +1,59 @@
 #include "engine_scene.h"
 
 #include <new>
+#include <vector>
 
 namespace sae::engine
 {
 
 	struct Scene_Data
 	{
+	public:
+
+		void push_back(WidgetObject* _obj)
+		{
+			this->widgets_.push_back(_obj);
+		};
+
+
+		void draw()
+		{
+
+		};
+		void update()
+		{
+
+		};
+
 
 		~Scene_Data() = default;
+	private:
+		std::vector<WidgetObject*> widgets_{};
 	};
 
 	Scene_Data* lua_toscenedata(lua_State* _lua, int _idx, int _arg)
 	{		
-		void* ud = luaL_checkudata(_lua, _idx, "SAEEngine.scene");
+		void* ud = lua::lua_downcast(_lua, _idx, "SAEEngine.scene");
 		luaL_argcheck(_lua, ud != NULL, _arg, "`scene' expected");
 		return (Scene_Data*)ud;
 	};
 
 	int scene_new(lua_State* _lua)
 	{
-		auto _ptr = new (lua_newuserdata(_lua, sizeof(Scene_Data))) Scene_Data{};
-		luaL_getmetatable(_lua, "SAEEngine.scene");
-		lua_setmetatable(_lua, -2);
-
+		auto _ptr = lua::lua_newinstance<Scene_Data>(_lua, "SAEEngine.scene");
 		return 1;
 	};
 
+	int scene_push(lua_State* _lua)
+	{
+		auto _ptr = lua_toscenedata(_lua, 1, 1);
+		if (lua::lua_isbaseof(_lua, 2, "SAEEngine.WidgetObject"))
+		{
 
+		};
+
+
+	};
 
 
 
@@ -57,9 +83,6 @@ namespace sae::engine
 		lua_setfield(_lua, -2, "__index");
 
 		luaL_setfuncs(_lua, scene_lib, 0);
-
-		lua_newtable(_lua);
-		lua_setfield(_lua, -2, "objects");
 
 
 		return 1;

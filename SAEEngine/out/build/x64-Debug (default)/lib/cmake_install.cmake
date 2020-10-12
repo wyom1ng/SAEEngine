@@ -41,6 +41,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/build/x64-Debug (default)/lib/lodepng/cmake_install.cmake")
   include("C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/build/x64-Debug (default)/lib/lua/cmake_install.cmake")
   include("C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/build/x64-Debug (default)/lib/sae/cmake_install.cmake")
+  include("C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/build/x64-Debug (default)/lib/sae/lua/cmake_install.cmake")
 
 endif()
 

@@ -340,7 +340,7 @@ PKG_CONFIG_EXECUTABLE:FILEPATH=PKG_CONFIG_EXECUTABLE-NOTFOUND
 SAEEngine_BINARY_DIR:STATIC=C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/build/x64-Debug (default)
 
 //Dependencies for the target
-SAEEngine_LIB_DEPENDS:STATIC=general;liblua;general;glfw;general;glad;general;lodepng;
+SAEEngine_LIB_DEPENDS:STATIC=general;liblua;general;glfw;general;glad;general;lodepng;general;SAELua;
 
 //override the version checking for GLFW
 SAEEngine_OVERRIDE_GLFW_VERSION:BOOL=OFF
@@ -353,6 +353,15 @@ SAEEngine_SOURCE_DIR:STATIC=C:/Users/jonat/source/repos/SAEEngine/SAEEngine
 
 //enable / disable exceptions without changing the API
 SAEEngine_USE_EXCEPTIONS:BOOL=ON
+
+//Value Computed by CMake
+SAELua_BINARY_DIR:STATIC=C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/build/x64-Debug (default)/lib/sae/lua
+
+//Dependencies for the target
+SAELua_LIB_DEPENDS:STATIC=general;liblua;
+
+//Value Computed by CMake
+SAELua_SOURCE_DIR:STATIC=C:/Users/jonat/source/repos/SAEEngine/SAEEngine/lib/sae/lua
 
 //Use static CRT libraries
 STATIC_CRT:BOOL=OFF
@@ -527,7 +536,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MT
 CMAKE_MT-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=15
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=16
 //Platform information initialized
 CMAKE_PLATFORM_INFO_INITIALIZED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_RC_COMPILER

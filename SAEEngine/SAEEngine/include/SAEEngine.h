@@ -2,6 +2,7 @@
 
 #include "SAEEngineConfig.h"
 
+#include <SAELua.h>
 #include <lua.hpp>
 
 #include <glad/glad.h>
