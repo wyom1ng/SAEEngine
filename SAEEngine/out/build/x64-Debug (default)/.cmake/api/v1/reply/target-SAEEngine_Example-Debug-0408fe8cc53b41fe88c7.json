@@ -55,6 +55,10 @@
 			[
 				{
 					"backtrace" : 2,
+					"path" : "C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/build/x64-Debug (default)"
+				},
+				{
+					"backtrace" : 2,
 					"path" : "C:/Users/jonat/source/repos/SAEEngine/SAEEngine/SAEEngine/include"
 				},
 				{
@@ -101,11 +105,11 @@
 		},
 		{
 			"backtrace" : 2,
-			"id" : "lodepng::@85014371d6d6fefbb9c6"
+			"id" : "liblua::@2babcaad8f47ce36e162"
 		},
 		{
 			"backtrace" : 2,
-			"id" : "liblua::@2babcaad8f47ce36e162"
+			"id" : "lodepng::@85014371d6d6fefbb9c6"
 		},
 		{
 			"backtrace" : 2,

@@ -194,16 +194,16 @@ CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 CMAKE_PROJECT_NAME:STATIC=SAEEngine
 
 //Value Computed by CMake
-CMAKE_PROJECT_VERSION:STATIC=3.3.2
+CMAKE_PROJECT_VERSION:STATIC=0.1
 
 //Value Computed by CMake
-CMAKE_PROJECT_VERSION_MAJOR:STATIC=3
+CMAKE_PROJECT_VERSION_MAJOR:STATIC=0
 
 //Value Computed by CMake
-CMAKE_PROJECT_VERSION_MINOR:STATIC=3
+CMAKE_PROJECT_VERSION_MINOR:STATIC=1
 
 //Value Computed by CMake
-CMAKE_PROJECT_VERSION_PATCH:STATIC=2
+CMAKE_PROJECT_VERSION_PATCH:STATIC=
 
 //Value Computed by CMake
 CMAKE_PROJECT_VERSION_TWEAK:STATIC=
@@ -342,8 +342,17 @@ SAEEngine_BINARY_DIR:STATIC=C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/
 //Dependencies for the target
 SAEEngine_LIB_DEPENDS:STATIC=general;liblua;general;glfw;general;glad;general;lodepng;
 
+//override the version checking for GLFW
+SAEEngine_OVERRIDE_GLFW_VERSION:BOOL=OFF
+
+//override the version checking for Lua
+SAEEngine_OVERRIDE_LUA_VERSION:BOOL=OFF
+
 //Value Computed by CMake
 SAEEngine_SOURCE_DIR:STATIC=C:/Users/jonat/source/repos/SAEEngine/SAEEngine
+
+//enable / disable exceptions without changing the API
+SAEEngine_USE_EXCEPTIONS:BOOL=ON
 
 //Use static CRT libraries
 STATIC_CRT:BOOL=OFF

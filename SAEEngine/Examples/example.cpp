@@ -18,8 +18,6 @@ void test_function()
 
 	auto _lua = _engine.lua();
 
-	luaL_requiref(_lua, "package", &luaopen_package, false);
-	
 	try
 	{
 		auto _err = _engine.run_script("C:\\Users\\jonat\\source\\repos\\SAEEngine\\SAEEngine\\Examples\\example.lua");

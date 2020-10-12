@@ -1,15 +1,13 @@
 ﻿#pragma once
 
+#include "SAEEngineConfig.h"
+
 #include <lua.hpp>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 #include <filesystem>
-
-#define SAE_ENGINE_USE_EXCEPTIONS true
-#define SAE_ENGINE_OVERRIDE_GLFW_VERSION false
-#define SAE_ENGINE_OVERRIDE_LUA_VERSION false
 
 namespace std
 {
@@ -21,6 +19,7 @@ namespace std
 
 	using ostream = basic_ostream<char>;
 	using istream = basic_istream<char>;
+
 };
 
 namespace sae::engine
@@ -28,14 +27,14 @@ namespace sae::engine
 	constexpr const static auto SAE_ENGINE_GLFW_VERSION_MAJOR = 3;
 	constexpr const static auto SAE_ENGINE_GLFW_VERSION_MINOR = 3;
 
-#if !SAE_ENGINE_OVERRIDE_GLFW_VERSION
+#if SAE_ENGINE_OVERRIDE_GLFW_VERSION == OFF
 	static_assert(GLFW_VERSION_MAJOR == SAE_ENGINE_GLFW_VERSION_MAJOR, "GLFW version mismatch! SAEEngine requires major version 3! Set SAE_ENGINE_OVERRIDE_GLFW_VERSION to true to override");
 	static_assert(GLFW_VERSION_MINOR >= SAE_ENGINE_GLFW_VERSION_MINOR, "GLFW version mismatch! SAEEngine requires minor version >= 3! Set SAE_ENGINE_OVERRIDE_GLFW_VERSION to true to override");
 #endif
 
 	constexpr const static auto SAE_ENGINE_LUA_VERSION = "Lua " "5" "." "4";
 	
-#if !SAE_ENGINE_OVERRIDE_LUA_VERSION
+#if SAE_ENGINE_OVERRIDE_LUA_VERSION == OFF
 	static_assert(SAE_ENGINE_LUA_VERSION == LUA_VERSION, "Lua version mismatch! SAEEngine requires lua version 5.4! Set SAE_ENGINE_OVERRIDE_LUA_VERSION to true to override");
 #endif
 
@@ -93,7 +92,6 @@ namespace sae::engine
 
 	struct window_data;
 
-
 	struct SAEEngine
 	{
 	public:
@@ -118,6 +116,12 @@ namespace sae::engine
 	};
 
 	int luaopen_SAEEngine(lua_State* _lua);
+
+
+
+
+
+
 
 
 
