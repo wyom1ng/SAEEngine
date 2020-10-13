@@ -2,94 +2,101 @@
 
 #include "SAELua.h"
 
+#include <cassert>
+#include <filesystem>
+
 namespace sae::engine
 {
 
-	bool File_Data::good() const noexcept
+	namespace
 	{
-		return this->fstr_.good();
-	};
-	bool File_Data::is_open() const noexcept
-	{
-		return this->fstr_.is_open();
-	};
+		const auto CURRENT_PATH_KEY = "SAEEngine.current_path";
 
-	void File_Data::open(const std::filesystem::path& _path)
-	{
-		this->fstr_.open(_path);
-	};
-	void File_Data::close()
-	{
-		this->fstr_.close();
-	};
 
-	void File_Data::seekg(size_t _pos)
-	{
-		this->fstr_.seekg((std::streampos)_pos);
-	};
-	void File_Data::seekg_offset(int _off)
-	{
-		this->fstr_.seekg(std::streamoff{ _off });
-	};
+		void set_current_path(lua_State* _lua, std::filesystem::path _path)
+		{
+			if (_path.has_extension())
+				_path.remove_filename();
 
-	size_t File_Data::tellg()
-	{
-		return this->fstr_.tellg();
-	};
+			auto _beginTop = lua_gettop(_lua);
+			lua_pushstring(_lua, CURRENT_PATH_KEY);
+			lua_pushstring(_lua, _path.string().c_str());
+			lua_settable(_lua, LUA_REGISTRYINDEX);
+			auto _endTop = lua_gettop(_lua);
+			assert(_beginTop == _endTop);
+		};
+		
+		std::filesystem::path get_current_path(lua_State* _lua)
+		{
+			lua_pushstring(_lua, CURRENT_PATH_KEY);
+			std::filesystem::path _out{ lua_tostring(_lua, -1) };
+			lua_pop(_lua, 1);
+			return _out;
+		};
 
-	void File_Data::read(char* _out, size_t _maxCount)
-	{
-		this->fstr_.read(_out, _maxCount);
-	};
+	}
 
-	void File_Data::write(const char* _data, size_t _count)
+	int fs_dofile(lua_State* _lua, std::nothrow_t) noexcept
 	{
-		this->fstr_.write(_data, _count);
+		auto _path = lua_tostring(_lua, -1);
+		auto _err = luaL_loadfile(_lua, _path);
+		if (_err != LUA_OK)
+		{
+			return _err;
+		};
+		set_current_path(_lua, _path);
+		return lua_safecall(_lua, 0, LUA_MULTRET, 0);
 	};
 
-	void File_Data::flush()
+#ifdef SAE_ENGINE_USE_EXCEPTIONS
+	int fs_dofile(lua_State* _lua)
 	{
-		this->fstr_.flush();
+		auto _path = lua_tostring(_lua, -1);
+		auto _err = luaL_loadfile(_lua, _path);
+		if (_err != LUA_OK)
+		{
+			throw std::runtime_error{ "luaL_loadfile()" };
+			return _err;
+		};
+		set_current_path(_lua, _path);
+		return lua_safecall(_lua, 0, LUA_MULTRET, 0);
+	};
+#else
+	int fs_dofile(lua_State* _lua) noexcept
+	{
+		return fs_dofile(_lua, _path, std::nothrow);
+	};
+#endif
+
+	// fs.doAfter(scriptPath)
+	int fs_doAfter(lua_State* _lua)
+	{
+		if (!lua_isstring(_lua, -1))
+		{
+			luaL_argerror(_lua, 1, "'path' expected");
+		};
+		lua_pushstring(_lua, NEXT_SCRIPT_KEY);
+		lua_pushvalue(_lua, -2);
+		lua_settable(_lua, LUA_REGISTRYINDEX);
+		return 0;
 	};
 
-	size_t File_Data::gcount()
+	// fs.current_path() -> path
+	int fs_current_path(lua_State* _lua)
 	{
-		return this->fstr_.gcount();
-	};
-
-	bool File_Data::eof() const
-	{
-		return this->fstr_.eof();
-	};
-
-	File_Data::File_Data(const std::filesystem::path& _path) : 
-		path_{ _path }
-	{};
-
-
-
-	File_Data* lua_tofile(lua_State* _lua, int _idx, int _arg)
-	{
-		void* ud = lua::lua_downcast(_lua, _idx, "SAEEngine.file");
-		luaL_argcheck(_lua, ud != NULL, _arg, "`file' expected");
-		return (File_Data*)ud;
+		lua_pushstring(_lua, CURRENT_PATH_KEY);
+		lua_gettable(_lua, LUA_REGISTRYINDEX);
+		assert(lua_isstring(_lua, -1));
+		return 1;
 	};
 
 
 
 
-
-	const luaL_Reg file_lib[] =
+	int luaopen_engine_fs(lua_State* _lua)
 	{
-
-
-		luaL_Reg{ NULL, NULL }
-	};
-
-
-	int luaopen_engine_file(lua_State* _lua)
-	{
-		lua::lua_newclass(_lua, "SAEEngine.file", file_lib);
+		lua_newtable(_lua);
+		luaL_setfuncs(_lua, fs_lib, 0);
 		return 1;
 	};
 

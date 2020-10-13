@@ -8,63 +8,71 @@
 
 namespace sae::engine
 {
+	
+
+	// fs.current_path() -> path
+	int fs_current_path(lua_State* _lua);
+
+
+
+
+
+
+
+	// fs.dofile(scriptPath)
+	int fs_dofile(lua_State* _lua, std::nothrow_t) noexcept;
+
+#ifdef SAE_ENGINE_USE_EXCEPTIONS
+	// fs.dofile(scriptPath)
+	int fs_dofile(lua_State* _lua);
+#else
+	// fs.dofile(scriptPath)
+	int fs_dofile(lua_State* _lua) noexcept;
+#endif
+
+	const auto NEXT_SCRIPT_KEY = "SAEEngine.next_script";
+
+	// fs.doAfter(scriptPath)
+	int fs_doAfter(lua_State* _lua);
+
+
+
+
+
+
 	struct File_Data
 	{
+
+	};
+
+	/*
+		food for thought
+	*/
+	struct Path_Data
+	{
 	public:
-
-		bool good() const noexcept;
-		bool is_open() const noexcept;
-
-		void open(const std::filesystem::path& _path);
-		void close();
-
-		void seekg(size_t _pos);
-		void seekg_offset(int _off);
-
-		size_t tellg();
-
-		void read(char* _out, size_t _maxCount);
-		void write(const char* _data, size_t _count);
-
-		size_t gcount();
-
-		void flush();
-
-		bool eof() const;
-
-		File_Data() = default;
-		File_Data(const std::filesystem::path& _path);
-
+		Path_Data(const std::filesystem::path& _path) :
+			path_{ _path }
+		{};
 	private:
-		std::filesystem::path path_;
-		std::fstream fstr_;
+		std::filesystem::path path_{};
 	};
 
 
-	File_Data* lua_tofile(lua_State* _lua, int _idx, int _arg);
-
-	// engine.file.new([path])
-	int file_new(lua_State* _lua);
-
-	// file:open(path)
-	int file_open(lua_State* _lua);
-
-	// file:is_open() -> bool
-	int file_is_open(lua_State* _lua);
 
 
 
+	const luaL_Reg fs_lib[] =
+	{
+		luaL_Reg{ "current_path", &fs_current_path },
+		luaL_Reg{ "dofile", &fs_dofile },
+		luaL_Reg{ "doAfter", &fs_doAfter },
 
-	// file:close()
-	int file_close(lua_State* _lua);
+		luaL_Reg{ NULL, NULL }
+	};
 
 
 
-
-	// file:__gc()
-	int file_destructor(lua_State* _lua);
-
-
-	int luaopen_engine_file(lua_State* _lua);
+	int luaopen_engine_fs(lua_State* _lua);
 
 }

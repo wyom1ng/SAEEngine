@@ -27,15 +27,15 @@ namespace std
 
 namespace sae::engine
 {
-	constexpr const static auto SAE_ENGINE_GLFW_VERSION_MAJOR = 3;
-	constexpr const static auto SAE_ENGINE_GLFW_VERSION_MINOR = 3;
+	constexpr static inline auto SAE_ENGINE_GLFW_VERSION_MAJOR = 3;
+	constexpr static inline auto SAE_ENGINE_GLFW_VERSION_MINOR = 3;
 
 #ifdef SAE_ENGINE_OVERRIDE_GLFW_VERSION
 	static_assert(GLFW_VERSION_MAJOR == SAE_ENGINE_GLFW_VERSION_MAJOR, "GLFW version mismatch! SAEEngine requires major version 3! Set SAE_ENGINE_OVERRIDE_GLFW_VERSION to true to override");
 	static_assert(GLFW_VERSION_MINOR >= SAE_ENGINE_GLFW_VERSION_MINOR, "GLFW version mismatch! SAEEngine requires minor version >= 3! Set SAE_ENGINE_OVERRIDE_GLFW_VERSION to true to override");
 #endif
 
-	constexpr const static auto SAE_ENGINE_LUA_VERSION = "Lua " "5" "." "4";
+	constexpr static inline auto SAE_ENGINE_LUA_VERSION = "Lua " "5" "." "4";
 	
 #ifdef SAE_ENGINE_OVERRIDE_LUA_VERSION 
 	static_assert(SAE_ENGINE_LUA_VERSION == LUA_VERSION, "Lua version mismatch! SAEEngine requires lua version 5.4! Set SAE_ENGINE_OVERRIDE_LUA_VERSION to true to override");
@@ -65,6 +65,7 @@ namespace sae::engine
 	 * @return LUA_OK on success, same as lua_pcall()
 	*/
 	int lua_safecall(lua_State* _lua, int _args, int _rets, int _f);
+
 
 	struct Window;
 	struct Lua
@@ -116,8 +117,13 @@ namespace sae::engine
 		bool good() const;
 		void update();
 
-		int run_script(const std::filesystem::path& _path, std::nothrow_t);
+		int run_script(const std::filesystem::path& _path, std::nothrow_t) noexcept;
+#ifdef SAE_ENGINE_USE_EXCEPTIONS
 		int run_script(const std::filesystem::path& _path);
+#else 
+		int run_script(const std::filesystem::path& _path) noexcept;
+#endif
+
 
 		void set_ostream(std::ostream* _ostr) noexcept;
 		std::ostream* get_ostream() const;

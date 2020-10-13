@@ -2,6 +2,7 @@
 
 #include <chrono>
 #include <thread>
+#include <cassert>
 
 namespace sae::engine
 {
@@ -13,11 +14,6 @@ namespace sae::engine
 		return 0;
 	};
 
-	const luaL_Reg engine_os_lib[] =
-	{
-		luaL_Reg{ "sleep", &os_sleep },
-		luaL_Reg{ NULL, NULL }
-	};
 
 	int luaopen_engine_os(lua_State* _lua)
 	{

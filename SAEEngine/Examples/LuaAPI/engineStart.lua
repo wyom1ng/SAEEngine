@@ -7,4 +7,4 @@ function close_callback()
 end
 
 engine.window.set_callback("close", close_callback)
-engine.os.dofile("C:\\Users\\jonat\\source\\repos\\SAEEngine\\SAEEngine\\Examples\\LuaAPI\\example.lua")
+engine.fs.dofile(engine.fs.current_path() .. "example.lua")

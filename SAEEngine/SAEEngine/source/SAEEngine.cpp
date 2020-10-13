@@ -47,6 +47,7 @@ namespace sae::engine
 
 namespace sae::engine
 {
+
 	int lua_safecall(lua_State* _lua, int _args, int _rets, int _f, std::nothrow_t) noexcept
 	{
 		return lua_pcall(_lua, _args, _rets, _f);
@@ -73,83 +74,35 @@ namespace sae::engine
 		return lua_safecall(_lua, _args, _rets, _f, std::nothrow);
 	};
 #endif
+
 };
 
 namespace sae::engine
 {
 
-	int SAEEngine::run_script(const std::filesystem::path& _path, std::nothrow_t)
+	int SAEEngine::run_script(const std::filesystem::path& _path, std::nothrow_t) noexcept
 	{
-		auto _err = luaL_loadfile(this->lua(), _path.string().c_str());
-		if (_err != LUA_OK)
-			return _err;
-		return lua_safecall(this->lua(), 0, LUA_MULTRET, 0, std::nothrow);
+		lua_pushstring(this->lua(), _path.string().c_str());
+		auto _out = fs_dofile(this->lua(), std::nothrow);
+		lua_pop(this->lua(), 1);
+		return _out;
 	};
 
 #ifdef SAE_ENGINE_USE_EXCEPTIONS
 	int SAEEngine::run_script(const std::filesystem::path& _path)
 	{
-		auto _err = luaL_loadfile(this->lua(), _path.string().c_str());
-		if (_err != LUA_OK)
-		{
-			throw std::runtime_error{ "luaL_loadfile()" };
-			return _err;
-		};
-		return lua_safecall(this->lua(), 0, LUA_MULTRET, 0);
+		lua_pushstring(this->lua(), _path.string().c_str());
+		auto _out = fs_dofile(this->lua());
+		lua_pop(this->lua(), 1);
+		return _out;
 	};
 #else
-	int SAEEngine::run_script(const std::filesystem::path& _path)
+	int SAEEngine::run_script(const std::filesystem::path& _path) noexcept
 	{
 		return this->run_script(_path, std::nothrow);
 	};
 #endif
 
-
-	int dofile(lua_State* _lua, std::nothrow_t) noexcept
-	{
-		auto _path = lua_tostring(_lua, -1);
-		auto _err = luaL_loadfile(_lua, _path);
-		if (_err != LUA_OK)
-		{
-			return _err;
-		};
-		return lua_safecall(_lua, 0, LUA_MULTRET, 0);
-	};
-
-#ifdef SAE_ENGINE_USE_EXCEPTIONS
-	int dofile(lua_State* _lua)
-	{
-		auto _path = lua_tostring(_lua, -1);
-		auto _err = luaL_loadfile(_lua, _path);
-		if (_err != LUA_OK)
-		{
-			throw std::runtime_error{ "luaL_loadfile()" };
-			return _err;
-		};
-		return lua_safecall(_lua, 0, LUA_MULTRET, 0);
-	};
-#else
-	int dofile(lua_State* _lua)
-	{
-		return dofile(_lua, _path, std::nothrow);
-	};
-#endif
-
-
-	const auto NEXT_SCRIPT_KEY = "SAEEngine.next_script";
-
-	// doAfter(scriptPath)
-	int doAfter(lua_State* _lua)
-	{
-		if (!lua_isstring(_lua, -1))
-			luaL_argerror(_lua, 1, "'path' expected");
-		lua_pushstring(_lua, NEXT_SCRIPT_KEY);
-		lua_pushvalue(_lua, -2);
-		lua_settable(_lua, LUA_REGISTRYINDEX);
-		return 0;
-	};
-
-	
 
 
 	bool SAEEngine::good() const
@@ -276,20 +229,24 @@ namespace sae::engine
 
 		luaopen_engine_window(_lua);
 		lua_setfield(_lua, t, "window");
+
 		luaopen_engine_io(_lua);
 		lua_setfield(_lua, t, "io");
+
 		luaopen_engine_os(_lua);
-		lua_pushcfunction(_lua, &dofile);
-		lua_setfield(_lua, -2, "dofile");
-		lua_pushcfunction(_lua, &doAfter);
-		lua_setfield(_lua, -2, "doAfter");
 		lua_setfield(_lua, t, "os");
+
 		luaopen_engine_scene(_lua);
 		lua_setfield(_lua, t, "scene");
+
 		luaopen_engine_gfx(_lua);
 		lua_setfield(_lua, t, "gfx");
+	
 		luaopen_engine_shader(_lua);
 		lua_setfield(_lua, t, "shader");
+
+		luaopen_engine_fs(_lua);
+		lua_setfield(_lua, t, "fs");
 
 		lua_newtable(_lua);
 		lua_pushstring(_lua, EXTENSIONS_KEY);

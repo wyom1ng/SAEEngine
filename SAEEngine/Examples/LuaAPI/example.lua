@@ -2,10 +2,10 @@ local sptr_ = engine.scene.new()
 
 local sampleShader_ = engine.window.get_shader("sampleShader")
 
+local path_ = engine.fs.current_path()
+
 if(sampleShader_ == nil) then
-	sampleShader_ = engine.shader.new("sampleShader", 
-	"C:\\Users\\jonat\\source\\repos\\SAEEngine\\SAEEngine\\Examples\\LuaAPI\\vertexShader.glsl",
-	"C:\\Users\\jonat\\source\\repos\\SAEEngine\\SAEEngine\\Examples\\LuaAPI\\fragmentShader.glsl" )
+	sampleShader_ = engine.shader.new("sampleShader", path_ .. "vertexShader.glsl", path_ .. "fragmentShader.glsl" )
 	
 	if(sampleShader_:good() == false) then
 		close_callback()
@@ -22,7 +22,7 @@ sptr_:push(w0_)
 
 local function key_callback(_key, _scancode, _action, _mods)
 	if(_key == 256 and _action == 0) then
-		engine.os.doAfter("C:\\Users\\jonat\\source\\repos\\SAEEngine\\SAEEngine\\Examples\\LuaAPI\\otherScene.lua")
+		engine.fs.doAfter(path_ .. "otherScene.lua")
 		engine.window.pop_scene()
 	end
 end
