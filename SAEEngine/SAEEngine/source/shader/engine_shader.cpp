@@ -7,6 +7,7 @@
 #include <string>
 #include <optional>
 
+#include <iostream>
 
 namespace sae::engine
 {
@@ -168,11 +169,10 @@ namespace sae::engine
 		};
 	};
 
-
-
 	Shader_Data::Shader_Data(const std::string& _name, const std::filesystem::path& _vertexPath, const std::filesystem::path& _fragmentPath) :
 		name_{ _name }
 	{
+		
 		GLuint _vertID = glCreateShader(GL_VERTEX_SHADER);
 		auto _res = compile_shader(_vertID, file_reader{ _vertexPath }().c_str());
 		if (!_res)
@@ -196,10 +196,13 @@ namespace sae::engine
 		{
 			this->id_ = *_buildRes;
 		};
-
+		
 	};
 	Shader_Data::~Shader_Data()
 	{
+#ifdef SAE_ENGINE_DESTRUCTOR_DEBUG
+		std::cout << "~Shader_Data()\n";
+#endif
 		this->destroy();
 	};
 

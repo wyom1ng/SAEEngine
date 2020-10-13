@@ -5,6 +5,8 @@
 #include <new>
 #include <concepts>
 #include <type_traits>
+#include <typeinfo>
+#include <atomic>
 
 namespace sae::lua
 {
@@ -19,6 +21,13 @@ namespace sae::lua
 	void lua_newclass(lua_State* _lua, const char* _tname, const luaL_Reg* _functions, int _upVals);
 	void lua_newclass(lua_State* _lua, const char* _tname, const luaL_Reg* _functions);
 	void lua_newclass(lua_State* _lua, const char* _tname);
+	
+	
+
+	
+
+
+
 
 
 
@@ -58,6 +67,19 @@ namespace sae::lua
 		lua_setmetatable(_lua, -2);
 		return _out;
 	};
+
+	template <typename T>
+	T* lua_toinstance(lua_State* _lua, int _idx, const char* _tname)
+	{
+		void* ud = lua::lua_downcast(_lua, _idx, _tname);
+		if (ud == nullptr)
+		{
+			luaL_typeerror(_lua, _idx, _tname);
+		};
+		return (T*)ud;
+	};
+
+
 
 
 

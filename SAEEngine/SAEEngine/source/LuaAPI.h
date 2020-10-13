@@ -9,6 +9,10 @@
 #include "gfx/engine_gfx.h"
 #include "shader/engine_shader.h"
 #include "file/engine_file.h"
+#include "physics/engine_physics.h"
+
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
 #include <optional>
 

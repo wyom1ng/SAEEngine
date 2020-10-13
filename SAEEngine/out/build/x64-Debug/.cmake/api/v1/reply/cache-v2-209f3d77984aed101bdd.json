@@ -807,7 +807,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/install/x64-Debug"
+			"value" : "C:/Users/jonat/Source/Repos/SAEEngine/SAEEngine/out/install/x64-Debug"
 		},
 		{
 			"name" : "CMAKE_INSTALL_RUNSTATEDIR",
@@ -1007,7 +1007,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "16"
+			"value" : "18"
 		},
 		{
 			"name" : "CMAKE_PLATFORM_INFO_INITIALIZED",
@@ -2354,6 +2354,18 @@
 			"value" : "C:/Users/jonat/source/repos/SAEEngine/SAEEngine/lib/sae/lua"
 		},
 		{
+			"name" : "SAE_ENGINE_HARD_ERRORS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "causes errors to abort on site rather than throw an exception or return an error code"
+				}
+			],
+			"type" : "BOOL",
+			"value" : "ON"
+		},
+		{
 			"name" : "SAE_ENGINE_OVERRIDE_GLFW_VERSION",
 			"properties" : 
 			[
@@ -2459,7 +2471,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/install/x64-Debug"
+			"value" : "C:/Users/jonat/Source/Repos/SAEEngine/SAEEngine/out/install/x64-Debug"
 		},
 		{
 			"name" : "__pkg_config_checked_PC_BROTLIDEC",

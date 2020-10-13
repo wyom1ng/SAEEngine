@@ -104,6 +104,54 @@ namespace sae::engine
 	};
 #endif
 
+
+	int dofile(lua_State* _lua, std::nothrow_t) noexcept
+	{
+		auto _path = lua_tostring(_lua, -1);
+		auto _err = luaL_loadfile(_lua, _path);
+		if (_err != LUA_OK)
+		{
+			return _err;
+		};
+		return lua_safecall(_lua, 0, LUA_MULTRET, 0);
+	};
+
+#ifdef SAE_ENGINE_USE_EXCEPTIONS
+	int dofile(lua_State* _lua)
+	{
+		auto _path = lua_tostring(_lua, -1);
+		auto _err = luaL_loadfile(_lua, _path);
+		if (_err != LUA_OK)
+		{
+			throw std::runtime_error{ "luaL_loadfile()" };
+			return _err;
+		};
+		return lua_safecall(_lua, 0, LUA_MULTRET, 0);
+	};
+#else
+	int dofile(lua_State* _lua)
+	{
+		return dofile(_lua, _path, std::nothrow);
+	};
+#endif
+
+
+	const auto NEXT_SCRIPT_KEY = "SAEEngine.next_script";
+
+	// doAfter(scriptPath)
+	int doAfter(lua_State* _lua)
+	{
+		if (!lua_isstring(_lua, -1))
+			luaL_argerror(_lua, 1, "'path' expected");
+		lua_pushstring(_lua, NEXT_SCRIPT_KEY);
+		lua_pushvalue(_lua, -2);
+		lua_settable(_lua, LUA_REGISTRYINDEX);
+		return 0;
+	};
+
+	
+
+
 	bool SAEEngine::good() const
 	{
 		lua_getglobal(this->lua(), "SAEEngine");
@@ -115,8 +163,30 @@ namespace sae::engine
 
 	void SAEEngine::update()
 	{
-		auto _ptr = lua_getwindow(this->lua());
+		auto _lua = this->lua();
+		auto _beginTop = lua_gettop(_lua);
+
+		lua_pushstring(_lua, NEXT_SCRIPT_KEY);
+		lua_gettable(_lua, LUA_REGISTRYINDEX);
+		if (!lua_isnoneornil(this->lua(), -1))
+		{
+			std::filesystem::path _path = lua_tostring(_lua, -1);
+			lua_pop(_lua, 1);
+			lua_pushstring(_lua, NEXT_SCRIPT_KEY);
+			lua_pushnil(_lua);
+			lua_settable(_lua, LUA_REGISTRYINDEX);
+			this->run_script(_path);
+		}
+		else
+		{
+			lua_pop(_lua, 1);
+		};
+
+		auto _ptr = lua_getwindow(_lua);
 		_ptr->update();
+
+		auto _endTop = lua_gettop(_lua);
+		assert(_beginTop == _endTop);
 	};
 
 	void SAEEngine::set_ostream(std::ostream* _ostr) noexcept
@@ -140,6 +210,53 @@ namespace sae::engine
 		return lua_getistream(this->lua());
 	};
 
+
+	constexpr auto EXTENSIONS_KEY = "SAEEngine.ext";
+
+
+
+	bool SAEEngine::register_extension(const Extension& _ext)
+	{
+		auto _lua = this->lua();
+		auto _beginTop = lua_gettop(_lua);
+		
+		bool _out = false;
+
+		lua_pushstring(_lua, EXTENSIONS_KEY);
+		lua_gettable(_lua, LUA_REGISTRYINDEX);
+		assert(lua_istable(_lua, -1));
+
+		lua_getfield(_lua, -1, _ext.name.c_str());
+		if (lua_isnil(_lua, -1))
+		{
+			lua_pop(_lua, 1);
+			
+			auto _beforeOpen = lua_gettop(_lua);
+			auto _ret = _ext.open_function(_lua);
+			auto _afterOpen = lua_gettop(_lua);
+			
+			assert(_ret == 1);
+			assert(_beforeOpen == (_afterOpen - _ret));
+			assert(lua_istable(_lua, -1));
+
+			lua_setfield(_lua, _beforeOpen, _ext.name.c_str());
+
+			_out = true;
+		}
+		else
+		{
+			lua_pop(_lua, 1);
+		};
+
+		lua_pop(_lua, 1);
+
+		auto _endTop = lua_gettop(_lua);
+		assert(_beginTop == _endTop);
+
+		return _out;
+	};
+
+
 	SAEEngine::SAEEngine()
 	{
 		glfwInit();
@@ -162,6 +279,10 @@ namespace sae::engine
 		luaopen_engine_io(_lua);
 		lua_setfield(_lua, t, "io");
 		luaopen_engine_os(_lua);
+		lua_pushcfunction(_lua, &dofile);
+		lua_setfield(_lua, -2, "dofile");
+		lua_pushcfunction(_lua, &doAfter);
+		lua_setfield(_lua, -2, "doAfter");
 		lua_setfield(_lua, t, "os");
 		luaopen_engine_scene(_lua);
 		lua_setfield(_lua, t, "scene");
@@ -169,6 +290,13 @@ namespace sae::engine
 		lua_setfield(_lua, t, "gfx");
 		luaopen_engine_shader(_lua);
 		lua_setfield(_lua, t, "shader");
+
+		lua_newtable(_lua);
+		lua_pushstring(_lua, EXTENSIONS_KEY);
+		lua_pushvalue(_lua, -2);
+		lua_settable(_lua, LUA_REGISTRYINDEX);
+		lua_setfield(_lua, t, "ext");
+
 
 		return 1;
 	};

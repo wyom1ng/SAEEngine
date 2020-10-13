@@ -1,6 +1,7 @@
 #include "SAELua.h"
 
 #include <new>
+#include <cassert>
 
 namespace sae::lua
 {
@@ -14,6 +15,8 @@ namespace sae::lua
 			lua_pop(_lua, 1);
 
 			lua_newtable(_lua);
+			lua_pushvalue(_lua, -1);
+			lua_setfield(_lua, -2, "__index");
 
 			lua_pushstring(_lua, _tname);
 			lua_pushvalue(_lua, -2);
@@ -22,12 +25,8 @@ namespace sae::lua
 			lua_newtable(_lua);
 			lua_pushvalue(_lua, -2);
 			lua_setfield(_lua, -2, _tname);
-
 			lua_setfield(_lua, -2, "__name");
-
-			lua_pushvalue(_lua, -1);
-			lua_setfield(_lua, -2, "__index");
-
+			
 			if(_functions)
 				luaL_setfuncs(_lua, _functions, _upVals);
 
@@ -45,6 +44,8 @@ namespace sae::lua
 
 	int lua_inherit(lua_State* _lua, const char* _tname, int _idx)
 	{
+		auto _beginTop = lua_gettop(_lua);
+
 		if (_idx < 0)
 			_idx = lua_gettop(_lua) + (_idx + 1);
 		luaL_getmetatable(_lua, _tname);
@@ -53,15 +54,21 @@ namespace sae::lua
 
 		lua_getfield(_lua, -1, "__gc");
 		lua_setfield(_lua, _idx, "__gc");
-
-		lua_pop(_lua, 1);
-
+		
+		lua_getfield(_lua, -1, "__name");
 		lua_getfield(_lua, _idx, "__name");
-		luaL_getmetatable(_lua, _tname);
-		lua_setfield(_lua, -2, _tname);
 
-
-		lua_pop(_lua, 1);
+		lua_pushnil(_lua);
+		while (lua_next(_lua, -3) != 0)
+		{
+			auto _key = lua_tostring(_lua, -2);
+			lua_setfield(_lua, -3, _key);
+		};
+		
+		lua_pop(_lua, 3);
+		
+		auto _endTop = lua_gettop(_lua);
+		assert(_beginTop == _endTop);
 
 		return 0;
 	};

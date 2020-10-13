@@ -1,7 +1,7 @@
-prefix=C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/install/x64-Debug
+prefix=C:/Users/jonat/Source/Repos/SAEEngine/SAEEngine/out/install/x64-Debug
 exec_prefix=${prefix}
-includedir=C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/install/x64-Debug/include
-libdir=C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/install/x64-Debug/lib
+includedir=C:/Users/jonat/Source/Repos/SAEEngine/SAEEngine/out/install/x64-Debug/include
+libdir=C:/Users/jonat/Source/Repos/SAEEngine/SAEEngine/out/install/x64-Debug/lib
 
 Name: GLFW
 Description: A multi-platform library for OpenGL, window and input

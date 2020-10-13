@@ -5,10 +5,12 @@
 #include <SAELua.h>
 #include <lua.hpp>
 
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-
 #include <filesystem>
+#include <unordered_map>
+
+#if true
+#define SAE_ENGINE_DESTRUCTOR_DEBUG
+#endif
 
 namespace std
 {
@@ -96,6 +98,16 @@ namespace sae::engine
 
 	struct window_data;
 
+
+
+
+
+	struct Extension
+	{
+		std::string name;
+		lua_CFunction open_function;
+	};
+
 	struct SAEEngine
 	{
 	public:
@@ -112,6 +124,9 @@ namespace sae::engine
 		void set_istream(std::istream* _istr) noexcept;
 		std::istream* get_istream() const;
 
+		
+		bool register_extension(const Extension& _ext);
+
 		SAEEngine();
 		~SAEEngine();
 
@@ -119,10 +134,14 @@ namespace sae::engine
 		Lua lua_;
 	};
 
+
+	
+
 	int luaopen_SAEEngine(lua_State* _lua);
 
 
 
+	
 
 
 

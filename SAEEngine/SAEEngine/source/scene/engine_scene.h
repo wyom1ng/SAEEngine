@@ -4,7 +4,6 @@
 
 #include "gfx/engine_gfx.h"
 
-
 #include <vector>
 
 namespace sae::engine
@@ -24,9 +23,13 @@ namespace sae::engine
 		void activate() {};
 		void deactivate() {};
 
+		void set_display_size(int _width, int _height);
+
 		~Scene_Data();
 	private:
 		std::vector<WidgetObject*> widgets_{};
+		int window_width_ = 0;
+		int window_height_ = 0;
 	};
 
 	Scene_Data* lua_toscenedata(lua_State* _lua, int _idx, int _arg);

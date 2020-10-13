@@ -2,12 +2,15 @@
 
 #include "SAEEngine.h"
 #include "scene/engine_scene.h"
+#include "shader/engine_shader.h"
 
 #include <optional>
 #include <exception>
 #include <stdexcept>
 #include <functional>
 #include <stack>
+#include <unordered_map>
+#include <map>
 
 namespace sae::engine
 {
@@ -16,103 +19,36 @@ namespace sae::engine
 	{
 	public:
 
-		GLFWwindow* get() const noexcept { return this->window_; };
+		GLFWwindow* get() const noexcept;
 
-		operator GLFWwindow*& () noexcept { return this->window_; };
-		operator GLFWwindow* const& () const noexcept { return this->window_; };
+		operator GLFWwindow*& () noexcept;
+		operator GLFWwindow* const& () const noexcept;
 
-		bool operator==(const Window& _other) const noexcept { return (this->window_ == _other.window_); };
-		bool operator!=(const Window& _other) const noexcept { return (this->window_ != _other.window_); };
+		bool operator==(const Window& _other) const noexcept;
+		bool operator!=(const Window& _other) const noexcept;
 
-		bool operator==(GLFWwindow* _window) const noexcept { return (this->window_ == _window); };
-		bool operator!=(GLFWwindow* _window) const noexcept { return (this->window_ != _window); };
+		bool operator==(GLFWwindow* _window) const noexcept;
+		bool operator!=(GLFWwindow* _window) const noexcept;
 
-		bool good() const noexcept { return (this->window_ != nullptr); };
-		void close()
-		{
-			if (this->good())
-			{
-				glfwDestroyWindow(this->window_);
-				this->window_ = nullptr;
-			};
-		};
+		bool good() const noexcept;
+		void close();
 
-		explicit operator bool() const { return this->good(); };
+		explicit operator bool() const;
 
 
-		void update()
-		{
-			glfwSwapBuffers(this->window_);
-			glfwPollEvents();
-		};
+		void update();
 
-		Window(int _width, int _height, const char* _title, std::optional<int> _monitor, std::optional<GLFWwindow*> _share)
-		{
-			GLFWmonitor* _useMonitor = nullptr;
-			if (_monitor)
-			{
-				auto _mcount = 0;
-				auto _mptr = glfwGetMonitors(&_mcount);
-				if (*_monitor >= _mcount)
-				{
-					if (_mcount != 0)
-					{
-						_useMonitor = _mptr[0];
-					}
-					else
-					{
-#ifdef SAE_ENGINE_USE_EXCEPTIONS
-						throw std::out_of_range{ "no monitors were found" };
-#else
-						return;
-#endif
-					};
-				}
-				else
-				{
-					_useMonitor = _mptr[*_monitor];
-				};
-			};
+		Window(int _width, int _height, const char* _title, std::optional<int> _monitor, std::optional<GLFWwindow*> _share);
 
-			GLFWwindow* _shareWindow = nullptr;
-			if (_share)
-				_shareWindow = *_share;
-
-			this->window_ = glfwCreateWindow(_width, _height, _title, _useMonitor, _shareWindow);
-			if (this->good())
-			{
-				glfwMakeContextCurrent(this->window_);
-				gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-			}
-			else
-			{
-#ifdef SAE_ENGINE_USE_EXCEPTIONS
-				throw std::runtime_error{ "glfwCreateWindow() failed" };
-#else
-				return;
-#endif
-			};
-		};
-
-		Window(int _width, int _height, const char* _title) :
-			Window{ _width, _height, _title, std::nullopt, std::nullopt }
-		{};
+		Window(int _width, int _height, const char* _title);
 
 		Window(const Window& other) = delete;
 		Window& operator=(const Window& other) = delete;
 
-		Window(Window&& other) noexcept :
-			window_{ std::exchange(other.window_, nullptr) }
-		{};
-		Window& operator=(Window&& other) noexcept
-		{
-			this->window_ = std::exchange(other.window_, nullptr);
-		};
+		Window(Window&& other) noexcept;
+		Window& operator=(Window&& other) noexcept;
 
-		~Window()
-		{
-			this->close();
-		};
+		~Window();
 
 	private:
 		GLFWwindow* window_ = nullptr;
@@ -120,153 +56,56 @@ namespace sae::engine
 	struct window_data
 	{
 
-		static void key_callback(GLFWwindow* _window, int _key, int _scancode, int _action, int _mods)
-		{
-			auto _lua = ((window_data*)glfwGetWindowUserPointer(_window))->lua_;
-			lua_getglobal(_lua, "SAEEngine");
-			lua_getfield(_lua, -1, "window");
-			lua_getfield(_lua, -1, "callback");
-			lua_getfield(_lua, -1, "key");
+		static void key_callback(GLFWwindow* _window, int _key, int _scancode, int _action, int _mods);
+		static void char_callback(GLFWwindow* _window, unsigned int _codepoint);
 
-			if (lua_isfunction(_lua, -1))
-			{
-				lua_pushinteger(_lua, _key);
-				lua_pushinteger(_lua, _scancode);
-				lua_pushinteger(_lua, _action);
-				lua_pushinteger(_lua, _mods);
-				auto _err = lua_safecall(_lua, 4, 0, 0);
-				lua_pop(_lua, 3);
-			}
-			else
-			{
-				lua_pop(_lua, 4);
-			};
-		};
-		static void char_callback(GLFWwindow* _window, unsigned int _codepoint)
-		{
-			auto _lua = ((window_data*)glfwGetWindowUserPointer(_window))->lua_;
-			lua_getglobal(_lua, "SAEEngine");
-			lua_getfield(_lua, -1, "window");
-			lua_getfield(_lua, -1, "callback");
-			lua_getfield(_lua, -1, "text");
+		static void mouse_button_callback(GLFWwindow* _window, int _button, int _action, int _mods);
+		static void cursor_callback(GLFWwindow* _window, double _x, double _y);
 
-			if (lua_isfunction(_lua, -1))
-			{
-				lua_pushinteger(_lua, _codepoint);
-				auto _err = lua_safecall(_lua, 1, 0, 0);
-				lua_pop(_lua, 3);
-			}
-			else
-			{
-				lua_pop(_lua, 4);
-			};
-		};
-
-		static void mouse_button_callback(GLFWwindow* _window, int _button, int _action, int _mods)
-		{
-			auto _lua = ((window_data*)glfwGetWindowUserPointer(_window))->lua_;
-			lua_getglobal(_lua, "SAEEngine");
-			lua_getfield(_lua, -1, "window");
-			lua_getfield(_lua, -1, "callback");
-			lua_getfield(_lua, -1, "mouse");
-
-			if (lua_isfunction(_lua, -1))
-			{
-				lua_pushinteger(_lua, _button);
-				lua_pushinteger(_lua, _action);
-				lua_pushinteger(_lua, _mods);
-				auto _err = lua_safecall(_lua, 3, 0, 0);
-				lua_pop(_lua, 3);
-			}
-			else
-			{
-				lua_pop(_lua, 4);
-			};
-		};
-		static void cursor_callback(GLFWwindow* _window, double _x, double _y)
-		{
-			auto _lua = ((window_data*)glfwGetWindowUserPointer(_window))->lua_;
-			lua_getglobal(_lua, "SAEEngine");
-			lua_getfield(_lua, -1, "window");
-			lua_getfield(_lua, -1, "callback");
-			lua_getfield(_lua, -1, "cursor");
-
-			if (lua_isfunction(_lua, -1))
-			{
-				lua_pushnumber(_lua, _x);
-				lua_pushnumber(_lua, _y);
-				auto _err = lua_safecall(_lua, 2, 0, 0);
-				lua_pop(_lua, 3);
-			}
-			else
-			{
-				lua_pop(_lua, 4);
-			};
-
-		};
-
-		static void close_callback(GLFWwindow* _window)
-		{
-			auto _lua = ((window_data*)glfwGetWindowUserPointer(_window))->lua_;
-			lua_getglobal(_lua, "SAEEngine");
-			lua_getfield(_lua, -1, "window");
-			lua_getfield(_lua, -1, "callback");
-			lua_getfield(_lua, -1, "close");
-
-			if (lua_isfunction(_lua, -1))
-			{
-				auto _err = lua_safecall(_lua, 0, 0, 0);
-				lua_pop(_lua, 3);
-			}
-			else
-			{
-				lua_pop(_lua, 4);
-			};
-		};
-		static void focus_callback(GLFWwindow* _window, int _focused)
-		{
-			auto _lua = ((window_data*)glfwGetWindowUserPointer(_window))->lua_;
-			lua_getglobal(_lua, "SAEEngine");
-			lua_getfield(_lua, -1, "window");
-			lua_getfield(_lua, -1, "callback");
-			lua_getfield(_lua, -1, "focus");
-
-			if (lua_isfunction(_lua, -1))
-			{
-				lua_pushinteger(_lua, _focused);
-				auto _err = lua_safecall(_lua, 1, 0, 0);
-				lua_pop(_lua, 3);
-			}
-			else
-			{
-				lua_pop(_lua, 4);
-			};
-		};
+		static void close_callback(GLFWwindow* _window);
+		static void focus_callback(GLFWwindow* _window, int _focused);
+		static void resize_callback(GLFWwindow* _window, int _width, int _height);
 
 		Scene_Data* active_scene() const;
 		
 		void update();
 
-
-		window_data(Window _window, lua_State* _lua) :
-			window_{ std::move(_window) },
-			lua_{ _lua }
-		{
-
-			glfwSetMouseButtonCallback(this->window_, &mouse_button_callback);
-			glfwSetCursorPosCallback(this->window_, &cursor_callback);
-
-			glfwSetKeyCallback(this->window_, &key_callback);
-			glfwSetCharCallback(this->window_, &char_callback);
+		void push(Shader_Data* _shader);
+		void erase(Shader_Data* _shader);
 
 
-			glfwSetWindowCloseCallback(this->window_, &close_callback);
-			glfwSetWindowFocusCallback(this->window_, &focus_callback);
 
-		};
+
+		window_data(Window _window, lua_State* _lua);
+		~window_data();
 
 		Window window_;
 		lua_State* lua_ = nullptr;
+
+		Shader_Data* active_shader_ = nullptr;
+		std::unordered_map<std::string, Shader_Data*> shaders_{};
+		
+		bool is_valid_callback_key(const std::string& _key) const;
+		void set_lua_callback(const std::string& _key, int _ref);
+		void clear_lua_callback(const std::string& _key);
+		const std::optional<int>& get_lua_callback(const std::string& _key) const;
+		
+	private:
+
+		std::map<std::string, std::optional<int>> lua_callbacks_
+		{
+			{ "key", std::nullopt },
+			{ "char", std::nullopt },
+
+			{ "mouse", std::nullopt },
+			{ "cursor", std::nullopt },
+
+			{ "close", std::nullopt },
+			{ "focus", std::nullopt },
+			{ "resize", std::nullopt }
+
+		};
+
 	};
 
 
@@ -313,11 +152,51 @@ namespace sae::engine
 	// window.has_active_scene() -> bool
 	int window_has_active_scene(lua_State* _lua);
 
+	// window.push_shader(Shader_Data)
+	int window_push_shader(lua_State* _lua);
+
+	// window.erase_shader(Shader_Data)
+	int window_erase_shader(lua_State* _lua);
+
+	// window.get_shader(name) -> Shader_Data
+	int window_get_shader(lua_State* _lua);
+
+	// window.set_callback(name, function)
+	int window_set_callback(lua_State* _lua);
+
 
 
 	// window:__gc
 	int window_destructor(lua_State* _lua);
 
+
+
+	static const luaL_Reg window_lib_m[] =
+	{
+		luaL_Reg{ "__gc", &window_destructor },
+		luaL_Reg{ "close", &window_close },
+		luaL_Reg{ "get_size", &window_get_size},
+		luaL_Reg{ "set_size", &window_set_size },
+		luaL_Reg{ "iconify", &window_iconify},
+		luaL_Reg{ "attention", &window_attention },
+		luaL_Reg{ "show", &window_show },
+		luaL_Reg{ "hide", &window_hide },
+		luaL_Reg{ "focus", &window_focus },
+		luaL_Reg{ "open", &window_open },
+
+		luaL_Reg{ "push_scene", &window_push_scene },
+		luaL_Reg{ "pop_scene", &window_pop_scene },
+		luaL_Reg{ "get_scene_stack_size", &window_scene_stack_size },
+		luaL_Reg{ "has_active_scene", &window_has_active_scene },
+
+		luaL_Reg{ "push_shader", &window_push_shader },
+		luaL_Reg{ "erase_shader", &window_erase_shader },
+		luaL_Reg{ "get_shader", &window_get_shader },
+
+		luaL_Reg{ "set_callback", &window_set_callback },
+
+		luaL_Reg{ NULL, NULL }
+	};
 
 	int luaopen_engine_window(lua_State* _lua);
 

@@ -4,14 +4,277 @@
 
 #include <new>
 #include <iostream>
+#include <stdexcept>
+#include <string>
+
+#define glassert assert(glGetError() == GL_NO_ERROR)
+
+namespace sae::engine
+{
+	bool vertex_array_object::good() const noexcept
+	{
+		return (this->id != 0);
+	};
+	vertex_array_object::operator bool() const noexcept
+	{
+		return this->good();
+	};
+
+	void vertex_array_object::bind()
+	{
+		glBindVertexArray(this->id);
+	};
+	void vertex_array_object::unbind()
+	{
+		glBindVertexArray(0);
+	};
+
+	void vertex_array_object::destroy()
+	{
+		if (this->good())
+		{
+			glDeleteVertexArrays(1, &this->id);
+			this->id = 0;
+		};
+	};
+
+	vertex_array_object::vertex_array_object()
+	{
+		glGenVertexArrays(1, &this->id);
+	};
+	vertex_array_object::~vertex_array_object()
+	{
+		this->destroy();
+	};
+
+}
+
+
+namespace sae::engine
+{
+	bool vertex_buffer_object::good() const noexcept
+	{
+		return (this->id != 0);
+	};
+	vertex_buffer_object::operator bool() const noexcept
+	{
+		return this->good();
+	};
+
+	void vertex_buffer_object::bind(GLenum _target)
+	{
+		glBindBuffer(_target, this->id);
+	};
+	void vertex_buffer_object::unbind(GLenum _target)
+	{
+		glBindBuffer(_target, 0);
+	};
+
+
+	void vertex_buffer_object::destroy()
+	{
+		if (this->good())
+		{
+			glDeleteBuffers(1, &this->id);
+			this->id = 0;
+		};
+	};
+
+	vertex_buffer_object::vertex_buffer_object()
+	{
+		glGenBuffers(1, &this->id);
+	};
+	vertex_buffer_object::~vertex_buffer_object()
+	{
+		this->destroy();
+	};
+
+
+}
 
 
 namespace sae::engine
 {
 
-	void WidgetObject::draw(const glm::mat4& _projectionMat)
+	void vertex_attribute::enable() const
 	{
+		glEnableVertexAttribArray(this->index);
+	};
+	void vertex_attribute::disable() const
+	{
+		glDisableVertexAttribArray(this->index);
+	};
+	void vertex_attribute::set() const
+	{
+		glVertexAttribPointer(this->index, this->size, this->type, this->normalize, this->stride, (void*)this->offset);
+	};
 
+	vertex_attribute::vertex_attribute(GLuint _index, uint8_t _size, GLenum _type, bool _normalize, uint16_t _stride, uint16_t _offset) :
+		index{ _index }, size{ _size }, type{ _type }, normalize{ _normalize }, stride{ _stride }, offset{ _offset }
+	{};
+	vertex_attribute::vertex_attribute(GLuint _index, uint8_t _size, GLenum _type, bool _normalize, uint16_t _stride) : 
+		vertex_attribute{ _index, _size, _type, _normalize, _stride, 0 }
+	{};
+	vertex_attribute::vertex_attribute(GLuint _index, uint8_t _size, GLenum _type, bool _normalize) :
+		vertex_attribute{ _index, _size, _type, _normalize, 0 }
+	{};
+	vertex_attribute::vertex_attribute(GLuint _index, uint8_t _size, GLenum _type) :
+		vertex_attribute{ _index, _size, _type, false }
+	{};
+
+}
+
+
+
+namespace sae::engine
+{
+
+	void WidgetObject::set_color(color_rgba _col) noexcept
+	{
+		this->color_ = _col;
+	};
+	color_rgba WidgetObject::get_color() const noexcept
+	{
+		return this->color_;
+	};
+
+	void WidgetObject::set_position(position2D _pos) noexcept
+	{
+		this->position_ = _pos;
+	};
+	position2D WidgetObject::get_position() const noexcept
+	{
+		return this->position_;
+	};
+
+	void WidgetObject::set_size(size2D _s) noexcept
+	{
+		this->size_ = _s;
+	};
+	size2D WidgetObject::get_size() const noexcept
+	{
+		return this->size_;
+	};
+	
+
+
+
+
+
+	bool Widget_Rectangle::good() const
+	{
+		return this->vao_.good();
+	};
+	void Widget_Rectangle::update()
+	{
+		auto _c = this->get_color();
+		for (auto p = this->cols_.data(); p < (this->cols_.data() + this->cols_.size()); p += 4)
+		{
+			*(p + 0) = _c.r;
+			*(p + 1) = _c.g;
+			*(p + 2) = _c.b;
+			*(p + 3) = _c.a;
+		};
+		this->cols_.update(0, this->cols_.size());
+
+		auto _pos = this->get_position();
+		auto _size = this->get_size();
+		auto p = this->pos_.data();
+
+		p[0] = _pos.x;
+		p[1] = _pos.y;
+		p[2] = _pos.z;
+
+		p[3] = _pos.x;
+		p[4] = _pos.y + _size.height;
+		p[5] = _pos.z;
+
+		p[6] = _pos.x + _size.width;
+		p[7] = _pos.y;
+		p[8] = _pos.z;
+
+		p[9] = _pos.x + _size.width;
+		p[10] = _pos.y + _size.height;
+		p[11] = _pos.z;
+
+		this->pos_.update(0, this->pos_.size());
+
+	};
+	void Widget_Rectangle::draw(const glm::mat4& _projectionMat)
+	{
+		this->shader_->bind();
+		this->vao_.bind();
+		glUniformMatrix4fv(this->projection_uniform_, 1, GL_FALSE, &_projectionMat[0][0]);
+		this->indices_.bind();
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, NULL);
+		this->vao_.unbind();
+	};
+	void Widget_Rectangle::destroy()
+	{
+		this->vao_.destroy();
+		this->pos_.destroy();
+		this->cols_.destroy();
+		this->indices_.destroy();
+	};
+
+	Widget_Rectangle::Widget_Rectangle(Shader_Data* _shader) :
+		shader_{ _shader }
+	{
+#ifdef SAE_ENGINE_HARD_ERRORS
+		assert(this->shader_ != nullptr);
+#else
+#ifdef SAE_ENGINE_USE_EXCEPTIONS
+		throw std::runtime_error{ "no shader was set" };
+#else
+		this->vao_ = 0;
+		return;
+#endif
+#endif
+		assert(!glGetError());
+
+		this->projection_uniform_ = glGetUniformLocation(this->shader_->id(), "ProjectionMatrix");
+		this->vao_.bind();
+
+		assert(this->vao_.good());
+		assert(this->pos_.good());
+		assert(this->cols_.good());
+		assert(this->indices_.good());
+
+		this->pos_attr_.enable();
+		this->pos_.bind();
+		this->pos_attr_.set();
+		this->pos_.realloc_buffer();
+		assert(!glGetError());
+
+		this->col_attr_.enable();
+		this->cols_.bind();
+		this->col_attr_.set();
+		this->cols_.realloc_buffer();
+		assert(!glGetError());
+
+		this->indices_.bind();
+		this->indices_.realloc_buffer();
+
+		auto _glError = glGetError();
+		if (_glError != GL_NO_ERROR)
+		{
+#ifdef SAE_ENGINE_HARD_ERRORS
+			abort();
+#ifdef SAE_ENGINE_USE_EXCEPTIONS
+			throw std::runtime_error{ "OpenGL error : " + std::to_string(_glError) };
+#else
+			this->vao_ = 0;
+#endif
+#endif
+		};
+
+		this->vao_.unbind();
+	};
+	Widget_Rectangle::~Widget_Rectangle()
+	{
+#ifdef SAE_ENGINE_DESTRUCTOR_DEBUG
+		std::cout << "~Widget_Rectangle()\n";
+#endif
 	};
 
 
@@ -39,28 +302,27 @@ namespace sae::engine
 		return 0;
 	};
 
-	
-
-	const luaL_Reg gfx_lib[] =
+	int gfx_good(lua_State* _lua)
 	{
-		luaL_Reg{ "__gc", &gfx_destructor },
-
-		luaL_Reg{ NULL, NULL }
+		auto _ptr = lua_toGFXObject(_lua, -1, 1);
+		lua_pushboolean(_lua, _ptr->good());
+		return 1;
 	};
+
+
+
 
 
 	int luaopen_engine_gfx(lua_State* _lua)
 	{
 		lua::lua_newclass(_lua, "SAEEngine.GFXObject");
-		lua_pushvalue(_lua, -1);
-		lua_setfield(_lua, -2, "__index");
-
 		luaL_setfuncs(_lua, gfx_lib, 0);
 
 		luaopen_engine_gfx_widget(_lua);
 		lua_setfield(_lua, -2, "widget");
 
-
+		luaopen_engine_gfx_rectangle(_lua);
+		lua_setfield(_lua, -2, "rectangle");
 
 		return 1;
 	};
@@ -69,41 +331,170 @@ namespace sae::engine
 
 
 
-	int gfx_widgetobject_new(lua_State* _lua)
+
+	WidgetObject* lua_towidget(lua_State* _lua, int _idx, int _arg)
 	{
-		auto _ptr = lua::lua_newinstance<WidgetObject>(_lua, "SAEEngine.WidgetObject");
+		void* ud = lua::lua_downcast(_lua, _idx, "SAEEngine.WidgetObject");
+		luaL_argcheck(_lua, ud != NULL, _arg, "`WidgetObject' expected");
+		return (WidgetObject*)ud;
+	};
+
+	// widget:set_color({ r, g, b, a })
+	int widget_set_color(lua_State* _lua)
+	{
+		auto _ptr = lua_towidget(_lua, 1, 1);
+
+		color_rgba _col{};
+
+		lua_getfield(_lua, 2, "r");
+		_col.r = (uint8_t)lua_tointeger(_lua, -1);
+
+		lua_getfield(_lua, 2, "g");
+		_col.g = (uint8_t)lua_tointeger(_lua, -1);
+
+		lua_getfield(_lua, 2, "b");
+		_col.b = (uint8_t)lua_tointeger(_lua, -1);
+
+		lua_getfield(_lua, 2, "a");
+		_col.a = (uint8_t)lua_tointeger(_lua, -1);
+
+		lua_pop(_lua, 4);
+		_ptr->set_color(_col);
+
+		return 0;
+	};
+
+	// widget:get_color() -> {r, g, b, a}
+	int widget_get_color(lua_State* _lua)
+	{
+		auto _ptr = lua_towidget(_lua, -1, 1);
+		auto _col = _ptr->get_color();
+
+		lua_newtable(_lua);
+		lua_pushinteger(_lua, (lua_Integer)_col.r);
+		lua_setfield(_lua, -2, "r");
+		lua_pushinteger(_lua, (lua_Integer)_col.g);
+		lua_setfield(_lua, -2, "g");
+		lua_pushinteger(_lua, (lua_Integer)_col.b);
+		lua_setfield(_lua, -2, "b");
+		lua_pushinteger(_lua, (lua_Integer)_col.a);
+		lua_setfield(_lua, -2, "a");
+
 		return 1;
 	};
-	const luaL_Reg gfx_widget_lib[] =
-	{
-		luaL_Reg{ "new", &gfx_widgetobject_new },
 
-		luaL_Reg{ NULL, NULL }
+	// widget:get_position() -> {x, y, z}
+	int widget_get_position(lua_State* _lua)
+	{
+		auto _ptr = lua_towidget(_lua, -1, 1);
+		auto _p = _ptr->get_position();
+
+		lua_newtable(_lua);
+		lua_pushinteger(_lua, _p.x);
+		lua_setfield(_lua, -2, "x");
+		lua_pushinteger(_lua, _p.y);
+		lua_setfield(_lua, -2, "y");
+		lua_pushnumber(_lua, _p.z);
+		lua_setfield(_lua, -2, "z");
+
+		return 1;
 	};
+
+	// widget:set_position({x, y, z})
+	int widget_set_position(lua_State* _lua)
+	{
+		auto _ptr = lua_towidget(_lua, 1, 1);
+		auto _pos = position2D{};
+
+		lua_getfield(_lua, 2, "x");
+		_pos.x = lua_tointeger(_lua, -1);
+
+		lua_getfield(_lua, 2, "y");
+		_pos.y = lua_tointeger(_lua, -1);
+
+		lua_getfield(_lua, 2, "z");
+		_pos.z = lua_tonumber(_lua, -1);
+
+		lua_pop(_lua, 3);
+		_ptr->set_position(_pos);
+
+		return 0;
+	};
+
+	// widget:get_size() -> {w, h}
+	int widget_get_size(lua_State* _lua)
+	{
+		auto _ptr = lua_towidget(_lua, -1, 1);
+		auto _s = _ptr->get_size();
+
+		lua_newtable(_lua);
+		lua_pushinteger(_lua, _s.width);
+		lua_setfield(_lua, -2, "w");
+		lua_pushinteger(_lua, _s.height);
+		lua_setfield(_lua, -2, "h");
+
+		return 1;
+	};
+
+	// widget:set_size({w, h})
+	int widget_set_size(lua_State* _lua)
+	{
+		auto _ptr = lua_towidget(_lua, -1, 1);
+		auto _s = size2D{};
+
+		lua_getfield(_lua, 2, "w");
+		_s.width = lua_tointeger(_lua, -1);
+
+		lua_getfield(_lua, 2, "h");
+		_s.height = lua_tointeger(_lua, -1);
+
+		lua_pop(_lua, 2);
+		_ptr->set_size(_s);
+
+		return 0;
+	};
+
+
 
 	int luaopen_engine_gfx_widget(lua_State* _lua)
 	{
 		lua::lua_newclass(_lua, "SAEEngine.WidgetObject");
-
 		lua::lua_inherit(_lua, "SAEEngine.GFXObject", -1);
-
 		luaL_setfuncs(_lua, gfx_widget_lib, 0);
 		return 1;
 	}
 
-
-	int gfx_worldobject_new(lua_State* _lua)
-	{
-
-		return 1;
-	};
 	int luaopen_engine_gfx_world(lua_State* _lua)
 	{
-
-		return 1;
+		abort();
+		return 0;
 	};
 
 
 
+
+
+	Widget_Rectangle* lua_torectangle(lua_State* _lua, int _idx, int _arg)
+	{
+		void* ud = lua::lua_downcast(_lua, _idx, "SAEEngine.Rectangle");
+		luaL_argcheck(_lua, ud != NULL, _arg, "'Rectangle' expected");
+		return (Widget_Rectangle*)ud;
+	};
+
+	// gfx.rectangle.new(Shader_Data) -> rectangle
+	int gfx_rectangle_new(lua_State* _lua)
+	{
+		auto _shader = lua_toshader(_lua, -1, 1);
+		auto _ptr = lua::lua_newinstance<Widget_Rectangle>(_lua, "SAEEngine.Rectangle", _shader);
+		return 1;
+	};
+
+	int luaopen_engine_gfx_rectangle(lua_State* _lua)
+	{
+		lua::lua_newclass(_lua, "SAEEngine.Rectangle");
+		lua::lua_inherit(_lua, "SAEEngine.WidgetObject", -1);
+		luaL_setfuncs(_lua, gfx_rectangle_lib, 0);
+		return 1;
+	};
 
 }

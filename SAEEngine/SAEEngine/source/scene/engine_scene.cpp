@@ -8,8 +8,12 @@
 
 namespace sae::engine
 {
-
-	Scene_Data::~Scene_Data() { std::cout << "~Scene_Data()\n"; };
+	Scene_Data::~Scene_Data()
+	{
+#ifdef SAE_ENGINE_DESTRUCTOR_DEBUG
+		std::cout << "~Scene_Data()\n";
+#endif
+	};
 
 	void Scene_Data::push_back(WidgetObject* _obj)
 	{
@@ -25,9 +29,15 @@ namespace sae::engine
 		this->widgets_.clear();
 	};
 
+	void Scene_Data::set_display_size(int _width, int _height)
+	{
+		this->window_width_ = _width;
+		this->window_height_ = _height;
+	};
+
 	void Scene_Data::draw()
 	{
-		glm::mat4 _projectionMat = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f);
+		glm::mat4 _projectionMat = glm::ortho(0.0f, (float_t)this->window_width_, 0.0f, (float_t)this->window_height_);
 		for (auto& w : this->widgets_)
 			w->draw(_projectionMat);
 	};
@@ -39,13 +49,8 @@ namespace sae::engine
 
 	Scene_Data* lua_toscenedata(lua_State* _lua, int _idx, int _arg)
 	{		
-		void* ud = lua::lua_downcast(_lua, _idx, "SAEEngine.scene");
-		luaL_argcheck(_lua, ud != NULL, _arg, "`scene' expected");
-		return (Scene_Data*)ud;
+		return lua::lua_toinstance<Scene_Data>(_lua, _idx, "SAEEngine.scene");
 	};
-
-
-
 
 	int scene_new(lua_State* _lua)
 	{
@@ -58,7 +63,7 @@ namespace sae::engine
 		auto _ptr = lua_toscenedata(_lua, 1, 1);
 		if (lua::lua_isbaseof(_lua, 2, "SAEEngine.WidgetObject"))
 		{
-			_ptr->push_back((WidgetObject*)lua::lua_downcast(_lua, 2, "SAEEngine.WidgetObject"));
+			_ptr->push_back(lua::lua_toinstance<WidgetObject>(_lua, 2, "SAEEngine.WidgetObject"));
 		}
 		else if (lua::lua_isbaseof(_lua, 2, "SAEEngine.WorldObject"))
 		{

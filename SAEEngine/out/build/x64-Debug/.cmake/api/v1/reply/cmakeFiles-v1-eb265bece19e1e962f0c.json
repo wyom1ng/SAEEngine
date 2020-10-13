@@ -408,6 +408,12 @@
 		},
 		{
 			"path" : "Examples/CMakeLists.txt"
+		},
+		{
+			"path" : "Examples/CustomExtension/CMakeLists.txt"
+		},
+		{
+			"path" : "Examples/LuaAPI/CMakeLists.txt"
 		}
 	],
 	"kind" : "cmakeFiles",
