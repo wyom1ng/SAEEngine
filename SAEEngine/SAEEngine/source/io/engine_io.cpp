@@ -24,8 +24,9 @@ namespace sae::engine
 		return _ptr;
 	};
 
-	// engine.io.print(string)
-	int io_print(lua_State* _lua)
+
+	// io.print(string)
+	int lib_io::print(lua_State* _lua)
 	{
 		auto t = lua_gettop(_lua);
 		auto _ostr = lua_getostream(_lua);
@@ -41,8 +42,8 @@ namespace sae::engine
 		return 0;
 	};
 
-	// engine.io.println(string)
-	int io_println(lua_State* _lua)
+	// io.println(string)
+	int lib_io::println(lua_State* _lua)
 	{
 		auto t = lua_gettop(_lua);
 		auto _ostr = lua_getostream(_lua);
@@ -65,8 +66,8 @@ namespace sae::engine
 		return 0;
 	};
 
-	// engine.io.read(count) -> string
-	int io_read(lua_State* _lua)
+	// io.read(count) -> string
+	int lib_io::read(lua_State* _lua)
 	{
 		size_t _count = (size_t)lua_tointeger(_lua, -1);
 		auto _istr = lua_getistream(_lua);
@@ -78,10 +79,10 @@ namespace sae::engine
 		};
 		lua_pushstring(_lua, _str.c_str());
 		return 1;
-	}
+	};
 
-	// engine.io.readln() -> string
-	int io_readln(lua_State* _lua)
+	// io.readln() -> string
+	int lib_io::readln(lua_State* _lua)
 	{
 		auto _istr = lua_getistream(_lua);
 		std::string _str{};
@@ -94,20 +95,10 @@ namespace sae::engine
 	};
 
 
-	const luaL_Reg engine_io_lib[] =
-	{
-		luaL_Reg{ "print", &io_print },
-		luaL_Reg{ "println", &io_println },
-		luaL_Reg{ "read", &io_read },
-		luaL_Reg{ "readln", &io_readln },
-
-		luaL_Reg{ NULL, NULL }
-	};
-
-	int luaopen_engine_io(lua_State* _lua)
+	int lib_io::lua_open(lua_State* _lua)
 	{
 		lua_newtable(_lua);
-		luaL_setfuncs(_lua, engine_io_lib, 0);
+		luaL_setfuncs(_lua, funcs_f, 0);
 		return 1;
 	};
 
