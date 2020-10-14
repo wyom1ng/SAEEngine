@@ -155,7 +155,7 @@ namespace sae::engine
 	{
 		return this->size_;
 	};
-	
+
 
 
 
@@ -278,6 +278,14 @@ namespace sae::engine
 	};
 
 
+
+}
+
+
+namespace sae::engine
+{
+
+
 	GFXObject* lua_toGFXObject(lua_State* _lua, int _idx, int _arg)
 	{
 		void* ud = lua::lua_downcast(_lua, _idx, "SAEEngine.GFXObject");
@@ -313,165 +321,12 @@ namespace sae::engine
 
 
 
-	int luaopen_engine_gfx(lua_State* _lua)
-	{
-		lua::lua_newclass(_lua, "SAEEngine.GFXObject");
-		luaL_setfuncs(_lua, gfx_lib, 0);
-
-		luaopen_engine_gfx_widget(_lua);
-		lua_setfield(_lua, -2, "widget");
-
-		luaopen_engine_gfx_rectangle(_lua);
-		lua_setfield(_lua, -2, "rectangle");
-
-		return 1;
-	};
-
-
-
-
-
-
 	WidgetObject* lua_towidget(lua_State* _lua, int _idx, int _arg)
 	{
 		void* ud = lua::lua_downcast(_lua, _idx, "SAEEngine.WidgetObject");
 		luaL_argcheck(_lua, ud != NULL, _arg, "`WidgetObject' expected");
 		return (WidgetObject*)ud;
 	};
-
-	// widget:set_color({ r, g, b, a })
-	int widget_set_color(lua_State* _lua)
-	{
-		auto _ptr = lua_towidget(_lua, 1, 1);
-
-		color_rgba _col{};
-
-		lua_getfield(_lua, 2, "r");
-		_col.r = (uint8_t)lua_tointeger(_lua, -1);
-
-		lua_getfield(_lua, 2, "g");
-		_col.g = (uint8_t)lua_tointeger(_lua, -1);
-
-		lua_getfield(_lua, 2, "b");
-		_col.b = (uint8_t)lua_tointeger(_lua, -1);
-
-		lua_getfield(_lua, 2, "a");
-		_col.a = (uint8_t)lua_tointeger(_lua, -1);
-
-		lua_pop(_lua, 4);
-		_ptr->set_color(_col);
-
-		return 0;
-	};
-
-	// widget:get_color() -> {r, g, b, a}
-	int widget_get_color(lua_State* _lua)
-	{
-		auto _ptr = lua_towidget(_lua, -1, 1);
-		auto _col = _ptr->get_color();
-
-		lua_newtable(_lua);
-		lua_pushinteger(_lua, (lua_Integer)_col.r);
-		lua_setfield(_lua, -2, "r");
-		lua_pushinteger(_lua, (lua_Integer)_col.g);
-		lua_setfield(_lua, -2, "g");
-		lua_pushinteger(_lua, (lua_Integer)_col.b);
-		lua_setfield(_lua, -2, "b");
-		lua_pushinteger(_lua, (lua_Integer)_col.a);
-		lua_setfield(_lua, -2, "a");
-
-		return 1;
-	};
-
-	// widget:get_position() -> {x, y, z}
-	int widget_get_position(lua_State* _lua)
-	{
-		auto _ptr = lua_towidget(_lua, -1, 1);
-		auto _p = _ptr->get_position();
-
-		lua_newtable(_lua);
-		lua_pushinteger(_lua, _p.x);
-		lua_setfield(_lua, -2, "x");
-		lua_pushinteger(_lua, _p.y);
-		lua_setfield(_lua, -2, "y");
-		lua_pushnumber(_lua, _p.z);
-		lua_setfield(_lua, -2, "z");
-
-		return 1;
-	};
-
-	// widget:set_position({x, y, z})
-	int widget_set_position(lua_State* _lua)
-	{
-		auto _ptr = lua_towidget(_lua, 1, 1);
-		auto _pos = position2D{};
-
-		lua_getfield(_lua, 2, "x");
-		_pos.x = lua_tointeger(_lua, -1);
-
-		lua_getfield(_lua, 2, "y");
-		_pos.y = lua_tointeger(_lua, -1);
-
-		lua_getfield(_lua, 2, "z");
-		_pos.z = lua_tonumber(_lua, -1);
-
-		lua_pop(_lua, 3);
-		_ptr->set_position(_pos);
-
-		return 0;
-	};
-
-	// widget:get_size() -> {w, h}
-	int widget_get_size(lua_State* _lua)
-	{
-		auto _ptr = lua_towidget(_lua, -1, 1);
-		auto _s = _ptr->get_size();
-
-		lua_newtable(_lua);
-		lua_pushinteger(_lua, _s.width);
-		lua_setfield(_lua, -2, "w");
-		lua_pushinteger(_lua, _s.height);
-		lua_setfield(_lua, -2, "h");
-
-		return 1;
-	};
-
-	// widget:set_size({w, h})
-	int widget_set_size(lua_State* _lua)
-	{
-		auto _ptr = lua_towidget(_lua, -1, 1);
-		auto _s = size2D{};
-
-		lua_getfield(_lua, 2, "w");
-		_s.width = lua_tointeger(_lua, -1);
-
-		lua_getfield(_lua, 2, "h");
-		_s.height = lua_tointeger(_lua, -1);
-
-		lua_pop(_lua, 2);
-		_ptr->set_size(_s);
-
-		return 0;
-	};
-
-
-
-	int luaopen_engine_gfx_widget(lua_State* _lua)
-	{
-		lua::lua_newclass(_lua, "SAEEngine.WidgetObject");
-		lua::lua_inherit(_lua, "SAEEngine.GFXObject", -1);
-		luaL_setfuncs(_lua, gfx_widget_lib, 0);
-		return 1;
-	}
-
-	int luaopen_engine_gfx_world(lua_State* _lua)
-	{
-		abort();
-		return 0;
-	};
-
-
-
 
 
 	Widget_Rectangle* lua_torectangle(lua_State* _lua, int _idx, int _arg)
@@ -494,6 +349,193 @@ namespace sae::engine
 		lua::lua_newclass(_lua, "SAEEngine.Rectangle");
 		lua::lua_inherit(_lua, "SAEEngine.WidgetObject", -1);
 		luaL_setfuncs(_lua, gfx_rectangle_lib, 0);
+		return 1;
+	};
+
+}
+
+
+namespace sae::engine
+{
+
+	int lib_gfx::ltype_GFXObject::good(lua_State* _lua)
+	{
+		auto _ptr = to_userdata(_lua, 1);
+		lua_pushboolean(_lua, _ptr->good());
+		return 1;
+	};
+	int lib_gfx::ltype_GFXObject::update(lua_State* _lua)
+	{
+		auto _ptr = to_userdata(_lua, 1);
+		_ptr->update();
+		return 0;
+	};
+	int lib_gfx::ltype_GFXObject::destructor(lua_State* _lua)
+	{
+		auto _ptr = to_userdata(_lua, 1);
+		_ptr->~GFXObject();
+		return 0;
+	};
+
+	lib_gfx::ltype_GFXObject::pointer lib_gfx::ltype_GFXObject::to_userdata(lua_State* _lua, int _idx)
+	{
+		return lua::lua_toinstance<value_type>(_lua, _idx, tname());
+	};
+
+	int lib_gfx::ltype_GFXObject::lua_open(lua_State* _lua)
+	{
+		lua::lua_newclass(_lua, tname());
+		luaL_setfuncs(_lua, funcs, 0);
+		lua_pop(_lua, 1);
+		return 0;
+	};
+
+}
+
+
+namespace sae::engine
+{
+
+	int lib_gfx::ltype_WidgetObject::set_color(lua_State* _lua)
+	{
+		auto _ptr = to_userdata(_lua, 1);
+
+		color_rgba _col{};
+
+		lua_getfield(_lua, 2, "r");
+		_col.r = (uint8_t)lua_tointeger(_lua, -1);
+
+		lua_getfield(_lua, 2, "g");
+		_col.g = (uint8_t)lua_tointeger(_lua, -1);
+
+		lua_getfield(_lua, 2, "b");
+		_col.b = (uint8_t)lua_tointeger(_lua, -1);
+
+		lua_getfield(_lua, 2, "a");
+		_col.a = (uint8_t)lua_tointeger(_lua, -1);
+
+		lua_pop(_lua, 4);
+		_ptr->set_color(_col);
+
+		return 0;
+	};
+
+	int lib_gfx::ltype_WidgetObject::get_color(lua_State* _lua)
+	{
+		auto _ptr = to_userdata(_lua, 1);
+		auto _col = _ptr->get_color();
+
+		lua_newtable(_lua);
+		lua_pushinteger(_lua, (lua_Integer)_col.r);
+		lua_setfield(_lua, -2, "r");
+		lua_pushinteger(_lua, (lua_Integer)_col.g);
+		lua_setfield(_lua, -2, "g");
+		lua_pushinteger(_lua, (lua_Integer)_col.b);
+		lua_setfield(_lua, -2, "b");
+		lua_pushinteger(_lua, (lua_Integer)_col.a);
+		lua_setfield(_lua, -2, "a");
+
+		return 1;
+	};
+
+	int lib_gfx::ltype_WidgetObject::set_position(lua_State* _lua)
+	{
+		auto _ptr = to_userdata(_lua, 1);
+		auto _pos = position2D{};
+
+		lua_getfield(_lua, 2, "x");
+		_pos.x = lua_tointeger(_lua, -1);
+
+		lua_getfield(_lua, 2, "y");
+		_pos.y = lua_tointeger(_lua, -1);
+
+		lua_getfield(_lua, 2, "z");
+		_pos.z = lua_tonumber(_lua, -1);
+
+		lua_pop(_lua, 3);
+		_ptr->set_position(_pos);
+
+		return 0;
+	};
+
+	int lib_gfx::ltype_WidgetObject::get_position(lua_State* _lua)
+	{
+		auto _ptr = to_userdata(_lua, 1);
+		auto _p = _ptr->get_position();
+
+		lua_newtable(_lua);
+		lua_pushinteger(_lua, _p.x);
+		lua_setfield(_lua, -2, "x");
+		lua_pushinteger(_lua, _p.y);
+		lua_setfield(_lua, -2, "y");
+		lua_pushnumber(_lua, _p.z);
+		lua_setfield(_lua, -2, "z");
+
+		return 1;
+	};
+
+	int lib_gfx::ltype_WidgetObject::set_size(lua_State* _lua)
+	{
+		auto _ptr = to_userdata(_lua, 1);
+		auto _s = size2D{};
+
+		lua_getfield(_lua, 2, "w");
+		_s.width = lua_tointeger(_lua, -1);
+
+		lua_getfield(_lua, 2, "h");
+		_s.height = lua_tointeger(_lua, -1);
+
+		lua_pop(_lua, 2);
+		_ptr->set_size(_s);
+
+		return 0;
+	};
+
+	int lib_gfx::ltype_WidgetObject::get_size(lua_State* _lua)
+	{
+		auto _ptr = to_userdata(_lua, 1);
+		auto _s = _ptr->get_size();
+
+		lua_newtable(_lua);
+		lua_pushinteger(_lua, _s.width);
+		lua_setfield(_lua, -2, "w");
+		lua_pushinteger(_lua, _s.height);
+		lua_setfield(_lua, -2, "h");
+
+		return 1;
+	};
+
+	lib_gfx::ltype_WidgetObject::pointer lib_gfx::ltype_WidgetObject::to_userdata(lua_State* _lua, int _idx)
+	{
+		return lua::lua_toinstance<value_type>(_lua, _idx, tname());
+	};
+
+	int lib_gfx::ltype_WidgetObject::lua_open(lua_State* _lua)
+	{
+		lua::lua_newclass(_lua, tname());
+		lua::lua_inherit(_lua, ltype_GFXObject::tname(), -1);
+		luaL_setfuncs(_lua, funcs, 0);
+		lua_pop(_lua, 1);
+		return 0;
+	};
+
+
+}
+
+
+namespace sae::engine
+{
+
+	int lib_gfx::lua_open(lua_State* _lua)
+	{
+		lua_newtable(_lua);
+
+		assert(ltype_GFXObject::lua_open(_lua) == 0);
+		assert(ltype_WidgetObject::lua_open(_lua) == 0);
+
+		assert(luaopen_engine_gfx_rectangle(_lua) == 1);
+		lua_setfield(_lua, -2, "rectangle");
+
 		return 1;
 	};
 

@@ -370,67 +370,6 @@ namespace sae::engine
 
 
 
-	GFXObject* lua_toGFXObject(lua_State* _lua, int _idx, int _arg);
-
-	// gfx:__gc()
-	int gfx_destructor(lua_State* _lua);
-
-	// gfx:update()
-	int gfx_update(lua_State* _lua);
-
-	// gfx:good() -> bool
-	int gfx_good(lua_State* _lua);
-
-	static inline const luaL_Reg gfx_lib[] =
-	{
-		luaL_Reg{ "__gc", &gfx_destructor },
-		luaL_Reg{ "update", &gfx_update },
-		luaL_Reg{ "good", &gfx_good },
-		luaL_Reg{ NULL, NULL }
-	};
-
-	int luaopen_engine_gfx(lua_State* _lua);
-
-
-
-
-	WidgetObject* lua_towidget(lua_State* _lua, int _idx, int _arg);
-
-
-	// widget:set_color({ r, g, b, a })
-	int widget_set_color(lua_State* _lua);
-
-	// widget:get_color() -> {r, g, b, a}
-	int widget_get_color(lua_State* _lua);
-
-	// widget:get_position() -> {x, y, z}
-	int widget_get_position(lua_State* _lua);
-
-	// widget:set_position({x, y, z})
-	int widget_set_position(lua_State* _lua);
-
-	// widget:get_size() -> {w, h}
-	int widget_get_size(lua_State* _lua);
-
-	// widget:set_size({w, h})
-	int widget_set_size(lua_State* _lua);
-
-
-	static inline constexpr luaL_Reg gfx_widget_lib[] =
-	{
-		luaL_Reg{ "set_color", &widget_set_color },
-		luaL_Reg{ "get_color", &widget_get_color },
-		luaL_Reg{ "set_position", &widget_set_position },
-		luaL_Reg{ "get_position", &widget_get_position },
-		luaL_Reg{ "set_size", &widget_set_size },
-		luaL_Reg{ "get_size", &widget_get_size },
-		luaL_Reg{ NULL, NULL }
-	};
-
-	int luaopen_engine_gfx_widget(lua_State* _lua);
-
-
-	int luaopen_engine_gfx_world(lua_State* _lua);
 
 
 
@@ -440,14 +379,130 @@ namespace sae::engine
 	// gfx.rectangle.new(Shader_Data) -> rectangle
 	int gfx_rectangle_new(lua_State* _lua);
 
-
-
 	static inline const luaL_Reg gfx_rectangle_lib[] =
 	{
 		luaL_Reg{ "new", &gfx_rectangle_new },
 		luaL_Reg{ NULL, NULL }
 	};
 	int luaopen_engine_gfx_rectangle(lua_State* _lua);
+
+
+
+
+	
+
+	struct lib_gfx
+	{
+	public:
+
+		struct ltype_GFXObject
+		{
+		private:
+
+			static int good(lua_State* _lua);
+			
+			static int update(lua_State* _lua);
+
+			static int destructor(lua_State* _lua);
+
+			constexpr static inline luaL_Reg funcs[] =
+			{
+				luaL_Reg{ "update", &update },
+				luaL_Reg{ "good", &good },
+				luaL_Reg{ "__gc", &destructor },
+				luaL_Reg{ NULL, NULL }
+			};
+
+			constexpr static inline auto TYPENAME = "SAEEngine.GFXObject";
+
+		public:
+			using value_type = GFXObject;
+			using pointer = value_type*;
+
+			static pointer to_userdata(lua_State* _lua, int _idx);
+
+			constexpr static inline const char* tname() noexcept
+			{
+				return TYPENAME;
+			};
+
+			static int lua_open(lua_State* _lua);
+
+		};
+
+		struct ltype_WidgetObject
+		{
+		private:
+
+			static int set_color(lua_State* _lua);
+			static int get_color(lua_State* _lua);
+
+			static int set_position(lua_State* _lua);
+			static int get_position(lua_State* _lua);
+
+			static int set_size(lua_State* _lua);
+			static int get_size(lua_State* _lua);
+
+			constexpr static inline luaL_Reg funcs[] =
+			{
+				luaL_Reg{ "set_color", &set_color },
+				luaL_Reg{ "get_color", &get_color },
+				luaL_Reg{ "set_position", &set_position },
+				luaL_Reg{ "get_position", &get_position },
+				luaL_Reg{ "set_size", &set_size },
+				luaL_Reg{ "get_size", &get_size },
+				luaL_Reg{ NULL, NULL }
+			};
+
+			constexpr static inline auto TYPENAME = "SAEEngine.WidgetObject";
+
+		public:
+			using value_type = WidgetObject;
+			using pointer = value_type*;
+
+			static pointer to_userdata(lua_State* _lua, int _idx);
+
+			constexpr static inline const char* tname() noexcept 
+			{
+				return TYPENAME;
+			};
+
+			static int lua_open(lua_State* _lua);
+
+		};
+
+		struct WorldObject
+		{
+
+		};
+
+
+	private:
+
+
+
+
+
+
+
+
+	public:
+		
+		static inline auto to_gfxobject(lua_State* _lua, int _arg)
+		{
+			return ltype_GFXObject::to_userdata(_lua, _arg);
+		};
+		static inline auto to_widgetobject(lua_State* _lua, int _arg)
+		{
+			return ltype_WidgetObject::to_userdata(_lua, _arg);
+		};
+
+
+
+		static int lua_open(lua_State* _lua);
+
+	};
+
 
 
 }

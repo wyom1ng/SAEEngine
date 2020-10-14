@@ -243,6 +243,7 @@ namespace sae::engine
 	public:
 
 		struct pixel_view;
+
 		struct const_pixel_view : public base_pixel_view<const uint8_t>
 		{
 			constexpr const_pixel_view() noexcept = default;
@@ -297,7 +298,6 @@ namespace sae::engine
 			friend const_pixel_view;
 
 		};
-
 
 
 		inline pixel_view view_begin() noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))

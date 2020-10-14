@@ -248,7 +248,7 @@ namespace sae::engine
 		luaopen_engine_window(_lua);
 		lua_setfield(_lua, t, "window");
 
-		lib_io::lua_open(_lua);
+		assert(lib_io::lua_open(_lua) == 1);
 		lua_setfield(_lua, t, "io");
 
 		luaopen_engine_os(_lua);
@@ -257,7 +257,7 @@ namespace sae::engine
 		luaopen_engine_scene(_lua);
 		lua_setfield(_lua, t, "scene");
 
-		luaopen_engine_gfx(_lua);
+		assert(lib_gfx::lua_open(_lua) == 1);
 		lua_setfield(_lua, t, "gfx");
 	
 		luaopen_engine_shader(_lua);
@@ -266,7 +266,7 @@ namespace sae::engine
 		luaopen_engine_fs(_lua);
 		lua_setfield(_lua, t, "fs");
 
-		lib_texture::lua_open(_lua);
+		assert(lib_texture::lua_open(_lua) == 1);
 		lua_setfield(_lua, t, "texture");
 
 
