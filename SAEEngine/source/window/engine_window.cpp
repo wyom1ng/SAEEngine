@@ -651,7 +651,7 @@ namespace sae::engine
 	int window_push_shader(lua_State* _lua)
 	{
 		auto _beginTop = lua_gettop(_lua);
-		auto _ptr = lua_toshader(_lua, 1, 1);
+		auto _ptr = lib_shader::to_shader(_lua, 1);
 
 		lua_getglobal(_lua, "SAEEngine");
 		lua_getfield(_lua, -1, "window");
@@ -696,7 +696,7 @@ namespace sae::engine
 	int window_erase_shader(lua_State* _lua)
 	{
 		auto _beginTop = lua_gettop(_lua);
-		auto _ptr = lua_toshader(_lua, 1, 1);
+		auto _ptr = lib_shader::to_shader(_lua, 1);
 
 		lua_getglobal(_lua, "SAEEngine");
 		lua_getfield(_lua, -1, "window");

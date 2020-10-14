@@ -84,10 +84,8 @@ namespace sae::engine
 	{
 		auto _beginTop = lua_gettop(this->lua());
 		
-		lua_pushstring(this->lua(), _path.string().c_str());
-		auto _out = fs_dofile(this->lua(), std::nothrow);
-		lua_pop(this->lua(), 1);
-
+		auto _out = dofile(this->lua(), _path, std::nothrow);
+		
 		auto _endTop = lua_gettop(this->lua());
 		assert(_beginTop == _endTop);
 
@@ -98,11 +96,8 @@ namespace sae::engine
 	int SAEEngine::run_script(const std::filesystem::path& _path)
 	{
 		auto _beginTop = lua_gettop(this->lua());
-
-		lua_pushstring(this->lua(), _path.string().c_str());
-		auto _out = fs_dofile(this->lua());
-		lua_pop(this->lua(), 1);
-
+		auto _out = dofile(this->lua(), _path);
+		
 		auto _endTop = lua_gettop(this->lua());
 		assert(_beginTop == _endTop);
 
@@ -137,13 +132,13 @@ namespace sae::engine
 		auto _lua = this->lua();
 		auto _beginTop = lua_gettop(_lua);
 
-		lua_pushstring(_lua, NEXT_SCRIPT_KEY);
+		lua_pushstring(_lua, lib_fs::NEXT_SCRIPT_KEY);
 		lua_gettable(_lua, LUA_REGISTRYINDEX);
 		if (!lua_isnoneornil(this->lua(), -1))
 		{
 			std::filesystem::path _path = lua_tostring(_lua, -1);
 			lua_pop(_lua, 1);
-			lua_pushstring(_lua, NEXT_SCRIPT_KEY);
+			lua_pushstring(_lua, lib_fs::NEXT_SCRIPT_KEY);
 			lua_pushnil(_lua);
 			lua_settable(_lua, LUA_REGISTRYINDEX);
 			this->run_script(_path);
@@ -248,7 +243,7 @@ namespace sae::engine
 		luaopen_engine_window(_lua);
 		lua_setfield(_lua, t, "window");
 
-		lib_io::lua_open(_lua);
+		assert(lib_io::lua_open(_lua) == 1);
 		lua_setfield(_lua, t, "io");
 
 		luaopen_engine_os(_lua);
@@ -257,16 +252,16 @@ namespace sae::engine
 		luaopen_engine_scene(_lua);
 		lua_setfield(_lua, t, "scene");
 
-		luaopen_engine_gfx(_lua);
+		assert(lib_gfx::lua_open(_lua) == 1);
 		lua_setfield(_lua, t, "gfx");
-	
-		luaopen_engine_shader(_lua);
+
+		assert(lib_shader::lua_open(_lua) == 1);
 		lua_setfield(_lua, t, "shader");
 
-		luaopen_engine_fs(_lua);
+		assert(lib_fs::lua_open(_lua) == 1);
 		lua_setfield(_lua, t, "fs");
 
-		lib_texture::lua_open(_lua);
+		assert(lib_texture::lua_open(_lua) == 1);
 		lua_setfield(_lua, t, "texture");
 
 

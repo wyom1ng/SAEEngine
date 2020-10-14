@@ -22,7 +22,7 @@ int main()
 	
 	try 
 	{
-		auto _err = _engine.run_script("C:\\Users\\jonat\\source\\repos\\SAEEngine\\SAEEngine\\Examples\\LuaAPI\\engineStart.lua");
+		auto _err = _engine.run_script("C:\\Users\\jonat\\source\\repos\\SAEEngine\\Examples\\LuaAPI\\engineStart.lua");
 	}
 	catch (const std::runtime_error& e)
 	{

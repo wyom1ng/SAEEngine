@@ -43,36 +43,74 @@ namespace sae::engine
 
 
 
+	
 
-	Shader_Data* lua_toshader(lua_State* _lua, int _idx, int _arg);
-
-
-	// engine.shader.new(name, vertexPath, fragmentPath) -> Shader_Data
-	int shader_new(lua_State* _lua);
-
-	// shader:good() -> bool
-	int shader_good(lua_State* _lua);
-
-	// shader:name() -> string
-	int shader_name(lua_State* _lua);
-
-	// shader:destroy()
-	int shader_destroy(lua_State* _lua);
-
-	// shader:__gc()
-	int shader_destructor(lua_State* _lua);
-
-
-	static inline const luaL_Reg shader_funcs[] =
+	struct lib_shader
 	{
-		luaL_Reg{ "new", &shader_new },
-		luaL_Reg{ "good", &shader_good },
-		luaL_Reg{ "name", &shader_name },
-		luaL_Reg{ "destroy", &shader_destroy },
-		luaL_Reg{ "__gc", &shader_destructor },
+	public:
+		
+		struct ltype_Shader
+		{
+		private:
 
-		luaL_Reg{ NULL, NULL }
+			// engine.shader.new(name, vertexPath, fragmentPath) -> Shader_Data
+			static int new_f(lua_State* _lua);
+
+
+			// shader:good() -> bool
+			static int good(lua_State* _lua);
+
+			// shader:name() -> string
+			static int name(lua_State* _lua);
+
+			// shader:destroy()
+			static int destroy(lua_State* _lua);
+
+			// shader:__gc()
+			static int destructor(lua_State* _lua);
+
+
+			constexpr static inline luaL_Reg funcs_f[] =
+			{
+				luaL_Reg{ "new", &new_f },
+				luaL_Reg{ NULL, NULL }
+			};
+
+			constexpr static inline luaL_Reg funcs_m[] =
+			{
+				luaL_Reg{ "good", &good },
+				luaL_Reg{ "name", &name },
+				luaL_Reg{ "destroy", &destroy },
+				luaL_Reg{ "__gc", &destructor },
+				luaL_Reg{ NULL, NULL }
+			};
+
+			constexpr static inline auto TYPENAME = "SAEEngine.shader";
+
+		public:
+			using value_type = Shader_Data;
+			using pointer = value_type*;
+
+			static pointer to_userdata(lua_State* _lua, int _arg);
+
+			constexpr static inline const char* tname() noexcept { return TYPENAME; };
+
+			static int lua_open(lua_State* _lua);
+
+		};
+
+
+
+	private:
+
+
+
+	public:
+
+		static inline auto to_shader(lua_State* _lua, int _arg) { return ltype_Shader::to_userdata(_lua, _arg); };
+
+		static int lua_open(lua_State* _lua);
+
 	};
 
-	int luaopen_engine_shader(lua_State* _lua);
 }

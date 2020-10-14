@@ -36,6 +36,7 @@ imageRGBA_:save(path_ .. "TextureRGBA_ButHalfIsWhite.png")
 
 local sourceImage_ = engine.texture.load("RGB_8", path_ .. "PasteTestTexture.png")
 sourceImage_:resize(32, 32)
+sourceImage_:save(path_ .. "CutQuadrant.png")
 
 local pasteImage_ = engine.texture.load("RGB_8", path_ .. "PasteTestTexture.png")
 pasteImage_:paste(sourceImage_, 32, 0)
