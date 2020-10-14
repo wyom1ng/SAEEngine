@@ -230,7 +230,7 @@ namespace sae::engine
 		luaopen_engine_window(_lua);
 		lua_setfield(_lua, t, "window");
 
-		luaopen_engine_io(_lua);
+		lib_io::lua_open(_lua);
 		lua_setfield(_lua, t, "io");
 
 		luaopen_engine_os(_lua);
