@@ -248,6 +248,11 @@ namespace sae::engine
 		luaopen_engine_fs(_lua);
 		lua_setfield(_lua, t, "fs");
 
+		lib_texture::lua_open(_lua);
+		lua_setfield(_lua, t, "texture");
+
+
+
 		lua_newtable(_lua);
 		lua_pushstring(_lua, EXTENSIONS_KEY);
 		lua_pushvalue(_lua, -2);

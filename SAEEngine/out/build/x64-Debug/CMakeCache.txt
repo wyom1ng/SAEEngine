@@ -331,7 +331,7 @@ PKG_CONFIG_EXECUTABLE:FILEPATH=PKG_CONFIG_EXECUTABLE-NOTFOUND
 SAEEngine_BINARY_DIR:STATIC=C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/build/x64-Debug
 
 //Dependencies for the target
-SAEEngine_LIB_DEPENDS:STATIC=general;liblua;general;glfw;general;glad;general;lodepng;general;SAELua;
+SAEEngine_LIB_DEPENDS:STATIC=general;liblua;general;glfw;general;glad;general;SAELua;general;lodepng;
 
 //override the version checking for GLFW
 SAEEngine_OVERRIDE_GLFW_VERSION:BOOL=OFF
@@ -524,7 +524,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MT
 CMAKE_MT-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=18
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=19
 //Platform information initialized
 CMAKE_PLATFORM_INFO_INITIALIZED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_RC_COMPILER

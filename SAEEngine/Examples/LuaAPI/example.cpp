@@ -16,6 +16,9 @@ int main()
 	_engine.set_istream(&std::cin);
 
 	auto _lua = _engine.lua();
+
+	lua_register(_lua, sae::lua::lualib_tostring.name, sae::lua::lualib_tostring.func);
+
 	
 	try 
 	{

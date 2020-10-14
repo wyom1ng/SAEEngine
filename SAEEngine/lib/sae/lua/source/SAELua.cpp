@@ -6,6 +6,28 @@
 namespace sae::lua
 {
 
+
+	int lualib_tostring_f(lua_State* _lua)
+	{
+		if (lua_isstring(_lua, 1))
+		{
+			lua_pushnil(_lua);
+			lua_rotate(_lua, 1, 1);
+			assert(lua_isstring(_lua, -1));
+			return 1;
+		}
+		else if (luaL_callmeta(_lua, -1, "__tostring"))
+		{
+			assert(lua_isstring(_lua, -1));
+			return 1;
+		}
+		else
+		{
+			return luaL_argerror(_lua, 1, "not string or string convertible type");
+		};
+	};
+
+
 	void lua_newclass(lua_State* _lua, const char* _tname, const luaL_Reg* _functions, int _upVals)
 	{
 		lua_pushstring(_lua, _tname);

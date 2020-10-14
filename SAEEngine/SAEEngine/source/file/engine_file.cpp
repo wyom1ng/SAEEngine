@@ -36,6 +36,8 @@ namespace sae::engine
 
 	}
 
+
+
 	int fs_dofile(lua_State* _lua, std::nothrow_t) noexcept
 	{
 		auto _path = lua_tostring(_lua, -1);
@@ -89,6 +91,10 @@ namespace sae::engine
 		assert(lua_isstring(_lua, -1));
 		return 1;
 	};
+	
+
+
+
 
 
 
@@ -97,7 +103,58 @@ namespace sae::engine
 	{
 		lua_newtable(_lua);
 		luaL_setfuncs(_lua, fs_lib, 0);
+
+		luaopen_fs_path(_lua);
+		lua_setfield(_lua, -2, "path");
+
 		return 1;
 	};
+
+}
+
+namespace sae::engine
+{
+
+	Path_Data* lua_topathdata(lua_State* _lua, int _idx)
+	{
+		return lua::lua_toinstance<Path_Data>(_lua, _idx, PATH_DATA_TNAME);
+	};
+
+	// fs.path.new(string) -> Path_Data
+	int fs_path_new(lua_State* _lua)
+	{
+		auto _path = lua_tostring(_lua, 1);
+		auto _ptr = lua::lua_newinstance<Path_Data>(_lua, PATH_DATA_TNAME, _path);
+		return 1;
+	};
+
+
+
+
+	// fs.path:__tostring() -> string
+	int fs_path_tostring(lua_State* _lua)
+	{
+		auto _ptr = lua_topathdata(_lua, 1);
+		lua_pushstring(_lua, _ptr->get().string().c_str());
+		return 1;
+	};
+
+	// fs.path:__gc()
+	int fs_path_destructor(lua_State* _lua)
+	{
+		auto _ptr = lua_topathdata(_lua, 1);
+		_ptr->~Path_Data();
+		return 0;
+	};
+
+
+
+	int luaopen_fs_path(lua_State* _lua)
+	{
+		lua::lua_newclass(_lua, PATH_DATA_TNAME);
+		luaL_setfuncs(_lua, fs_path_lib, 0);
+		return 1;
+	};
+
 
 }

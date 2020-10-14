@@ -8,6 +8,7 @@
 
 namespace sae::engine
 {
+
 	Scene_Data::~Scene_Data()
 	{
 #ifdef SAE_ENGINE_DESTRUCTOR_DEBUG

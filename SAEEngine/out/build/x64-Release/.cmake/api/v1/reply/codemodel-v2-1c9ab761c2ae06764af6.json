@@ -1,0 +1,702 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						14,
+						15
+					],
+					"hasInstallRule" : true,
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "lib",
+					"childIndexes" : 
+					[
+						2,
+						3,
+						4,
+						8,
+						10,
+						11,
+						12,
+						13
+					],
+					"hasInstallRule" : true,
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "lib"
+				},
+				{
+					"build" : "lib/freetype",
+					"hasInstallRule" : true,
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8.12"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 1,
+					"source" : "lib/freetype",
+					"targetIndexes" : 
+					[
+						9
+					]
+				},
+				{
+					"build" : "lib/glad",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "lib/glad",
+					"targetIndexes" : 
+					[
+						12
+					]
+				},
+				{
+					"build" : "lib/glfw",
+					"childIndexes" : 
+					[
+						5,
+						6,
+						7
+					],
+					"hasInstallRule" : true,
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 2,
+					"source" : "lib/glfw",
+					"targetIndexes" : 
+					[
+						36
+					]
+				},
+				{
+					"build" : "lib/glfw/src",
+					"hasInstallRule" : true,
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0"
+					},
+					"parentIndex" : 4,
+					"projectIndex" : 2,
+					"source" : "lib/glfw/src",
+					"targetIndexes" : 
+					[
+						13
+					]
+				},
+				{
+					"build" : "lib/glfw/examples",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0"
+					},
+					"parentIndex" : 4,
+					"projectIndex" : 2,
+					"source" : "lib/glfw/examples",
+					"targetIndexes" : 
+					[
+						4,
+						11,
+						15,
+						24,
+						26,
+						28,
+						29,
+						30,
+						37
+					]
+				},
+				{
+					"build" : "lib/glfw/tests",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0"
+					},
+					"parentIndex" : 4,
+					"projectIndex" : 2,
+					"source" : "lib/glfw/tests",
+					"targetIndexes" : 
+					[
+						5,
+						6,
+						7,
+						8,
+						10,
+						14,
+						16,
+						17,
+						18,
+						19,
+						22,
+						23,
+						25,
+						27,
+						31,
+						32,
+						33,
+						34,
+						35,
+						38
+					]
+				},
+				{
+					"build" : "lib/glm",
+					"childIndexes" : 
+					[
+						9
+					],
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.2"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 3,
+					"source" : "lib/glm"
+				},
+				{
+					"build" : "lib/glm/glm",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.2"
+					},
+					"parentIndex" : 8,
+					"projectIndex" : 3,
+					"source" : "lib/glm/glm"
+				},
+				{
+					"build" : "lib/lodepng",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "lib/lodepng",
+					"targetIndexes" : 
+					[
+						21
+					]
+				},
+				{
+					"build" : "lib/lua",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "lib/lua",
+					"targetIndexes" : 
+					[
+						20
+					]
+				},
+				{
+					"build" : "lib/sae",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "lib/sae"
+				},
+				{
+					"build" : "lib/sae/lua",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 4,
+					"source" : "lib/sae/lua",
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"build" : "SAEEngine",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "SAEEngine",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "Examples",
+					"childIndexes" : 
+					[
+						16,
+						17
+					],
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "Examples"
+				},
+				{
+					"build" : "Examples/CustomExtension",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 15,
+					"projectIndex" : 0,
+					"source" : "Examples/CustomExtension",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "Examples/LuaAPI",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 15,
+					"projectIndex" : 0,
+					"source" : "Examples/LuaAPI",
+					"targetIndexes" : 
+					[
+						1
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4
+					],
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						3,
+						10,
+						11,
+						12,
+						14,
+						15,
+						16,
+						17
+					],
+					"name" : "SAEEngine",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						12,
+						20,
+						21
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2
+					],
+					"name" : "freetype",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						9
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						4,
+						5,
+						6,
+						7
+					],
+					"name" : "GLFW",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						4,
+						5,
+						6,
+						7,
+						8,
+						10,
+						11,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18,
+						19,
+						22,
+						23,
+						24,
+						25,
+						26,
+						27,
+						28,
+						29,
+						30,
+						31,
+						32,
+						33,
+						34,
+						35,
+						36,
+						37,
+						38
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						8,
+						9
+					],
+					"name" : "glm",
+					"parentIndex" : 0
+				},
+				{
+					"directoryIndexes" : 
+					[
+						13
+					],
+					"name" : "SAELua",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 14,
+					"id" : "SAEEngine::@2ff18bf7d8469fa10e28",
+					"jsonFile" : "target-SAEEngine-Release-1305b47cdd24fa6829b6.json",
+					"name" : "SAEEngine",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 17,
+					"id" : "SAEEngine_Example::@f37c5db9e53d4affbd70",
+					"jsonFile" : "target-SAEEngine_Example-Release-6bb61b116dee5da5b868.json",
+					"name" : "SAEEngine_Example",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 16,
+					"id" : "SAEEngine_Example_Extension::@8467b9fe03e71eae64c8",
+					"jsonFile" : "target-SAEEngine_Example_Extension-Release-07fb18924277e051735b.json",
+					"name" : "SAEEngine_Example_Extension",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 13,
+					"id" : "SAELua::@3324317b11ffc32bd237",
+					"jsonFile" : "target-SAELua-Release-95e785c5247e77bd2317.json",
+					"name" : "SAELua",
+					"projectIndex" : 4
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "boing::@b5705d2630751f584e5f",
+					"jsonFile" : "target-boing-Release-d856b883f7c1fef4f20b.json",
+					"name" : "boing",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "clipboard::@7d17247f136556186bbb",
+					"jsonFile" : "target-clipboard-Release-766ceca18d04d321921e.json",
+					"name" : "clipboard",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "cursor::@7d17247f136556186bbb",
+					"jsonFile" : "target-cursor-Release-f8b55a6ce7f25e20fd6f.json",
+					"name" : "cursor",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "empty::@7d17247f136556186bbb",
+					"jsonFile" : "target-empty-Release-c206662b31c89b458130.json",
+					"name" : "empty",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "events::@7d17247f136556186bbb",
+					"jsonFile" : "target-events-Release-c497ae151589da2f6972.json",
+					"name" : "events",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "freetype::@8a69046285a7753fc6ca",
+					"jsonFile" : "target-freetype-Release-69930c6120950917edbf.json",
+					"name" : "freetype",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "gamma::@7d17247f136556186bbb",
+					"jsonFile" : "target-gamma-Release-c0f80da50153b3e185f0.json",
+					"name" : "gamma",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "gears::@b5705d2630751f584e5f",
+					"jsonFile" : "target-gears-Release-bc6c0dcc79faee35f86a.json",
+					"name" : "gears",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "glad::@bf3af473941166e98053",
+					"jsonFile" : "target-glad-Release-7ac83d32779e8f7414bb.json",
+					"name" : "glad",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "glfw::@17f284a5fc0809a54549",
+					"jsonFile" : "target-glfw-Release-78da5203a3049c6e83b1.json",
+					"name" : "glfw",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "glfwinfo::@7d17247f136556186bbb",
+					"jsonFile" : "target-glfwinfo-Release-537e8403289f3c034cc2.json",
+					"name" : "glfwinfo",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "heightmap::@b5705d2630751f584e5f",
+					"jsonFile" : "target-heightmap-Release-0aa28a33fc22192c6df1.json",
+					"name" : "heightmap",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "icon::@7d17247f136556186bbb",
+					"jsonFile" : "target-icon-Release-a5c3e468872b09c49658.json",
+					"name" : "icon",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "iconify::@7d17247f136556186bbb",
+					"jsonFile" : "target-iconify-Release-57050dc3b176a1f92c02.json",
+					"name" : "iconify",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "inputlag::@7d17247f136556186bbb",
+					"jsonFile" : "target-inputlag-Release-f0adb4c79d583669c752.json",
+					"name" : "inputlag",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "joysticks::@7d17247f136556186bbb",
+					"jsonFile" : "target-joysticks-Release-a685bcf72351ee6237df.json",
+					"name" : "joysticks",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 11,
+					"id" : "liblua::@2babcaad8f47ce36e162",
+					"jsonFile" : "target-liblua-Release-fe0562e25ee86bac2b9d.json",
+					"name" : "liblua",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 10,
+					"id" : "lodepng::@85014371d6d6fefbb9c6",
+					"jsonFile" : "target-lodepng-Release-7616166bd5d0d6c5ac6f.json",
+					"name" : "lodepng",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "monitors::@7d17247f136556186bbb",
+					"jsonFile" : "target-monitors-Release-5576729e34bbaa3db0b5.json",
+					"name" : "monitors",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "msaa::@7d17247f136556186bbb",
+					"jsonFile" : "target-msaa-Release-7ef08fbbf25a0ab11364.json",
+					"name" : "msaa",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "offscreen::@b5705d2630751f584e5f",
+					"jsonFile" : "target-offscreen-Release-6993a2a67826b40b94b3.json",
+					"name" : "offscreen",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "opacity::@7d17247f136556186bbb",
+					"jsonFile" : "target-opacity-Release-4082ec1201c3096deb57.json",
+					"name" : "opacity",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "particles::@b5705d2630751f584e5f",
+					"jsonFile" : "target-particles-Release-45727bd1a3450e542f17.json",
+					"name" : "particles",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "reopen::@7d17247f136556186bbb",
+					"jsonFile" : "target-reopen-Release-9e877e0cbf9b7ea4c190.json",
+					"name" : "reopen",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "sharing::@b5705d2630751f584e5f",
+					"jsonFile" : "target-sharing-Release-f3378d56314c121fdb37.json",
+					"name" : "sharing",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "simple::@b5705d2630751f584e5f",
+					"jsonFile" : "target-simple-Release-df45d70333d7a81aee2a.json",
+					"name" : "simple",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "splitview::@b5705d2630751f584e5f",
+					"jsonFile" : "target-splitview-Release-b181e16fbe2982f3415b.json",
+					"name" : "splitview",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "tearing::@7d17247f136556186bbb",
+					"jsonFile" : "target-tearing-Release-b43200591469359c1330.json",
+					"name" : "tearing",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "threads::@7d17247f136556186bbb",
+					"jsonFile" : "target-threads-Release-315d0945beec3ada9441.json",
+					"name" : "threads",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "timeout::@7d17247f136556186bbb",
+					"jsonFile" : "target-timeout-Release-828a1fddc415e48bdcf7.json",
+					"name" : "timeout",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "title::@7d17247f136556186bbb",
+					"jsonFile" : "target-title-Release-d88b2b10a6665bec403b.json",
+					"name" : "title",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "triangle-vulkan::@7d17247f136556186bbb",
+					"jsonFile" : "target-triangle-vulkan-Release-10ada1f5535d32cc0315.json",
+					"name" : "triangle-vulkan",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "uninstall::@a7a2f639778f88e1b46d",
+					"jsonFile" : "target-uninstall-Release-db5123eae3ba0493a47b.json",
+					"name" : "uninstall",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "wave::@b5705d2630751f584e5f",
+					"jsonFile" : "target-wave-Release-b5453210c4fb6dddb1f3.json",
+					"name" : "wave",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "windows::@7d17247f136556186bbb",
+					"jsonFile" : "target-windows-Release-40f76eb14a78960b9427.json",
+					"name" : "windows",
+					"projectIndex" : 2
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/build/x64-Release",
+		"source" : "C:/Users/jonat/source/repos/SAEEngine/SAEEngine"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 0
+	}
+}

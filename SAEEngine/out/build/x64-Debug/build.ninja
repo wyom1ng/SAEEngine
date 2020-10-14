@@ -3729,7 +3729,7 @@ build cmake_object_order_depends_target_SAEEngine_Debug: phony || cmake_object_o
 
 build SAEEngine\CMakeFiles\SAEEngine.dir\source\SAEEngine.cpp.obj: CXX_COMPILER__SAEEngine_Debug ..\..\..\SAEEngine\source\SAEEngine.cpp || cmake_object_order_depends_target_SAEEngine_Debug
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   -std:c++latest
-  INCLUDES = -I. -I..\..\..\SAEEngine\include -I..\..\..\SAEEngine\source -I..\..\..\lib\lua\src -I..\..\..\lib\glfw\include -I..\..\..\lib\glm\glm\.. -I..\..\..\lib\glad\include -I..\..\..\lib\lodepng -I..\..\..\lib\sae\. -I..\..\..\lib\sae\lua\include
+  INCLUDES = -I. -I..\..\..\SAEEngine\include -I..\..\..\SAEEngine\source -I..\..\..\lib\lua\src -I..\..\..\lib\glfw\include -I..\..\..\lib\glm\glm\.. -I..\..\..\lib\glad\include -I..\..\..\lib\sae\. -I..\..\..\lib\sae\lua\include -I..\..\..\lib\lodepng
   OBJECT_DIR = SAEEngine\CMakeFiles\SAEEngine.dir
   OBJECT_FILE_DIR = SAEEngine\CMakeFiles\SAEEngine.dir\source
   TARGET_COMPILE_PDB = SAEEngine\CMakeFiles\SAEEngine.dir\SAEEngine.pdb
@@ -3737,7 +3737,7 @@ build SAEEngine\CMakeFiles\SAEEngine.dir\source\SAEEngine.cpp.obj: CXX_COMPILER_
 
 build SAEEngine\CMakeFiles\SAEEngine.dir\source\gfx\engine_gfx.cpp.obj: CXX_COMPILER__SAEEngine_Debug ..\..\..\SAEEngine\source\gfx\engine_gfx.cpp || cmake_object_order_depends_target_SAEEngine_Debug
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   -std:c++latest
-  INCLUDES = -I. -I..\..\..\SAEEngine\include -I..\..\..\SAEEngine\source -I..\..\..\lib\lua\src -I..\..\..\lib\glfw\include -I..\..\..\lib\glm\glm\.. -I..\..\..\lib\glad\include -I..\..\..\lib\lodepng -I..\..\..\lib\sae\. -I..\..\..\lib\sae\lua\include
+  INCLUDES = -I. -I..\..\..\SAEEngine\include -I..\..\..\SAEEngine\source -I..\..\..\lib\lua\src -I..\..\..\lib\glfw\include -I..\..\..\lib\glm\glm\.. -I..\..\..\lib\glad\include -I..\..\..\lib\sae\. -I..\..\..\lib\sae\lua\include -I..\..\..\lib\lodepng
   OBJECT_DIR = SAEEngine\CMakeFiles\SAEEngine.dir
   OBJECT_FILE_DIR = SAEEngine\CMakeFiles\SAEEngine.dir\source\gfx
   TARGET_COMPILE_PDB = SAEEngine\CMakeFiles\SAEEngine.dir\SAEEngine.pdb
@@ -3745,7 +3745,7 @@ build SAEEngine\CMakeFiles\SAEEngine.dir\source\gfx\engine_gfx.cpp.obj: CXX_COMP
 
 build SAEEngine\CMakeFiles\SAEEngine.dir\source\scene\engine_scene.cpp.obj: CXX_COMPILER__SAEEngine_Debug ..\..\..\SAEEngine\source\scene\engine_scene.cpp || cmake_object_order_depends_target_SAEEngine_Debug
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   -std:c++latest
-  INCLUDES = -I. -I..\..\..\SAEEngine\include -I..\..\..\SAEEngine\source -I..\..\..\lib\lua\src -I..\..\..\lib\glfw\include -I..\..\..\lib\glm\glm\.. -I..\..\..\lib\glad\include -I..\..\..\lib\lodepng -I..\..\..\lib\sae\. -I..\..\..\lib\sae\lua\include
+  INCLUDES = -I. -I..\..\..\SAEEngine\include -I..\..\..\SAEEngine\source -I..\..\..\lib\lua\src -I..\..\..\lib\glfw\include -I..\..\..\lib\glm\glm\.. -I..\..\..\lib\glad\include -I..\..\..\lib\sae\. -I..\..\..\lib\sae\lua\include -I..\..\..\lib\lodepng
   OBJECT_DIR = SAEEngine\CMakeFiles\SAEEngine.dir
   OBJECT_FILE_DIR = SAEEngine\CMakeFiles\SAEEngine.dir\source\scene
   TARGET_COMPILE_PDB = SAEEngine\CMakeFiles\SAEEngine.dir\SAEEngine.pdb
@@ -3753,7 +3753,7 @@ build SAEEngine\CMakeFiles\SAEEngine.dir\source\scene\engine_scene.cpp.obj: CXX_
 
 build SAEEngine\CMakeFiles\SAEEngine.dir\source\window\engine_window.cpp.obj: CXX_COMPILER__SAEEngine_Debug ..\..\..\SAEEngine\source\window\engine_window.cpp || cmake_object_order_depends_target_SAEEngine_Debug
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   -std:c++latest
-  INCLUDES = -I. -I..\..\..\SAEEngine\include -I..\..\..\SAEEngine\source -I..\..\..\lib\lua\src -I..\..\..\lib\glfw\include -I..\..\..\lib\glm\glm\.. -I..\..\..\lib\glad\include -I..\..\..\lib\lodepng -I..\..\..\lib\sae\. -I..\..\..\lib\sae\lua\include
+  INCLUDES = -I. -I..\..\..\SAEEngine\include -I..\..\..\SAEEngine\source -I..\..\..\lib\lua\src -I..\..\..\lib\glfw\include -I..\..\..\lib\glm\glm\.. -I..\..\..\lib\glad\include -I..\..\..\lib\sae\. -I..\..\..\lib\sae\lua\include -I..\..\..\lib\lodepng
   OBJECT_DIR = SAEEngine\CMakeFiles\SAEEngine.dir
   OBJECT_FILE_DIR = SAEEngine\CMakeFiles\SAEEngine.dir\source\window
   TARGET_COMPILE_PDB = SAEEngine\CMakeFiles\SAEEngine.dir\SAEEngine.pdb
@@ -3761,7 +3761,7 @@ build SAEEngine\CMakeFiles\SAEEngine.dir\source\window\engine_window.cpp.obj: CX
 
 build SAEEngine\CMakeFiles\SAEEngine.dir\source\io\engine_io.cpp.obj: CXX_COMPILER__SAEEngine_Debug ..\..\..\SAEEngine\source\io\engine_io.cpp || cmake_object_order_depends_target_SAEEngine_Debug
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   -std:c++latest
-  INCLUDES = -I. -I..\..\..\SAEEngine\include -I..\..\..\SAEEngine\source -I..\..\..\lib\lua\src -I..\..\..\lib\glfw\include -I..\..\..\lib\glm\glm\.. -I..\..\..\lib\glad\include -I..\..\..\lib\lodepng -I..\..\..\lib\sae\. -I..\..\..\lib\sae\lua\include
+  INCLUDES = -I. -I..\..\..\SAEEngine\include -I..\..\..\SAEEngine\source -I..\..\..\lib\lua\src -I..\..\..\lib\glfw\include -I..\..\..\lib\glm\glm\.. -I..\..\..\lib\glad\include -I..\..\..\lib\sae\. -I..\..\..\lib\sae\lua\include -I..\..\..\lib\lodepng
   OBJECT_DIR = SAEEngine\CMakeFiles\SAEEngine.dir
   OBJECT_FILE_DIR = SAEEngine\CMakeFiles\SAEEngine.dir\source\io
   TARGET_COMPILE_PDB = SAEEngine\CMakeFiles\SAEEngine.dir\SAEEngine.pdb
@@ -3769,7 +3769,7 @@ build SAEEngine\CMakeFiles\SAEEngine.dir\source\io\engine_io.cpp.obj: CXX_COMPIL
 
 build SAEEngine\CMakeFiles\SAEEngine.dir\source\os\engine_os.cpp.obj: CXX_COMPILER__SAEEngine_Debug ..\..\..\SAEEngine\source\os\engine_os.cpp || cmake_object_order_depends_target_SAEEngine_Debug
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   -std:c++latest
-  INCLUDES = -I. -I..\..\..\SAEEngine\include -I..\..\..\SAEEngine\source -I..\..\..\lib\lua\src -I..\..\..\lib\glfw\include -I..\..\..\lib\glm\glm\.. -I..\..\..\lib\glad\include -I..\..\..\lib\lodepng -I..\..\..\lib\sae\. -I..\..\..\lib\sae\lua\include
+  INCLUDES = -I. -I..\..\..\SAEEngine\include -I..\..\..\SAEEngine\source -I..\..\..\lib\lua\src -I..\..\..\lib\glfw\include -I..\..\..\lib\glm\glm\.. -I..\..\..\lib\glad\include -I..\..\..\lib\sae\. -I..\..\..\lib\sae\lua\include -I..\..\..\lib\lodepng
   OBJECT_DIR = SAEEngine\CMakeFiles\SAEEngine.dir
   OBJECT_FILE_DIR = SAEEngine\CMakeFiles\SAEEngine.dir\source\os
   TARGET_COMPILE_PDB = SAEEngine\CMakeFiles\SAEEngine.dir\SAEEngine.pdb
@@ -3777,7 +3777,7 @@ build SAEEngine\CMakeFiles\SAEEngine.dir\source\os\engine_os.cpp.obj: CXX_COMPIL
 
 build SAEEngine\CMakeFiles\SAEEngine.dir\source\shader\engine_shader.cpp.obj: CXX_COMPILER__SAEEngine_Debug ..\..\..\SAEEngine\source\shader\engine_shader.cpp || cmake_object_order_depends_target_SAEEngine_Debug
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   -std:c++latest
-  INCLUDES = -I. -I..\..\..\SAEEngine\include -I..\..\..\SAEEngine\source -I..\..\..\lib\lua\src -I..\..\..\lib\glfw\include -I..\..\..\lib\glm\glm\.. -I..\..\..\lib\glad\include -I..\..\..\lib\lodepng -I..\..\..\lib\sae\. -I..\..\..\lib\sae\lua\include
+  INCLUDES = -I. -I..\..\..\SAEEngine\include -I..\..\..\SAEEngine\source -I..\..\..\lib\lua\src -I..\..\..\lib\glfw\include -I..\..\..\lib\glm\glm\.. -I..\..\..\lib\glad\include -I..\..\..\lib\sae\. -I..\..\..\lib\sae\lua\include -I..\..\..\lib\lodepng
   OBJECT_DIR = SAEEngine\CMakeFiles\SAEEngine.dir
   OBJECT_FILE_DIR = SAEEngine\CMakeFiles\SAEEngine.dir\source\shader
   TARGET_COMPILE_PDB = SAEEngine\CMakeFiles\SAEEngine.dir\SAEEngine.pdb
@@ -3785,7 +3785,7 @@ build SAEEngine\CMakeFiles\SAEEngine.dir\source\shader\engine_shader.cpp.obj: CX
 
 build SAEEngine\CMakeFiles\SAEEngine.dir\source\file\engine_file.cpp.obj: CXX_COMPILER__SAEEngine_Debug ..\..\..\SAEEngine\source\file\engine_file.cpp || cmake_object_order_depends_target_SAEEngine_Debug
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   -std:c++latest
-  INCLUDES = -I. -I..\..\..\SAEEngine\include -I..\..\..\SAEEngine\source -I..\..\..\lib\lua\src -I..\..\..\lib\glfw\include -I..\..\..\lib\glm\glm\.. -I..\..\..\lib\glad\include -I..\..\..\lib\lodepng -I..\..\..\lib\sae\. -I..\..\..\lib\sae\lua\include
+  INCLUDES = -I. -I..\..\..\SAEEngine\include -I..\..\..\SAEEngine\source -I..\..\..\lib\lua\src -I..\..\..\lib\glfw\include -I..\..\..\lib\glm\glm\.. -I..\..\..\lib\glad\include -I..\..\..\lib\sae\. -I..\..\..\lib\sae\lua\include -I..\..\..\lib\lodepng
   OBJECT_DIR = SAEEngine\CMakeFiles\SAEEngine.dir
   OBJECT_FILE_DIR = SAEEngine\CMakeFiles\SAEEngine.dir\source\file
   TARGET_COMPILE_PDB = SAEEngine\CMakeFiles\SAEEngine.dir\SAEEngine.pdb
@@ -3793,9 +3793,25 @@ build SAEEngine\CMakeFiles\SAEEngine.dir\source\file\engine_file.cpp.obj: CXX_CO
 
 build SAEEngine\CMakeFiles\SAEEngine.dir\source\physics\engine_physics.cpp.obj: CXX_COMPILER__SAEEngine_Debug ..\..\..\SAEEngine\source\physics\engine_physics.cpp || cmake_object_order_depends_target_SAEEngine_Debug
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   -std:c++latest
-  INCLUDES = -I. -I..\..\..\SAEEngine\include -I..\..\..\SAEEngine\source -I..\..\..\lib\lua\src -I..\..\..\lib\glfw\include -I..\..\..\lib\glm\glm\.. -I..\..\..\lib\glad\include -I..\..\..\lib\lodepng -I..\..\..\lib\sae\. -I..\..\..\lib\sae\lua\include
+  INCLUDES = -I. -I..\..\..\SAEEngine\include -I..\..\..\SAEEngine\source -I..\..\..\lib\lua\src -I..\..\..\lib\glfw\include -I..\..\..\lib\glm\glm\.. -I..\..\..\lib\glad\include -I..\..\..\lib\sae\. -I..\..\..\lib\sae\lua\include -I..\..\..\lib\lodepng
   OBJECT_DIR = SAEEngine\CMakeFiles\SAEEngine.dir
   OBJECT_FILE_DIR = SAEEngine\CMakeFiles\SAEEngine.dir\source\physics
+  TARGET_COMPILE_PDB = SAEEngine\CMakeFiles\SAEEngine.dir\SAEEngine.pdb
+  TARGET_PDB = SAEEngine\SAEEngine.pdb
+
+build SAEEngine\CMakeFiles\SAEEngine.dir\source\texture\engine_texture.cpp.obj: CXX_COMPILER__SAEEngine_Debug ..\..\..\SAEEngine\source\texture\engine_texture.cpp || cmake_object_order_depends_target_SAEEngine_Debug
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   -std:c++latest
+  INCLUDES = -I. -I..\..\..\SAEEngine\include -I..\..\..\SAEEngine\source -I..\..\..\lib\lua\src -I..\..\..\lib\glfw\include -I..\..\..\lib\glm\glm\.. -I..\..\..\lib\glad\include -I..\..\..\lib\sae\. -I..\..\..\lib\sae\lua\include -I..\..\..\lib\lodepng
+  OBJECT_DIR = SAEEngine\CMakeFiles\SAEEngine.dir
+  OBJECT_FILE_DIR = SAEEngine\CMakeFiles\SAEEngine.dir\source\texture
+  TARGET_COMPILE_PDB = SAEEngine\CMakeFiles\SAEEngine.dir\SAEEngine.pdb
+  TARGET_PDB = SAEEngine\SAEEngine.pdb
+
+build SAEEngine\CMakeFiles\SAEEngine.dir\source\texture\texture.cpp.obj: CXX_COMPILER__SAEEngine_Debug ..\..\..\SAEEngine\source\texture\texture.cpp || cmake_object_order_depends_target_SAEEngine_Debug
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   -std:c++latest
+  INCLUDES = -I. -I..\..\..\SAEEngine\include -I..\..\..\SAEEngine\source -I..\..\..\lib\lua\src -I..\..\..\lib\glfw\include -I..\..\..\lib\glm\glm\.. -I..\..\..\lib\glad\include -I..\..\..\lib\sae\. -I..\..\..\lib\sae\lua\include -I..\..\..\lib\lodepng
+  OBJECT_DIR = SAEEngine\CMakeFiles\SAEEngine.dir
+  OBJECT_FILE_DIR = SAEEngine\CMakeFiles\SAEEngine.dir\source\texture
   TARGET_COMPILE_PDB = SAEEngine\CMakeFiles\SAEEngine.dir\SAEEngine.pdb
   TARGET_PDB = SAEEngine\SAEEngine.pdb
 
@@ -3807,7 +3823,7 @@ build SAEEngine\CMakeFiles\SAEEngine.dir\source\physics\engine_physics.cpp.obj: 
 #############################################
 # Link the static library SAEEngine\SAEEngine.lib
 
-build SAEEngine\SAEEngine.lib: CXX_STATIC_LIBRARY_LINKER__SAEEngine_Debug SAEEngine\CMakeFiles\SAEEngine.dir\source\SAEEngine.cpp.obj SAEEngine\CMakeFiles\SAEEngine.dir\source\gfx\engine_gfx.cpp.obj SAEEngine\CMakeFiles\SAEEngine.dir\source\scene\engine_scene.cpp.obj SAEEngine\CMakeFiles\SAEEngine.dir\source\window\engine_window.cpp.obj SAEEngine\CMakeFiles\SAEEngine.dir\source\io\engine_io.cpp.obj SAEEngine\CMakeFiles\SAEEngine.dir\source\os\engine_os.cpp.obj SAEEngine\CMakeFiles\SAEEngine.dir\source\shader\engine_shader.cpp.obj SAEEngine\CMakeFiles\SAEEngine.dir\source\file\engine_file.cpp.obj SAEEngine\CMakeFiles\SAEEngine.dir\source\physics\engine_physics.cpp.obj || lib\glad\glad.lib lib\glfw\src\glfw3.lib lib\lodepng\lodepng.lib lib\lua\liblua.lib lib\sae\lua\SAELua.lib
+build SAEEngine\SAEEngine.lib: CXX_STATIC_LIBRARY_LINKER__SAEEngine_Debug SAEEngine\CMakeFiles\SAEEngine.dir\source\SAEEngine.cpp.obj SAEEngine\CMakeFiles\SAEEngine.dir\source\gfx\engine_gfx.cpp.obj SAEEngine\CMakeFiles\SAEEngine.dir\source\scene\engine_scene.cpp.obj SAEEngine\CMakeFiles\SAEEngine.dir\source\window\engine_window.cpp.obj SAEEngine\CMakeFiles\SAEEngine.dir\source\io\engine_io.cpp.obj SAEEngine\CMakeFiles\SAEEngine.dir\source\os\engine_os.cpp.obj SAEEngine\CMakeFiles\SAEEngine.dir\source\shader\engine_shader.cpp.obj SAEEngine\CMakeFiles\SAEEngine.dir\source\file\engine_file.cpp.obj SAEEngine\CMakeFiles\SAEEngine.dir\source\physics\engine_physics.cpp.obj SAEEngine\CMakeFiles\SAEEngine.dir\source\texture\engine_texture.cpp.obj SAEEngine\CMakeFiles\SAEEngine.dir\source\texture\texture.cpp.obj || lib\glad\glad.lib lib\glfw\src\glfw3.lib lib\lodepng\lodepng.lib lib\lua\liblua.lib lib\sae\lua\SAELua.lib
   LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64
   OBJECT_DIR = SAEEngine\CMakeFiles\SAEEngine.dir
@@ -3998,7 +4014,7 @@ build cmake_object_order_depends_target_SAEEngine_Example_Extension_Debug: phony
 
 build Examples\CustomExtension\CMakeFiles\SAEEngine_Example_Extension.dir\ExtensionExample.cpp.obj: CXX_COMPILER__SAEEngine_Example_Extension_Debug ..\..\..\Examples\CustomExtension\ExtensionExample.cpp || cmake_object_order_depends_target_SAEEngine_Example_Extension_Debug
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   -std:c++latest
-  INCLUDES = -I. -I..\..\..\SAEEngine\include -I..\..\..\lib\lua\src -I..\..\..\lib\glfw\include -I..\..\..\lib\glm\glm\.. -I..\..\..\lib\glad\include -I..\..\..\lib\lodepng -I..\..\..\lib\sae\. -I..\..\..\lib\sae\lua\include
+  INCLUDES = -I. -I..\..\..\SAEEngine\include -I..\..\..\lib\lua\src -I..\..\..\lib\glfw\include -I..\..\..\lib\glm\glm\.. -I..\..\..\lib\glad\include -I..\..\..\lib\sae\. -I..\..\..\lib\sae\lua\include
   OBJECT_DIR = Examples\CustomExtension\CMakeFiles\SAEEngine_Example_Extension.dir
   OBJECT_FILE_DIR = Examples\CustomExtension\CMakeFiles\SAEEngine_Example_Extension.dir
   TARGET_COMPILE_PDB = Examples\CustomExtension\CMakeFiles\SAEEngine_Example_Extension.dir\
@@ -4012,10 +4028,10 @@ build Examples\CustomExtension\CMakeFiles\SAEEngine_Example_Extension.dir\Extens
 #############################################
 # Link the executable Examples\CustomExtension\SAEEngine_Example_Extension.exe
 
-build Examples\CustomExtension\SAEEngine_Example_Extension.exe: CXX_EXECUTABLE_LINKER__SAEEngine_Example_Extension_Debug Examples\CustomExtension\CMakeFiles\SAEEngine_Example_Extension.dir\ExtensionExample.cpp.obj | SAEEngine\SAEEngine.lib lib\glfw\src\glfw3.lib lib\glad\glad.lib lib\lodepng\lodepng.lib lib\sae\lua\SAELua.lib lib\lua\liblua.lib || SAEEngine\SAEEngine.lib lib\glad\glad.lib lib\glfw\src\glfw3.lib lib\lodepng\lodepng.lib lib\lua\liblua.lib lib\sae\lua\SAELua.lib
+build Examples\CustomExtension\SAEEngine_Example_Extension.exe: CXX_EXECUTABLE_LINKER__SAEEngine_Example_Extension_Debug Examples\CustomExtension\CMakeFiles\SAEEngine_Example_Extension.dir\ExtensionExample.cpp.obj | SAEEngine\SAEEngine.lib lib\glfw\src\glfw3.lib lib\glad\glad.lib lib\sae\lua\SAELua.lib lib\lua\liblua.lib lib\lodepng\lodepng.lib || SAEEngine\SAEEngine.lib lib\glad\glad.lib lib\glfw\src\glfw3.lib lib\lodepng\lodepng.lib lib\lua\liblua.lib lib\sae\lua\SAELua.lib
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
-  LINK_LIBRARIES = SAEEngine\SAEEngine.lib  lib\glfw\src\glfw3.lib  lib\glad\glad.lib  lib\lodepng\lodepng.lib  lib\sae\lua\SAELua.lib  lib\lua\liblua.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  LINK_LIBRARIES = SAEEngine\SAEEngine.lib  lib\glfw\src\glfw3.lib  lib\glad\glad.lib  lib\sae\lua\SAELua.lib  lib\lua\liblua.lib  lib\lodepng\lodepng.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
   OBJECT_DIR = Examples\CustomExtension\CMakeFiles\SAEEngine_Example_Extension.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
@@ -4117,7 +4133,7 @@ build cmake_object_order_depends_target_SAEEngine_Example_Debug: phony || cmake_
 
 build Examples\LuaAPI\CMakeFiles\SAEEngine_Example.dir\example.cpp.obj: CXX_COMPILER__SAEEngine_Example_Debug ..\..\..\Examples\LuaAPI\example.cpp || cmake_object_order_depends_target_SAEEngine_Example_Debug
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   -std:c++latest
-  INCLUDES = -I. -I..\..\..\SAEEngine\include -I..\..\..\lib\lua\src -I..\..\..\lib\glfw\include -I..\..\..\lib\glm\glm\.. -I..\..\..\lib\glad\include -I..\..\..\lib\lodepng -I..\..\..\lib\sae\. -I..\..\..\lib\sae\lua\include
+  INCLUDES = -I. -I..\..\..\SAEEngine\include -I..\..\..\lib\lua\src -I..\..\..\lib\glfw\include -I..\..\..\lib\glm\glm\.. -I..\..\..\lib\glad\include -I..\..\..\lib\sae\. -I..\..\..\lib\sae\lua\include
   OBJECT_DIR = Examples\LuaAPI\CMakeFiles\SAEEngine_Example.dir
   OBJECT_FILE_DIR = Examples\LuaAPI\CMakeFiles\SAEEngine_Example.dir
   TARGET_COMPILE_PDB = Examples\LuaAPI\CMakeFiles\SAEEngine_Example.dir\
@@ -4131,10 +4147,10 @@ build Examples\LuaAPI\CMakeFiles\SAEEngine_Example.dir\example.cpp.obj: CXX_COMP
 #############################################
 # Link the executable Examples\LuaAPI\SAEEngine_Example.exe
 
-build Examples\LuaAPI\SAEEngine_Example.exe: CXX_EXECUTABLE_LINKER__SAEEngine_Example_Debug Examples\LuaAPI\CMakeFiles\SAEEngine_Example.dir\example.cpp.obj | SAEEngine\SAEEngine.lib lib\glfw\src\glfw3.lib lib\glad\glad.lib lib\lodepng\lodepng.lib lib\sae\lua\SAELua.lib lib\lua\liblua.lib || SAEEngine\SAEEngine.lib lib\glad\glad.lib lib\glfw\src\glfw3.lib lib\lodepng\lodepng.lib lib\lua\liblua.lib lib\sae\lua\SAELua.lib
+build Examples\LuaAPI\SAEEngine_Example.exe: CXX_EXECUTABLE_LINKER__SAEEngine_Example_Debug Examples\LuaAPI\CMakeFiles\SAEEngine_Example.dir\example.cpp.obj | SAEEngine\SAEEngine.lib lib\glfw\src\glfw3.lib lib\glad\glad.lib lib\sae\lua\SAELua.lib lib\lua\liblua.lib lib\lodepng\lodepng.lib || SAEEngine\SAEEngine.lib lib\glad\glad.lib lib\glfw\src\glfw3.lib lib\lodepng\lodepng.lib lib\lua\liblua.lib lib\sae\lua\SAELua.lib
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
-  LINK_LIBRARIES = SAEEngine\SAEEngine.lib  lib\glfw\src\glfw3.lib  lib\glad\glad.lib  lib\lodepng\lodepng.lib  lib\sae\lua\SAELua.lib  lib\lua\liblua.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  LINK_LIBRARIES = SAEEngine\SAEEngine.lib  lib\glfw\src\glfw3.lib  lib\glad\glad.lib  lib\sae\lua\SAELua.lib  lib\lua\liblua.lib  lib\lodepng\lodepng.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
   OBJECT_DIR = Examples\LuaAPI\CMakeFiles\SAEEngine_Example.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
@@ -4209,6 +4225,125 @@ build Examples\LuaAPI\rebuild_cache: phony Examples\LuaAPI\CMakeFiles\rebuild_ca
 build Examples\LuaAPI\list_install_components: phony
 
 # =============================================================================
+# Write statements declared in CMakeLists.txt:
+# C:/Users/jonat/source/repos/SAEEngine/SAEEngine/Examples/CMakeLists.txt
+# =============================================================================
+
+
+#############################################
+# Utility command for package
+
+build Examples\ManipulateTexture\CMakeFiles\package.util: CUSTOM_COMMAND Examples\ManipulateTexture\all
+  COMMAND = cmd.exe /C "cd /D C:\Users\jonat\source\repos\SAEEngine\SAEEngine\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackConfig.cmake"
+  DESC = Run CPack packaging tool...
+  pool = console
+  restat = 1
+
+build Examples\ManipulateTexture\package: phony Examples\ManipulateTexture\CMakeFiles\package.util
+
+# =============================================================================
+# Object build statements for EXECUTABLE target SAEEngine_Example_ManipulateTexture
+
+
+#############################################
+# Order-only phony target for SAEEngine_Example_ManipulateTexture
+
+build cmake_object_order_depends_target_SAEEngine_Example_ManipulateTexture_Debug: phony || cmake_object_order_depends_target_SAEEngine_Debug cmake_object_order_depends_target_SAELua_Debug cmake_object_order_depends_target_glad_Debug cmake_object_order_depends_target_glfw_Debug cmake_object_order_depends_target_liblua_Debug cmake_object_order_depends_target_lodepng_Debug
+
+build Examples\ManipulateTexture\CMakeFiles\SAEEngine_Example_ManipulateTexture.dir\manipulateTexture.cpp.obj: CXX_COMPILER__SAEEngine_Example_ManipulateTexture_Debug ..\..\..\Examples\ManipulateTexture\manipulateTexture.cpp || cmake_object_order_depends_target_SAEEngine_Example_ManipulateTexture_Debug
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   -std:c++latest
+  INCLUDES = -I. -I..\..\..\SAEEngine\include -I..\..\..\lib\lua\src -I..\..\..\lib\glfw\include -I..\..\..\lib\glm\glm\.. -I..\..\..\lib\glad\include -I..\..\..\lib\sae\. -I..\..\..\lib\sae\lua\include
+  OBJECT_DIR = Examples\ManipulateTexture\CMakeFiles\SAEEngine_Example_ManipulateTexture.dir
+  OBJECT_FILE_DIR = Examples\ManipulateTexture\CMakeFiles\SAEEngine_Example_ManipulateTexture.dir
+  TARGET_COMPILE_PDB = Examples\ManipulateTexture\CMakeFiles\SAEEngine_Example_ManipulateTexture.dir\
+  TARGET_PDB = Examples\ManipulateTexture\SAEEngine_Example_ManipulateTexture.pdb
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target SAEEngine_Example_ManipulateTexture
+
+
+#############################################
+# Link the executable Examples\ManipulateTexture\SAEEngine_Example_ManipulateTexture.exe
+
+build Examples\ManipulateTexture\SAEEngine_Example_ManipulateTexture.exe: CXX_EXECUTABLE_LINKER__SAEEngine_Example_ManipulateTexture_Debug Examples\ManipulateTexture\CMakeFiles\SAEEngine_Example_ManipulateTexture.dir\manipulateTexture.cpp.obj | SAEEngine\SAEEngine.lib lib\glfw\src\glfw3.lib lib\glad\glad.lib lib\sae\lua\SAELua.lib lib\lua\liblua.lib lib\lodepng\lodepng.lib || SAEEngine\SAEEngine.lib lib\glad\glad.lib lib\glfw\src\glfw3.lib lib\lodepng\lodepng.lib lib\lua\liblua.lib lib\sae\lua\SAELua.lib
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
+  LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
+  LINK_LIBRARIES = SAEEngine\SAEEngine.lib  lib\glfw\src\glfw3.lib  lib\glad\glad.lib  lib\sae\lua\SAELua.lib  lib\lua\liblua.lib  lib\lodepng\lodepng.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  OBJECT_DIR = Examples\ManipulateTexture\CMakeFiles\SAEEngine_Example_ManipulateTexture.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_COMPILE_PDB = Examples\ManipulateTexture\CMakeFiles\SAEEngine_Example_ManipulateTexture.dir\
+  TARGET_FILE = Examples\ManipulateTexture\SAEEngine_Example_ManipulateTexture.exe
+  TARGET_IMPLIB = Examples\ManipulateTexture\SAEEngine_Example_ManipulateTexture.lib
+  TARGET_PDB = Examples\ManipulateTexture\SAEEngine_Example_ManipulateTexture.pdb
+
+
+#############################################
+# Utility command for package_source
+
+build Examples\ManipulateTexture\CMakeFiles\package_source.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\jonat\source\repos\SAEEngine\SAEEngine\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/build/x64-Debug/CPackSourceConfig.cmake"
+  DESC = Run CPack packaging tool for source...
+  pool = console
+  restat = 1
+
+build Examples\ManipulateTexture\package_source: phony Examples\ManipulateTexture\CMakeFiles\package_source.util
+
+
+#############################################
+# Utility command for install/local
+
+build Examples\ManipulateTexture\CMakeFiles\install\local.util: CUSTOM_COMMAND Examples\ManipulateTexture\all
+  COMMAND = cmd.exe /C "cd /D C:\Users\jonat\source\repos\SAEEngine\SAEEngine\out\build\x64-Debug\Examples\ManipulateTexture && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build Examples\ManipulateTexture\install\local: phony Examples\ManipulateTexture\CMakeFiles\install\local.util
+
+
+#############################################
+# Utility command for install
+
+build Examples\ManipulateTexture\CMakeFiles\install.util: CUSTOM_COMMAND Examples\ManipulateTexture\all
+  COMMAND = cmd.exe /C "cd /D C:\Users\jonat\source\repos\SAEEngine\SAEEngine\out\build\x64-Debug\Examples\ManipulateTexture && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build Examples\ManipulateTexture\install: phony Examples\ManipulateTexture\CMakeFiles\install.util
+
+
+#############################################
+# Utility command for edit_cache
+
+build Examples\ManipulateTexture\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\jonat\source\repos\SAEEngine\SAEEngine\out\build\x64-Debug\Examples\ManipulateTexture && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build Examples\ManipulateTexture\edit_cache: phony Examples\ManipulateTexture\CMakeFiles\edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build Examples\ManipulateTexture\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\jonat\source\repos\SAEEngine\SAEEngine\out\build\x64-Debug\Examples\ManipulateTexture && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -SC:\Users\jonat\source\repos\SAEEngine\SAEEngine -BC:\Users\jonat\source\repos\SAEEngine\SAEEngine\out\build\x64-Debug"
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build Examples\ManipulateTexture\rebuild_cache: phony Examples\ManipulateTexture\CMakeFiles\rebuild_cache.util
+
+
+#############################################
+# Utility command for list_install_components
+
+build Examples\ManipulateTexture\list_install_components: phony
+
+# =============================================================================
 # Target aliases.
 
 build SAEEngine: phony SAEEngine\SAEEngine.lib
@@ -4222,6 +4357,10 @@ build SAEEngine_Example.exe: phony Examples\LuaAPI\SAEEngine_Example.exe
 build SAEEngine_Example_Extension: phony Examples\CustomExtension\SAEEngine_Example_Extension.exe
 
 build SAEEngine_Example_Extension.exe: phony Examples\CustomExtension\SAEEngine_Example_Extension.exe
+
+build SAEEngine_Example_ManipulateTexture: phony Examples\ManipulateTexture\SAEEngine_Example_ManipulateTexture.exe
+
+build SAEEngine_Example_ManipulateTexture.exe: phony Examples\ManipulateTexture\SAEEngine_Example_ManipulateTexture.exe
 
 build SAELua: phony lib\sae\lua\SAELua.lib
 
@@ -4380,7 +4519,7 @@ build all: phony lib\all SAEEngine\all Examples\all
 #############################################
 # Folder: C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/build/x64-Debug/Examples
 
-build Examples\all: phony Examples\CustomExtension\all Examples\LuaAPI\all
+build Examples\all: phony Examples\CustomExtension\all Examples\LuaAPI\all Examples\ManipulateTexture\all
 
 # =============================================================================
 
@@ -4395,6 +4534,13 @@ build Examples\CustomExtension\all: phony Examples\CustomExtension\SAEEngine_Exa
 # Folder: C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/build/x64-Debug/Examples/LuaAPI
 
 build Examples\LuaAPI\all: phony Examples\LuaAPI\SAEEngine_Example.exe
+
+# =============================================================================
+
+#############################################
+# Folder: C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/build/x64-Debug/Examples/ManipulateTexture
+
+build Examples\ManipulateTexture\all: phony Examples\ManipulateTexture\SAEEngine_Example_ManipulateTexture.exe
 
 # =============================================================================
 
@@ -4501,14 +4647,14 @@ build lib\sae\lua\all: phony lib\sae\lua\SAELua.lib
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | ..\..\..\CMakeLists.txt ..\..\..\Examples\CMakeLists.txt ..\..\..\Examples\CustomExtension\CMakeLists.txt ..\..\..\Examples\LuaAPI\CMakeLists.txt ..\..\..\SAEEngineConfig.h.in ..\..\..\SAEEngine\CMakeLists.txt ..\..\..\lib\CMakeLists.txt ..\..\..\lib\freetype\CMakeLists.txt ..\..\..\lib\freetype\builds\cmake\FindBrotliDec.cmake ..\..\..\lib\freetype\builds\cmake\FindHarfBuzz.cmake ..\..\..\lib\glad\CMakeLists.txt ..\..\..\lib\glfw\CMakeLists.txt ..\..\..\lib\glfw\cmake_uninstall.cmake.in ..\..\..\lib\glfw\examples\CMakeLists.txt ..\..\..\lib\glfw\src\CMakeLists.txt ..\..\..\lib\glfw\src\glfw3.pc.in ..\..\..\lib\glfw\src\glfw3Config.cmake.in ..\..\..\lib\glfw\src\glfw_config.h.in ..\..\..\lib\glfw\tests\CMakeLists.txt ..\..\..\lib\glm\CMakeLists.txt ..\..\..\lib\glm\glm\CMakeLists.txt ..\..\..\lib\lodepng\CMakeLists.txt ..\..\..\lib\lua\CMakeLists.txt ..\..\..\lib\sae\CMakeLists.txt ..\..\..\lib\sae\lua\CMakeLists.txt C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\BasicConfigVersion-SameMajorVersion.cmake.in C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeCXXInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeDependentOption.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeGenericSystem.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakePackageConfigHelpers.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeRCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CPack.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CPackComponent.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CheckCSourceCompiles.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CheckIncludeFile.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CheckLibraryExists.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindBZip2.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindDoxygen.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindPNG.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindPackageHandleStandardArgs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindPackageMessage.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindPkgConfig.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindThreads.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindZLIB.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\GNUInstallDirs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Platform\Windows.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Platform\WindowsPaths.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\SelectLibraryConfigurations.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\WriteBasicConfigVersionFile.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Templates\CPackConfig.cmake.in CMakeCache.txt CMakeFiles\3.17.20032601-MSVC_2\CMakeCCompiler.cmake CMakeFiles\3.17.20032601-MSVC_2\CMakeCXXCompiler.cmake CMakeFiles\3.17.20032601-MSVC_2\CMakeRCCompiler.cmake CMakeFiles\3.17.20032601-MSVC_2\CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | ..\..\..\CMakeLists.txt ..\..\..\Examples\CMakeLists.txt ..\..\..\Examples\CustomExtension\CMakeLists.txt ..\..\..\Examples\LuaAPI\CMakeLists.txt ..\..\..\Examples\ManipulateTexture\CMakeLists.txt ..\..\..\SAEEngineConfig.h.in ..\..\..\SAEEngine\CMakeLists.txt ..\..\..\lib\CMakeLists.txt ..\..\..\lib\freetype\CMakeLists.txt ..\..\..\lib\freetype\builds\cmake\FindBrotliDec.cmake ..\..\..\lib\freetype\builds\cmake\FindHarfBuzz.cmake ..\..\..\lib\glad\CMakeLists.txt ..\..\..\lib\glfw\CMakeLists.txt ..\..\..\lib\glfw\cmake_uninstall.cmake.in ..\..\..\lib\glfw\examples\CMakeLists.txt ..\..\..\lib\glfw\src\CMakeLists.txt ..\..\..\lib\glfw\src\glfw3.pc.in ..\..\..\lib\glfw\src\glfw3Config.cmake.in ..\..\..\lib\glfw\src\glfw_config.h.in ..\..\..\lib\glfw\tests\CMakeLists.txt ..\..\..\lib\glm\CMakeLists.txt ..\..\..\lib\glm\glm\CMakeLists.txt ..\..\..\lib\lodepng\CMakeLists.txt ..\..\..\lib\lua\CMakeLists.txt ..\..\..\lib\sae\CMakeLists.txt ..\..\..\lib\sae\lua\CMakeLists.txt C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\BasicConfigVersion-SameMajorVersion.cmake.in C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeCXXInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeDependentOption.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeGenericSystem.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakePackageConfigHelpers.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeRCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CPack.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CPackComponent.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CheckCSourceCompiles.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CheckIncludeFile.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CheckLibraryExists.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindBZip2.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindDoxygen.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindPNG.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindPackageHandleStandardArgs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindPackageMessage.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindPkgConfig.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindThreads.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindZLIB.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\GNUInstallDirs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Platform\Windows.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Platform\WindowsPaths.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\SelectLibraryConfigurations.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\WriteBasicConfigVersionFile.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Templates\CPackConfig.cmake.in CMakeCache.txt CMakeFiles\3.17.20032601-MSVC_2\CMakeCCompiler.cmake CMakeFiles\3.17.20032601-MSVC_2\CMakeCXXCompiler.cmake CMakeFiles\3.17.20032601-MSVC_2\CMakeRCCompiler.cmake CMakeFiles\3.17.20032601-MSVC_2\CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build ..\..\..\CMakeLists.txt ..\..\..\Examples\CMakeLists.txt ..\..\..\Examples\CustomExtension\CMakeLists.txt ..\..\..\Examples\LuaAPI\CMakeLists.txt ..\..\..\SAEEngineConfig.h.in ..\..\..\SAEEngine\CMakeLists.txt ..\..\..\lib\CMakeLists.txt ..\..\..\lib\freetype\CMakeLists.txt ..\..\..\lib\freetype\builds\cmake\FindBrotliDec.cmake ..\..\..\lib\freetype\builds\cmake\FindHarfBuzz.cmake ..\..\..\lib\glad\CMakeLists.txt ..\..\..\lib\glfw\CMakeLists.txt ..\..\..\lib\glfw\cmake_uninstall.cmake.in ..\..\..\lib\glfw\examples\CMakeLists.txt ..\..\..\lib\glfw\src\CMakeLists.txt ..\..\..\lib\glfw\src\glfw3.pc.in ..\..\..\lib\glfw\src\glfw3Config.cmake.in ..\..\..\lib\glfw\src\glfw_config.h.in ..\..\..\lib\glfw\tests\CMakeLists.txt ..\..\..\lib\glm\CMakeLists.txt ..\..\..\lib\glm\glm\CMakeLists.txt ..\..\..\lib\lodepng\CMakeLists.txt ..\..\..\lib\lua\CMakeLists.txt ..\..\..\lib\sae\CMakeLists.txt ..\..\..\lib\sae\lua\CMakeLists.txt C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\BasicConfigVersion-SameMajorVersion.cmake.in C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeCXXInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeDependentOption.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeGenericSystem.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakePackageConfigHelpers.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeRCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CPack.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CPackComponent.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CheckCSourceCompiles.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CheckIncludeFile.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CheckLibraryExists.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindBZip2.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindDoxygen.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindPNG.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindPackageHandleStandardArgs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindPackageMessage.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindPkgConfig.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindThreads.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindZLIB.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\GNUInstallDirs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Platform\Windows.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Platform\WindowsPaths.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\SelectLibraryConfigurations.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\WriteBasicConfigVersionFile.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Templates\CPackConfig.cmake.in CMakeCache.txt CMakeFiles\3.17.20032601-MSVC_2\CMakeCCompiler.cmake CMakeFiles\3.17.20032601-MSVC_2\CMakeCXXCompiler.cmake CMakeFiles\3.17.20032601-MSVC_2\CMakeRCCompiler.cmake CMakeFiles\3.17.20032601-MSVC_2\CMakeSystem.cmake: phony
+build ..\..\..\CMakeLists.txt ..\..\..\Examples\CMakeLists.txt ..\..\..\Examples\CustomExtension\CMakeLists.txt ..\..\..\Examples\LuaAPI\CMakeLists.txt ..\..\..\Examples\ManipulateTexture\CMakeLists.txt ..\..\..\SAEEngineConfig.h.in ..\..\..\SAEEngine\CMakeLists.txt ..\..\..\lib\CMakeLists.txt ..\..\..\lib\freetype\CMakeLists.txt ..\..\..\lib\freetype\builds\cmake\FindBrotliDec.cmake ..\..\..\lib\freetype\builds\cmake\FindHarfBuzz.cmake ..\..\..\lib\glad\CMakeLists.txt ..\..\..\lib\glfw\CMakeLists.txt ..\..\..\lib\glfw\cmake_uninstall.cmake.in ..\..\..\lib\glfw\examples\CMakeLists.txt ..\..\..\lib\glfw\src\CMakeLists.txt ..\..\..\lib\glfw\src\glfw3.pc.in ..\..\..\lib\glfw\src\glfw3Config.cmake.in ..\..\..\lib\glfw\src\glfw_config.h.in ..\..\..\lib\glfw\tests\CMakeLists.txt ..\..\..\lib\glm\CMakeLists.txt ..\..\..\lib\glm\glm\CMakeLists.txt ..\..\..\lib\lodepng\CMakeLists.txt ..\..\..\lib\lua\CMakeLists.txt ..\..\..\lib\sae\CMakeLists.txt ..\..\..\lib\sae\lua\CMakeLists.txt C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\BasicConfigVersion-SameMajorVersion.cmake.in C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeCXXInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeDependentOption.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeGenericSystem.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakePackageConfigHelpers.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeRCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CPack.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CPackComponent.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CheckCSourceCompiles.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CheckIncludeFile.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\CheckLibraryExists.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindBZip2.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindDoxygen.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindPNG.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindPackageHandleStandardArgs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindPackageMessage.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindPkgConfig.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindThreads.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\FindZLIB.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\GNUInstallDirs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Platform\Windows.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\Platform\WindowsPaths.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\SelectLibraryConfigurations.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Modules\WriteBasicConfigVersionFile.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.17\Templates\CPackConfig.cmake.in CMakeCache.txt CMakeFiles\3.17.20032601-MSVC_2\CMakeCCompiler.cmake CMakeFiles\3.17.20032601-MSVC_2\CMakeCXXCompiler.cmake CMakeFiles\3.17.20032601-MSVC_2\CMakeRCCompiler.cmake CMakeFiles\3.17.20032601-MSVC_2\CMakeSystem.cmake: phony
 
 
 #############################################

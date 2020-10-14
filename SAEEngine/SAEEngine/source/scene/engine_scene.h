@@ -8,6 +8,9 @@
 
 namespace sae::engine
 {
+
+	
+	
 	struct Scene_Data
 	{
 	public:
@@ -33,6 +36,7 @@ namespace sae::engine
 	};
 
 	Scene_Data* lua_toscenedata(lua_State* _lua, int _idx, int _arg);
+
 
 
 	// engine.scene.new()

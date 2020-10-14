@@ -163,3 +163,11 @@ C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/build/x64-Debug/Examples/Lua
 C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/build/x64-Debug/Examples/LuaAPI/CMakeFiles/edit_cache.dir
 C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/build/x64-Debug/Examples/LuaAPI/CMakeFiles/rebuild_cache.dir
 C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/build/x64-Debug/Examples/LuaAPI/CMakeFiles/list_install_components.dir
+C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/build/x64-Debug/Examples/ManipulateTexture/CMakeFiles/package.dir
+C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/build/x64-Debug/Examples/ManipulateTexture/CMakeFiles/SAEEngine_Example_ManipulateTexture.dir
+C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/build/x64-Debug/Examples/ManipulateTexture/CMakeFiles/package_source.dir
+C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/build/x64-Debug/Examples/ManipulateTexture/CMakeFiles/install/local.dir
+C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/build/x64-Debug/Examples/ManipulateTexture/CMakeFiles/install.dir
+C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/build/x64-Debug/Examples/ManipulateTexture/CMakeFiles/edit_cache.dir
+C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/build/x64-Debug/Examples/ManipulateTexture/CMakeFiles/rebuild_cache.dir
+C:/Users/jonat/source/repos/SAEEngine/SAEEngine/out/build/x64-Debug/Examples/ManipulateTexture/CMakeFiles/list_install_components.dir

@@ -10,6 +10,7 @@
 #include "shader/engine_shader.h"
 #include "file/engine_file.h"
 #include "physics/engine_physics.h"
+#include "texture/engine_texture.h"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
