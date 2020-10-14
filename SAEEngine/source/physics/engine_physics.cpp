@@ -3,83 +3,81 @@
 namespace sae::engine
 {
 
-	distance_t position_t::operator-(const position_t& rhs) const noexcept
-	{
-		return distance_t{ this->x - rhs.x, this->y - rhs.y, this->z - rhs.z };
-	};
 
-	position_t position_t::operator+(const distance_t& rhs) const noexcept
-	{
-		return position_t{ this->x + rhs.dx, this->y + rhs.dy, this->z + rhs.dz };
-	};
-	position_t& position_t::operator+=(const distance_t& rhs) noexcept
-	{
-		this->x += rhs.dx;
-		this->y += rhs.dy;
-		this->z += rhs.dz;
-		return *this;
-	};
 
-	position_t position_t::operator-(const distance_t& rhs) const noexcept
+
+	physics_clock::time_point physics_clock::now() noexcept
 	{
-		return position_t{ this->x - rhs.dx, this->y - rhs.dy, this->z - rhs.dz };
-	};
-	position_t& position_t::operator-=(const distance_t& rhs) noexcept
-	{
-		this->x -= rhs.dx;
-		this->y -= rhs.dy;
-		this->z -= rhs.dz;
-		return *this;
+		return time_point{ std::chrono::steady_clock::now().time_since_epoch() };
 	};
 
 
 
-	distance_t distance_t::operator+(distance_t rhs) const noexcept
+	distance_t operator-(const position_t& lhs, const position_t& rhs) noexcept
 	{
-		return distance_t{ this->dx + rhs.dx, this->dy + rhs.dy, this->dz + rhs.dz };
-	};
-	distance_t& distance_t::operator+=(distance_t rhs) noexcept
-	{
-		this->dx += rhs.dx;
-		this->dy += rhs.dy;
-		this->dz += rhs.dz;
-		return *this;
+		glm::vec3 _vec{ lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z };
+		distance_t _out{};
+		_out.dir = glm::normalize(_vec);
+		_out.mag = glm::distance(glm::vec3{}, _vec);
+		return _out;
 	};
 
-	distance_t distance_t::operator-(distance_t rhs) const noexcept
+	position_t& operator+=(position_t& lhs, const distance_t& rhs) noexcept
 	{
-		return distance_t{ this->dx - rhs.dx, this->dy - rhs.dy, this->dz - rhs.dz };
+		lhs.x += rhs.x();
+		lhs.y += rhs.y();
+		lhs.z += rhs.z();
+		return lhs;
+	};	
+	position_t& operator-=(position_t& lhs, const distance_t& rhs) noexcept
+	{
+		lhs.x -= rhs.x();
+		lhs.y -= rhs.y();
+		lhs.z -= rhs.z();
+		return lhs;
 	};
-	distance_t& distance_t::operator-=(distance_t rhs) noexcept
+
+
+
+	distance_t operator+(const distance_t& rhs, const distance_t& lhs) noexcept
 	{
-		this->dx -= rhs.dx;
-		this->dy -= rhs.dy;
-		this->dz -= rhs.dz;
-		return *this;
+		auto _vec = rhs.as_vec() + lhs.as_vec();
+		return distance_t
+		{
+			glm::normalize(_vec),
+			glm::distance(_vec, {})
+		};
+	};
+	distance_t& operator+=(distance_t& rhs, const distance_t& lhs) noexcept
+	{
+		auto _vec = rhs.as_vec() + lhs.as_vec();
+		rhs.dir = glm::normalize(_vec);
+		rhs.mag = glm::distance(_vec, {});
+		return rhs;
 	};
 
-	velocity_t distance_t::operator/(duration_t _dt) const noexcept
+	distance_t operator-(const distance_t& rhs, const distance_t& lhs) noexcept
 	{
-		return velocity_t{ distance_t{this->dx / _dt, this->dy / _dt, this->dz / _dt}, _dt };
+		auto _vec = rhs.as_vec() - lhs.as_vec();
+		return distance_t
+		{
+			glm::normalize(_vec),
+			glm::distance(_vec, {})
+		};
 	};
-	
-
-
-
-
-
-	distance_t velocity_t::operator*(duration_t _dt) const noexcept
+	distance_t& operator-=(distance_t& rhs, const distance_t& lhs) noexcept
 	{
-		return distance_t{ this->dx.dx * _dt, this->dx.dy * _dt, this->dx.dz * _dt };
-	};
-	acceleration_t velocity_t::operator/(duration_t _dt) const noexcept
-	{
-		return acceleration_t{ velocity_t{ distance_t{ this->dx.dx / _dt, this->dx.dy / _dt, this->dx.dz / _dt}, this->dt }, _dt };
+		auto _vec = rhs.as_vec() - lhs.as_vec();
+		rhs.dir = glm::normalize(_vec);
+		rhs.mag = glm::distance(_vec, {});
+		return rhs;
 	};
 
 
 
 
-	
+
+
+
 
 }

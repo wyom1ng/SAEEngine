@@ -2,7 +2,7 @@
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Users/jonat/source/repos/SAEEngine/out/install/x64-Debug")
+  set(CMAKE_INSTALL_PREFIX "C:/Users/jonat/Source/Repos/SAEEngine/out/install/x64-Debug")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -69,7 +69,6 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("C:/Users/jonat/source/repos/SAEEngine/out/build/x64-Debug/lib/glfw/src/cmake_install.cmake")
-  include("C:/Users/jonat/source/repos/SAEEngine/out/build/x64-Debug/lib/glfw/examples/cmake_install.cmake")
   include("C:/Users/jonat/source/repos/SAEEngine/out/build/x64-Debug/lib/glfw/tests/cmake_install.cmake")
 
 endif()

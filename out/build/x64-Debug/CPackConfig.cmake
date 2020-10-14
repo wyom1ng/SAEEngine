@@ -26,7 +26,7 @@ set(CPACK_DEFAULT_PACKAGE_DESCRIPTION_FILE "C:/Program Files (x86)/Microsoft Vis
 set(CPACK_DEFAULT_PACKAGE_DESCRIPTION_SUMMARY "SAEEngine built using CMake")
 set(CPACK_GENERATOR "ZIP")
 set(CPACK_INSTALL_CMAKE_PROJECTS "C:/Users/jonat/source/repos/SAEEngine/out/build/x64-Debug;SAEEngine;ALL;/")
-set(CPACK_INSTALL_PREFIX "C:/Users/jonat/source/repos/SAEEngine/out/install/x64-Debug")
+set(CPACK_INSTALL_PREFIX "C:/Users/jonat/Source/Repos/SAEEngine/out/install/x64-Debug")
 set(CPACK_MODULE_PATH "C:/Users/jonat/source/repos/SAEEngine/lib/freetype/builds/cmake")
 set(CPACK_NSIS_DISPLAY_NAME "SAEEngine 2.10.2")
 set(CPACK_NSIS_INSTALLER_ICON_CODE "")

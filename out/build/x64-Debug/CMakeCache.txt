@@ -132,7 +132,7 @@ CMAKE_INSTALL_MANDIR:PATH=
 CMAKE_INSTALL_OLDINCLUDEDIR:PATH=/usr/include
 
 //No help, variable specified on the command line.
-CMAKE_INSTALL_PREFIX:PATH=C:/Users/jonat/source/repos/SAEEngine/out/install/x64-Debug
+CMAKE_INSTALL_PREFIX:PATH=C:/Users/jonat/Source/Repos/SAEEngine/out/install/x64-Debug
 
 //Run-time variable data (LOCALSTATEDIR/run)
 CMAKE_INSTALL_RUNSTATEDIR:PATH=
@@ -298,10 +298,10 @@ FT_WITH_ZLIB:BOOL=OFF
 GLFW_BINARY_DIR:STATIC=C:/Users/jonat/source/repos/SAEEngine/out/build/x64-Debug/lib/glfw
 
 //Build the GLFW documentation
-GLFW_BUILD_DOCS:BOOL=ON
+GLFW_BUILD_DOCS:BOOL=False
 
 //Build the GLFW example programs
-GLFW_BUILD_EXAMPLES:BOOL=ON
+GLFW_BUILD_EXAMPLES:BOOL=False
 
 //Build the GLFW test programs
 GLFW_BUILD_TESTS:BOOL=ON
@@ -521,7 +521,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MT
 CMAKE_MT-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=19
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=18
 //Platform information initialized
 CMAKE_PLATFORM_INFO_INITIALIZED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_RC_COMPILER
@@ -628,7 +628,7 @@ ZLIB_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ZLIB_LIBRARY_RELEASE
 ZLIB_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
 //CMAKE_INSTALL_PREFIX during last run
-_GNUInstallDirs_LAST_CMAKE_INSTALL_PREFIX:INTERNAL=C:/Users/jonat/source/repos/SAEEngine/out/install/x64-Debug
+_GNUInstallDirs_LAST_CMAKE_INSTALL_PREFIX:INTERNAL=C:/Users/jonat/Source/Repos/SAEEngine/out/install/x64-Debug
 __pkg_config_checked_PC_BROTLIDEC:INTERNAL=1
 __pkg_config_checked_PC_HARFBUZZ:INTERNAL=1
 

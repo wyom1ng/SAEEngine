@@ -4,8 +4,14 @@
 
 #include <cstdint>
 
+#include <glm/vec3.hpp>
+#include <glm/geometric.hpp>
+
+#include <chrono>
+
 namespace sae::engine
 {
+
 	struct position_t;
 	struct distance_t;
 	struct velocity_t;
@@ -13,149 +19,135 @@ namespace sae::engine
 	struct force_t;
 	struct mass_t;
 
-	using duration_t = int32_t;
-	
+
+
+
+	using direction_t = glm::vec3;
+	using magnitude_t = float_t;
+
+
+
+
+
+
+
+	class physics_clock
+	{
+	public:
+		using rep = int64_t;
+		using period = std::nano;
+		using duration = std::chrono::duration<rep, period>;
+		using time_point = std::chrono::time_point<physics_clock>;
+		static constexpr bool is_steady = false;
+		static time_point now() noexcept;
+	};
+
+	using duration_t = typename physics_clock::duration;
+	using time_point_t = typename physics_clock::time_point;
+
+
+
+	struct basic_unit
+	{
+		constexpr auto x() const noexcept { return (this->mag * this->dir.x); };
+		constexpr auto y() const noexcept { return (this->mag * this->dir.y); };
+		constexpr auto z() const noexcept { return (this->mag * this->dir.z); };
+
+		constexpr glm::vec3 as_vec() const noexcept { return (this->dir * this->mag); };
+
+		constexpr basic_unit() noexcept = default;
+		constexpr basic_unit(const direction_t& _d, magnitude_t _mag) noexcept : 
+			dir{ _d }, mag{ _mag }
+		{};
+
+		direction_t dir{};
+		magnitude_t mag{};
+	};
+
 
 
 	struct position_t
 	{
-		distance_t operator-(const position_t& rhs) const noexcept;
-
-		position_t operator+(const distance_t& rhs) const noexcept;
-		position_t& operator+=(const distance_t& rhs) noexcept;
-
-		position_t operator-(const distance_t& rhs) const noexcept;
-		position_t& operator-=(const distance_t& rhs) noexcept;
-
-		constexpr explicit position_t() noexcept = default;
-		constexpr explicit position_t(int32_t _x, int32_t _y, int32_t _z) noexcept : 
-			x{ _x }, y{ _y }, z{ _z } 
-		{};
-
-
-		int32_t x = 0;
-		int32_t y = 0;
-		int32_t z = 0;
+		magnitude_t x{};
+		magnitude_t y{};
+		magnitude_t z{};
 	};
 	
-	struct distance_t
+	struct distance_t : public basic_unit 
 	{
-		distance_t operator+(distance_t rhs) const noexcept;
-		distance_t& operator+=(distance_t rhs) noexcept;
-
-		distance_t operator-(distance_t rhs) const noexcept;
-		distance_t& operator-=(distance_t rhs) noexcept;
-
-		velocity_t operator/(duration_t _dt) const noexcept;
-
-		duration_t operator/(velocity_t rhs) const noexcept;
-
-		explicit distance_t() noexcept = default;
-		constexpr explicit distance_t(int32_t _dx, int32_t _dy, int32_t _dz) noexcept :
-			dx{ _dx }, dy{ _dy }, dz{ _dz }
-		{};
-
-		int32_t dx = 0;
-		int32_t dy = 0;
-		int32_t dz = 0;
+		using basic_unit::basic_unit;
 	};
 
-	struct velocity_t
+	struct velocity_t : public basic_unit 
 	{
-		distance_t operator*(duration_t _dt) const noexcept;
-		acceleration_t operator/(duration_t _dt) const noexcept;
-
-		duration_t operator/(acceleration_t rhs) const noexcept;
-
-		velocity_t operator+(velocity_t rhs) const noexcept;
-		velocity_t& operator+=(velocity_t rhs) noexcept;
-
-		velocity_t operator-(velocity_t rhs) const noexcept;
-		velocity_t& operator-=(velocity_t rhs) noexcept;
-
-		constexpr explicit velocity_t() noexcept = default;
-		constexpr explicit velocity_t(distance_t _dx, duration_t _dt) noexcept :
-			dx{ _dx }, dt{ _dt }
-		{};
-
-		distance_t dx{};
-		duration_t dt = 0;
+		duration_t dt{};
 	};
 
-	struct acceleration_t
+
+	distance_t operator-(const position_t& lhs, const position_t& rhs) noexcept;
+
+	constexpr static inline position_t operator+(const position_t& lhs, const distance_t& rhs) noexcept
 	{
-		velocity_t operator*(duration_t _dt) const noexcept;
-
-		force_t operator*(mass_t rhs) const noexcept;
-
-		acceleration_t operator+(acceleration_t rhs) const noexcept;
-		acceleration_t& operator+=(acceleration_t rhs) noexcept;
-
-		acceleration_t operator-(acceleration_t rhs) const noexcept;
-		acceleration_t& operator-=(acceleration_t rhs) noexcept;
-
-
-
-
-		constexpr explicit acceleration_t() noexcept = default;
-		constexpr explicit acceleration_t(velocity_t _dv, duration_t _dt) noexcept :
-			dv{ _dv }, dt{ _dt }
-		{};
-
-
-		velocity_t dv{};
-		duration_t dt = 0;
+		return position_t
+		{
+			lhs.x + rhs.x(),
+			lhs.y + rhs.y(),
+			lhs.z + rhs.z()
+		};
 	};
+	position_t& operator+=(position_t& lhs, const distance_t& rhs) noexcept;
 
-	struct force_t
+	static inline position_t operator-(const position_t& lhs, const distance_t& rhs) noexcept
 	{
-		mass_t operator/(acceleration_t rhs) const noexcept;
-		acceleration_t operator/(mass_t rhs) const noexcept;
-
-		force_t operator+(force_t rhs) const noexcept;
-		force_t& operator+=(force_t rhs) noexcept;
-
-		force_t operator-(force_t rhs) const noexcept;
-		force_t& operator-=(force_t rhs) noexcept;
-
-
+		return position_t
+		{
+			lhs.x - rhs.x(),
+			lhs.y - rhs.y(),
+			lhs.z - rhs.z()
+		};
+	}; 
+	position_t& operator-=(position_t& lhs, const distance_t& rhs) noexcept;
 
 
-		int32_t x = 0;
-		int32_t y = 0;
-		int32_t z = 0;
-	};
 
-	struct mass_t
+	distance_t operator+(const distance_t& rhs, const distance_t& lhs) noexcept;
+	distance_t& operator+=(distance_t& rhs, const distance_t& lhs) noexcept;
+
+	distance_t operator-(const distance_t& rhs, const distance_t& lhs) noexcept;
+	distance_t& operator-=(distance_t& rhs, const distance_t& lhs) noexcept;
+
+
+
+	velocity_t operator+(const velocity_t& rhs, const velocity_t& lhs) noexcept;
+	velocity_t& operator+=(velocity_t& rhs, const velocity_t& lhs) noexcept;
+
+	velocity_t operator-(const velocity_t& rhs, const velocity_t& lhs) noexcept;
+	velocity_t& operator-=(velocity_t& rhs, const velocity_t& lhs) noexcept;
+
+
+
+
+
+
+	template <typename _Rep, typename _Period>
+	velocity_t operator/(const distance_t& lhs, std::chrono::duration<_Rep, _Period> rhs)
 	{
-		force_t operator*(acceleration_t rhs) const noexcept;
-
-		mass_t operator+(mass_t rhs) const noexcept;
-		mass_t& operator+=(mass_t rhs) noexcept;
-
-		mass_t operator-(mass_t rhs) const noexcept;
-		mass_t& operator-=(mass_t rhs) noexcept;
-
-		int32_t mass = 0;
-
+		return velocity_t{ lhs.dir, lhs.mag, std::chrono::duration_cast<duration_t>(rhs) };
 	};
-
-	float_t magnitude(distance_t _rhs) noexcept;
-	float_t magnitude(velocity_t _rhs) noexcept;
-	float_t magnitude(acceleration_t _rhs) noexcept;
-	float_t magnitude(force_t _rhs) noexcept;
-
-
-
 
 	
+
+
+
+
+
+
+
+
 
 	class PhysicsObject
 	{
 
-		position_t pos_{};
-		velocity_t vel_{};
-		mass_t mass_{};
 
 	};
 
@@ -163,5 +155,4 @@ namespace sae::engine
 
 
 
-	int luaopen_physics(lua_State* _lua);
 }
