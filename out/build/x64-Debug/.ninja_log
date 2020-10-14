@@ -308,3 +308,8 @@
 1267	1730	624411945	Examples/CustomExtension/SAEEngine_Example_Extension.exe	c59f98acc33e5b2a
 1271	1731	624411945	Examples/LuaAPI/SAEEngine_Example.exe	c5cb16289c5961cc
 1274	1731	624411945	Examples/ManipulateTexture/SAEEngine_Example_ManipulateTexture.exe	97df60d23a4bd238
+12	1083	624412135	SAEEngine/CMakeFiles/SAEEngine.dir/source/gfx/engine_gfx.cpp.obj	ce0b708abad74553
+1083	1131	624412135	SAEEngine/SAEEngine.lib	1e3f4310d343ea10
+1134	1322	624412135	Examples/ManipulateTexture/SAEEngine_Example_ManipulateTexture.exe	97df60d23a4bd238
+1131	1323	624412135	Examples/LuaAPI/SAEEngine_Example.exe	c5cb16289c5961cc
+1132	1323	624412135	Examples/CustomExtension/SAEEngine_Example_Extension.exe	c59f98acc33e5b2a

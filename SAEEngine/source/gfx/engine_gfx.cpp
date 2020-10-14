@@ -296,27 +296,6 @@ namespace sae::engine
 
 
 
-	int gfx_destructor(lua_State* _lua)
-	{
-		auto _ptr = lua_toGFXObject(_lua, -1, 1);
-		_ptr->~GFXObject();
-		return 0;
-	};
-
-	int gfx_update(lua_State* _lua)
-	{
-		auto _ptr = lua_toGFXObject(_lua, -1, 1);
-		_ptr->update();
-		return 0;
-	};
-
-	int gfx_good(lua_State* _lua)
-	{
-		auto _ptr = lua_toGFXObject(_lua, -1, 1);
-		lua_pushboolean(_lua, _ptr->good());
-		return 1;
-	};
-
 
 
 
