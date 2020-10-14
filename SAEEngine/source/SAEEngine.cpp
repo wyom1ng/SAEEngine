@@ -254,8 +254,8 @@ namespace sae::engine
 
 		assert(lib_gfx::lua_open(_lua) == 1);
 		lua_setfield(_lua, t, "gfx");
-	
-		luaopen_engine_shader(_lua);
+
+		assert(lib_shader::lua_open(_lua) == 1);
 		lua_setfield(_lua, t, "shader");
 
 		assert(lib_fs::lua_open(_lua) == 1);

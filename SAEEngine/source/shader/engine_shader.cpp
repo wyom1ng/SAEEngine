@@ -206,83 +206,82 @@ namespace sae::engine
 		this->destroy();
 	};
 
+}
 
-
-
-
-
-
-
-
-
-
-
-	Shader_Data* lua_toshader(lua_State* _lua, int _idx, int _arg)
-	{
-		void* ud = lua::lua_downcast(_lua, _idx, "SAEEngine.Shader_Data");
-		luaL_argcheck(_lua, ud != NULL, _arg, "`Shader_Data' expected");
-		return (Shader_Data*)ud;
-	};
-
-
+namespace sae::engine
+{
 
 	// engine.shader.new(name, vertexPath, fragmentPath) -> Shader_Data
-	int shader_new(lua_State* _lua)
+	int lib_shader::ltype_Shader::new_f(lua_State* _lua)
 	{
 		auto _name = lua_tostring(_lua, -3);
 		auto _vertexPath = lua_tostring(_lua, -2);
 		auto _fragmentPath = lua_tostring(_lua, -1);
-		auto _ptr = lua::lua_newinstance<Shader_Data>(_lua, "SAEEngine.Shader_Data", _name, _vertexPath, _fragmentPath);
+		auto _ptr = lua::lua_newinstance<value_type>(_lua, tname(), _name, _vertexPath, _fragmentPath);
 		return 1;
 	};
 
+
 	// shader:good() -> bool
-	int shader_good(lua_State* _lua)
+	int lib_shader::ltype_Shader::good(lua_State* _lua)
 	{
-		auto _ptr = lua_toshader(_lua, -1, 1);
+		auto _ptr = to_userdata(_lua, 1);
 		lua_pushboolean(_lua, _ptr->good());
 		return 1;
 	};
 
 	// shader:name() -> string
-	int shader_name(lua_State* _lua)
+	int lib_shader::ltype_Shader::name(lua_State* _lua)
 	{
-		auto _ptr = lua_toshader(_lua, -1, 1);
+		auto _ptr = to_userdata(_lua, 1);
 		lua_pushstring(_lua, _ptr->name().c_str());
 		return 1;
 	};
 
 	// shader:destroy()
-	int shader_destroy(lua_State* _lua)
+	int lib_shader::ltype_Shader::destroy(lua_State* _lua)
 	{
-		auto _ptr = lua_toshader(_lua, -1, 1);
+		auto _ptr = to_userdata(_lua, 1);
 		_ptr->destroy();
 		return 0;
 	};
 
 	// shader:__gc()
-	int shader_destructor(lua_State* _lua)
+	int lib_shader::ltype_Shader::destructor(lua_State* _lua)
 	{
-		auto _ptr = lua_toshader(_lua, -1, 1);
+		auto _ptr = to_userdata(_lua, 1);
 		_ptr->~Shader_Data();
 		return 0;
 	};
 
 
-
-
-
-
-
-
-	int luaopen_engine_shader(lua_State* _lua)
+	lib_shader::ltype_Shader::pointer lib_shader::ltype_Shader::to_userdata(lua_State* _lua, int _arg)
 	{
-		lua::lua_newclass(_lua, "SAEEngine.Shader_Data");
-		luaL_setfuncs(_lua, shader_funcs, 0);
+		return lua::lua_toinstance<value_type>(_lua, _arg, tname());
+	};
+
+
+	int lib_shader::ltype_Shader::lua_open(lua_State* _lua)
+	{
+		lua::lua_newclass(_lua, tname());
+		luaL_setfuncs(_lua, funcs_m, 0);
+		lua_pop(_lua, 1);
+
+		lua_newtable(_lua);
+		luaL_setfuncs(_lua, funcs_f, 0);
+
 		return 1;
 	};
 
 
+}
 
+namespace sae::engine
+{
+
+	int lib_shader::lua_open(lua_State* _lua)
+	{
+		return ltype_Shader::lua_open(_lua);
+	};
 
 }

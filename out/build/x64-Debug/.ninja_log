@@ -296,3 +296,15 @@
 1324	1498	624411351	Examples/CustomExtension/SAEEngine_Example_Extension.exe	c59f98acc33e5b2a
 1325	1499	624411351	Examples/LuaAPI/SAEEngine_Example.exe	c5cb16289c5961cc
 1327	1505	624411351	Examples/ManipulateTexture/SAEEngine_Example_ManipulateTexture.exe	97df60d23a4bd238
+15	1230	624411886	SAEEngine/CMakeFiles/SAEEngine.dir/source/scene/engine_scene.cpp.obj	1e1798fb408f8cf3
+30	1256	624411886	SAEEngine/CMakeFiles/SAEEngine.dir/source/shader/engine_shader.cpp.obj	2fa0e9ac7c23d847
+21	1348	624411886	SAEEngine/CMakeFiles/SAEEngine.dir/source/SAEEngine.cpp.obj	692fc78dd9277b3c
+28	1381	624411933	SAEEngine/CMakeFiles/SAEEngine.dir/source/shader/engine_shader.cpp.obj	2fa0e9ac7c23d847
+22	1435	624411933	SAEEngine/CMakeFiles/SAEEngine.dir/source/scene/engine_scene.cpp.obj	1e1798fb408f8cf3
+20	1516	624411934	SAEEngine/CMakeFiles/SAEEngine.dir/source/SAEEngine.cpp.obj	692fc78dd9277b3c
+15	1596	624411934	SAEEngine/CMakeFiles/SAEEngine.dir/source/window/engine_window.cpp.obj	d3b7b8d6a85661ae
+13	1211	624411944	SAEEngine/CMakeFiles/SAEEngine.dir/source/gfx/engine_gfx.cpp.obj	ce0b708abad74553
+1211	1267	624411944	SAEEngine/SAEEngine.lib	1e3f4310d343ea10
+1267	1730	624411945	Examples/CustomExtension/SAEEngine_Example_Extension.exe	c59f98acc33e5b2a
+1271	1731	624411945	Examples/LuaAPI/SAEEngine_Example.exe	c5cb16289c5961cc
+1274	1731	624411945	Examples/ManipulateTexture/SAEEngine_Example_ManipulateTexture.exe	97df60d23a4bd238

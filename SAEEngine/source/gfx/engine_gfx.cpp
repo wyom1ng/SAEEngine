@@ -339,7 +339,7 @@ namespace sae::engine
 	// gfx.rectangle.new(Shader_Data) -> rectangle
 	int gfx_rectangle_new(lua_State* _lua)
 	{
-		auto _shader = lua_toshader(_lua, -1, 1);
+		auto _shader = lib_shader::to_shader(_lua, 1);
 		auto _ptr = lua::lua_newinstance<Widget_Rectangle>(_lua, "SAEEngine.Rectangle", _shader);
 		return 1;
 	};
