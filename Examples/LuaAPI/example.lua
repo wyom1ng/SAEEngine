@@ -31,16 +31,15 @@ end
 local function test_button_callback(_widget, _mbutton, _action, _mods)
 	if(_mbutton == 0) then
 		_widget:set_color({ r = 0, g = 255, b = 0, a = 255 })
-		return
+		_widget:update()
 	elseif(_mbutton == 1) then
 		_widget:set_color({ r = 255, g = 0, b = 0, a = 255 })
-		return
+		_widget:update()
 	end
 end
 
-local testButton_ = engine.ui.button.new(w0_, test_button_callback, 
-
-
+local testButton_ = engine.ui.button.new(w0_, test_button_callback)
+sptr_:push(testButton_)
 
 engine.window.set_callback("key", key_callback)
 

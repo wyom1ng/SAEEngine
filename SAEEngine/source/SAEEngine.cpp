@@ -75,6 +75,38 @@ namespace sae::engine
 	};
 #endif
 
+
+	void stackDump(lua_State* L, std::ostream& _ostr)
+	{
+		int i;
+		int top = lua_gettop(L);
+		for (i = 1; i <= top; i++)
+		{
+			int t = lua_type(L, i);
+			switch (t)
+			{
+
+			case LUA_TSTRING:
+				_ostr << lua_tostring(L, i);
+				break;
+			case LUA_TBOOLEAN:
+				_ostr << std::boolalpha << lua_toboolean(L, i) << std::noboolalpha;
+				break;
+			case LUA_TNUMBER:
+				_ostr << lua_tonumber(L, i);
+				break;
+			default:
+				_ostr << lua_typename(L, t);
+				break;
+			};
+			_ostr << "  ";
+		};
+
+		_ostr << std::endl;
+
+	};
+
+
 };
 
 namespace sae::engine
@@ -249,7 +281,7 @@ namespace sae::engine
 		luaopen_engine_os(_lua);
 		lua_setfield(_lua, t, "os");
 
-		luaopen_engine_scene(_lua);
+		assert(lib_scene::lua_open(_lua) == 1);
 		lua_setfield(_lua, t, "scene");
 
 		assert(lib_gfx::lua_open(_lua) == 1);

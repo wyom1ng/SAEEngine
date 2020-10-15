@@ -7,6 +7,8 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
+#include <iostream>
+
 namespace sae::engine
 {
 	struct GFXObject
@@ -14,7 +16,7 @@ namespace sae::engine
 		virtual bool good() const = 0;
 		virtual void update() = 0;
 		virtual void destroy() = 0;
-		virtual ~GFXObject() = default;
+		virtual ~GFXObject() { std::cout << "~GFXObject()"; };
 	};
 
 	struct color_rgba
@@ -50,6 +52,8 @@ namespace sae::engine
 
 		void set_size(size2D _s) noexcept;
 		size2D get_size() const noexcept;
+
+		bool intersects(int16_t _x, int16_t _y) const noexcept;
 
 		virtual bool good() const = 0;
 		virtual void update() = 0;

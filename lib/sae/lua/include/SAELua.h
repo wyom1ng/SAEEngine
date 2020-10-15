@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../../SAELib_Either.h"
+
 #include <lua.hpp>
 
 #include <new>

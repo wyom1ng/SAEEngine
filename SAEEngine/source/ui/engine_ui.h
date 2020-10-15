@@ -19,25 +19,26 @@ namespace sae::engine
 	struct UIButton
 	{
 		int invoke(lua_State* _lua, int _nargs) noexcept(noexcept(lua_safecall(nullptr, 0, 0, 0)));
-
 		int widget_ref_;
 		int callback_ref_;
 		bool is_enabled_;
+		WidgetObject* ptr_ = nullptr;
 	};
 
 
-
-
-	class UIManager
+	struct UIHandler
 	{
 	public:
+		void push_back(UIButton* _b);
+		void erase(UIButton* _b);
+		void clear() noexcept;
 
-
-
+		UIButton* find_best_match(int16_t _cursorX, int16_t _cursorY) const;
 
 	private:
-
+		std::vector<UIButton*> elements_{};
 	};
+
 
 
 
@@ -45,6 +46,8 @@ namespace sae::engine
 
 	struct lib_ui
 	{
+	public:
+
 		struct ltype_button
 		{
 		private:
@@ -97,6 +100,27 @@ namespace sae::engine
 			static int lua_open(lua_State* _lua);
 
 		};
+
+		struct ltype_UIHandler
+		{
+		private:
+
+			static inline int new_f(lua_State* _lua)
+			{
+
+			};
+
+
+
+			constexpr static inline auto TYPENAME = "SAEEngine.UIHandler";
+
+		public:
+
+			constexpr static inline const char* tname() noexcept { return TYPENAME; };
+
+
+		};
+
 
 	private:
 

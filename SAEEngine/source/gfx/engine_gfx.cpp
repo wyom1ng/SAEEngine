@@ -158,6 +158,11 @@ namespace sae::engine
 
 
 
+	bool WidgetObject::intersects(int16_t _x, int16_t _y) const noexcept
+	{
+		return	((this->position_.x <= _x) && (_x < (this->position_.x + this->size_.width)) &&
+				 (this->position_.y <= _y) && (_y < (this->position_.y + this->size_.height)));
+	};
 
 
 
