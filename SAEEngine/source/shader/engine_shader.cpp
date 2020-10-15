@@ -26,7 +26,7 @@ namespace sae::engine
 			_err.result = _result;
 			_err.info_log.resize(_ilogLen + 1);
 			glGetShaderInfoLog(_id, _ilogLen, NULL, _err.info_log.data());
-			return { sae::badresult, _err };
+			return { sae::other, _err };
 		}
 		else
 		{
@@ -40,7 +40,7 @@ namespace sae::engine
 		auto _out = check_shader(_id, std::nothrow);
 		if (!_out)
 		{
-			throw std::runtime_error(_out.alternative().info_log);
+			throw std::runtime_error(_out.other().info_log);
 		};
 		return _out;
 	};
@@ -65,7 +65,7 @@ namespace sae::engine
 			_err.result = _result;
 			_err.info_log.resize(_ilogLen + 1);
 			glGetProgramInfoLog(_id, _ilogLen, NULL, _err.info_log.data());
-			return { sae::badresult, _err };
+			return { sae::other, _err };
 		}
 		else
 		{
@@ -79,7 +79,7 @@ namespace sae::engine
 		auto _out = check_program(_id, std::nothrow);
 		if (!_out)
 		{
-			throw std::runtime_error(_out.alternative().info_log);
+			throw std::runtime_error(_out.other().info_log);
 		};
 		return _out;
 	};
@@ -113,7 +113,7 @@ namespace sae::engine
 		auto _res = check_program(_programID);
 		if (!_res)
 		{
-			return { sae::badresult, std::move(_res.alternative()) };
+			return { sae::other, std::move(_res.other()) };
 		};
 
 		// Detach shaders

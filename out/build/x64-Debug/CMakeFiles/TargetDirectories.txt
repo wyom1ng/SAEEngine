@@ -155,3 +155,11 @@ C:/Users/jonat/source/repos/SAEEngine/out/build/x64-Debug/Examples/ManipulateTex
 C:/Users/jonat/source/repos/SAEEngine/out/build/x64-Debug/Examples/ManipulateTexture/CMakeFiles/edit_cache.dir
 C:/Users/jonat/source/repos/SAEEngine/out/build/x64-Debug/Examples/ManipulateTexture/CMakeFiles/rebuild_cache.dir
 C:/Users/jonat/source/repos/SAEEngine/out/build/x64-Debug/Examples/ManipulateTexture/CMakeFiles/list_install_components.dir
+C:/Users/jonat/source/repos/SAEEngine/out/build/x64-Debug/Examples/UIExample/CMakeFiles/install/local.dir
+C:/Users/jonat/source/repos/SAEEngine/out/build/x64-Debug/Examples/UIExample/CMakeFiles/install.dir
+C:/Users/jonat/source/repos/SAEEngine/out/build/x64-Debug/Examples/UIExample/CMakeFiles/edit_cache.dir
+C:/Users/jonat/source/repos/SAEEngine/out/build/x64-Debug/Examples/UIExample/CMakeFiles/SAEEngine_Example_UIExample.dir
+C:/Users/jonat/source/repos/SAEEngine/out/build/x64-Debug/Examples/UIExample/CMakeFiles/package.dir
+C:/Users/jonat/source/repos/SAEEngine/out/build/x64-Debug/Examples/UIExample/CMakeFiles/package_source.dir
+C:/Users/jonat/source/repos/SAEEngine/out/build/x64-Debug/Examples/UIExample/CMakeFiles/rebuild_cache.dir
+C:/Users/jonat/source/repos/SAEEngine/out/build/x64-Debug/Examples/UIExample/CMakeFiles/list_install_components.dir

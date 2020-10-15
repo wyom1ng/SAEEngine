@@ -264,14 +264,14 @@ namespace sae::engine
 		assert(lib_texture::lua_open(_lua) == 1);
 		lua_setfield(_lua, t, "texture");
 
-
+		assert(lib_ui::lua_open(_lua) == 1);
+		lua_setfield(_lua, t, "ui");
 
 		lua_newtable(_lua);
 		lua_pushstring(_lua, EXTENSIONS_KEY);
 		lua_pushvalue(_lua, -2);
 		lua_settable(_lua, LUA_REGISTRYINDEX);
 		lua_setfield(_lua, t, "ext");
-
 
 		return 1;
 	};

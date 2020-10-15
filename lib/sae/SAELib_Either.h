@@ -6,8 +6,8 @@
 
 namespace sae
 {
-	struct badresult_t {};
-	constexpr static inline badresult_t badresult{};
+	struct other_t {};
+	constexpr static inline other_t other{};
 
 
 
@@ -30,8 +30,8 @@ namespace sae
 		LT& operator*() { return this->get(); };
 		const LT& operator*() const { return this->get(); };
 
-		RT& alternative() { return std::get<1>(this->vt_); };
-		const RT& alternative() const { return std::get<1>(this->vt_); };
+		RT& other() { return std::get<1>(this->vt_); };
+		const RT& other() const { return std::get<1>(this->vt_); };
 
 
 
@@ -42,10 +42,10 @@ namespace sae
 			vt_{ std::in_place_index<0>, std::move(_lt) }
 		{};
 		
-		either(badresult_t, const RT& _rt) requires std::is_copy_constructible<RT>::value :
+		either(other_t, const RT& _rt) requires std::is_copy_constructible<RT>::value :
 			vt_{ std::in_place_index<1>, _rt }
 		{};
-		either(badresult_t, RT&& _rt) requires std::is_move_constructible<RT>::value :
+		either(other_t, RT&& _rt) requires std::is_move_constructible<RT>::value :
 			vt_{ std::in_place_index<1>, std::move(_rt) }
 		{};
 

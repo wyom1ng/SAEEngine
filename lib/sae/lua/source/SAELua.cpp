@@ -1,6 +1,5 @@
 #include "SAELua.h"
 
-#include <new>
 #include <cassert>
 
 namespace sae::lua
@@ -128,5 +127,13 @@ namespace sae::lua
 	};
 	
 
+
+}
+
+
+namespace sae::lua
+{
+
+	
 
 }

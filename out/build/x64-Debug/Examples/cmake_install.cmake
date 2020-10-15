@@ -37,6 +37,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("C:/Users/jonat/source/repos/SAEEngine/out/build/x64-Debug/Examples/CustomExtension/cmake_install.cmake")
   include("C:/Users/jonat/source/repos/SAEEngine/out/build/x64-Debug/Examples/LuaAPI/cmake_install.cmake")
   include("C:/Users/jonat/source/repos/SAEEngine/out/build/x64-Debug/Examples/ManipulateTexture/cmake_install.cmake")
+  include("C:/Users/jonat/source/repos/SAEEngine/out/build/x64-Debug/Examples/UIExample/cmake_install.cmake")
 
 endif()
 

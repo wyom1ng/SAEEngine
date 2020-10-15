@@ -96,7 +96,7 @@ int main()
 
 	try
 	{
-		_engine.run_script("C:\\Users\\jonat\\Source\\Repos\\SAEEngine\\SAEEngine\\Examples\\CustomExtension\\usingExtensions.lua");
+		_engine.run_script("C:\\Users\\jonat\\Source\\Repos\\SAEEngine\\Examples\\CustomExtension\\usingExtensions.lua");
 	}
 	catch (const std::runtime_error& _e)
 	{

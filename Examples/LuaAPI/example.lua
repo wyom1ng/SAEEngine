@@ -27,6 +27,21 @@ local function key_callback(_key, _scancode, _action, _mods)
 	end
 end
 
+
+local function test_button_callback(_widget, _mbutton, _action, _mods)
+	if(_mbutton == 0) then
+		_widget:set_color({ r = 0, g = 255, b = 0, a = 255 })
+		return
+	elseif(_mbutton == 1) then
+		_widget:set_color({ r = 255, g = 0, b = 0, a = 255 })
+		return
+	end
+end
+
+local testButton_ = engine.ui.button.new(w0_, test_button_callback, 
+
+
+
 engine.window.set_callback("key", key_callback)
 
 engine.io.print("Scene stack size = ")
