@@ -13,7 +13,8 @@ int main()
 
 	try
 	{
-		_engine.run_script("C:\\Users\\jonat\\Source\\Repos\\SAEEngine\\Examples\\ManipulateTexture\\manip.lua");
+		auto root = std::filesystem::path(PROJECT_ROOT);
+		_engine.run_script(root / "Examples/ManipulateTexture/manip.lua");
 	}
 	catch (std::runtime_error _e)
 	{
