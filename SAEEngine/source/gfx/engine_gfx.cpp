@@ -124,8 +124,6 @@ namespace sae::engine
 
 }
 
-
-
 namespace sae::engine
 {
 
@@ -158,6 +156,11 @@ namespace sae::engine
 
 
 
+	bool WidgetObject::intersects(int16_t _x, int16_t _y) const noexcept
+	{
+		return	((this->position_.x <= _x) && (_x < (this->position_.x + this->size_.width)) &&
+				 (this->position_.y <= _y) && (_y < (this->position_.y + this->size_.height)));
+	};
 
 
 
@@ -352,6 +355,8 @@ namespace sae::engine
 	int lib_gfx::ltype_GFXObject::destructor(lua_State* _lua)
 	{
 		auto _ptr = to_userdata(_lua, 1);
+		for (auto& d : _ptr->get_decorators())
+			luaL_unref(_lua, LUA_REGISTRYINDEX, d);
 		_ptr->~GFXObject();
 		return 0;
 	};

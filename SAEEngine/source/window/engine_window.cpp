@@ -183,6 +183,34 @@ namespace sae::engine
 		auto _wData = (window_data*)glfwGetWindowUserPointer(_window);
 		assert(_wData);
 
+		auto _scene = _wData->active_scene();
+		if (_scene)
+		{
+			double _x = 0.0;
+			double _y = 0.0;
+			glfwGetCursorPos(_wData->window_, &_x, &_y);
+
+			int _w = 0;
+			int _h = 0;
+			glfwGetFramebufferSize(_wData->window_, &_w, &_h);
+
+			_y *= -1;
+			_y += _h;
+
+			auto _buttonPtr = _scene->get_ui_handler()->find_best_match((int16_t)_x, (int16_t)_y);
+			if (_buttonPtr)
+			{
+				auto _lua = _wData->lua_;
+
+				lua_pushinteger(_lua, _button);
+				lua_pushinteger(_lua, _action);
+				lua_pushinteger(_lua, _mods);
+
+				_buttonPtr->invoke(_wData->lua_, 3);
+			};
+
+		};
+
 		auto _ref = _wData->get_lua_callback("mouse");
 		if (_ref)
 		{
@@ -360,7 +388,7 @@ namespace sae::engine
 		{
 			lua_rawgeti(_lua, -1, n);
 			auto t = lua_gettop(_lua);
-			_out = lua_toscenedata(_lua, t, 1);
+			_out = lib_scene::to_scene(_lua, t);
 			lua_pop(_lua, 1);
 		};
 
@@ -538,7 +566,7 @@ namespace sae::engine
 	// window.push_scene(Scene_Data)
 	int window_push_scene(lua_State* _lua)
 	{
-		auto _scene = lua_toscenedata(_lua, 1, 1);
+		auto _scene = lib_scene::to_scene(_lua, 1);
 		auto _beginTop = lua_gettop(_lua);
 		
 		lua_getglobal(_lua, "SAEEngine");
@@ -553,7 +581,7 @@ namespace sae::engine
 		if (n > 0)
 		{
 			lua_geti(_lua, -1, n);
-			auto _oldScene = lua_toscenedata(_lua, -1, 1);
+			auto _oldScene = lib_scene::to_scene(_lua, -1);
 			_oldScene->deactivate();
 			lua_pop(_lua, 1);
 		};
@@ -599,7 +627,7 @@ namespace sae::engine
 			if (n >= 1)
 			{
 				lua_geti(_lua, -1, n);
-				auto _scene = lua_toscenedata(_lua, -1, 1);
+				auto _scene = lib_scene::to_scene(_lua, -1);
 				_scene->activate();
 				lua_pop(_lua, 1);
 			};

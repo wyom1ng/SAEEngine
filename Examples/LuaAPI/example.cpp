@@ -29,8 +29,13 @@ int main()
 		std::cout << e.what() << '\n';
 	};
 
+	int _stackSize = 0;
+
 	while (_engine.good())
 	{
+		assert(_stackSize == lua_gettop(_lua));
+		_stackSize = lua_gettop(_lua);
+
 		try
 		{
 			_engine.update();

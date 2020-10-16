@@ -20,6 +20,16 @@ namespace sae::engine
 	{
 		this->widgets_.push_back(_obj);
 	};
+
+	UIHandler* Scene_Data::get_ui_handler()
+	{
+		return &this->ui_;
+	};
+	const UIHandler* Scene_Data::get_ui_handler() const
+	{
+		return &this->ui_;
+	};
+
 	void Scene_Data::erase(WidgetObject* _obj)
 	{
 		this->widgets_.erase(std::find(this->widgets_.begin(), this->widgets_.end(), _obj));
@@ -48,65 +58,77 @@ namespace sae::engine
 			w->update();
 	};
 
-	Scene_Data* lua_toscenedata(lua_State* _lua, int _idx, int _arg)
-	{		
-		return lua::lua_toinstance<Scene_Data>(_lua, _idx, "SAEEngine.scene");
-	};
+}
 
-	int scene_new(lua_State* _lua)
+namespace sae::engine
+{
+	int lib_scene::ltype_scene::new_f(lua_State* _lua)
 	{
-		auto _ptr = lua::lua_newinstance<Scene_Data>(_lua, "SAEEngine.scene");
+		auto _ptr = lua::lua_newinstance<value_type>(_lua, tname());
 		return 1;
 	};
 
-	int scene_push(lua_State* _lua)
+	int lib_scene::ltype_scene::push(lua_State* _lua)
 	{
-		auto _ptr = lua_toscenedata(_lua, 1, 1);
-		if (lua::lua_isbaseof(_lua, 2, "SAEEngine.WidgetObject"))
+		auto _ptr = to_userdata(_lua, 1);
+
+		if (lua::lua_isbaseof(_lua, 2, lib_gfx::ltype_WidgetObject::tname()))
 		{
-			_ptr->push_back(lua::lua_toinstance<WidgetObject>(_lua, 2, "SAEEngine.WidgetObject"));
+			auto _obj = lib_gfx::to_widgetobject(_lua, 2);
+			lua_pushvalue(_lua, 2);
+			auto _self = luaL_ref(_lua, LUA_REGISTRYINDEX);
+			_obj->set_self(_self);
+			_ptr->push_back(_obj);
+		}
+		else if (lua::lua_isbaseof(_lua, 2, lib_ui::ltype_button::tname()))
+		{
+			_ptr->get_ui_handler()->push_back(lib_ui::to_button(_lua, 2));
 		}
 		else if (lua::lua_isbaseof(_lua, 2, "SAEEngine.WorldObject"))
 		{
 			abort();
+		}
+		else
+		{
+			return lua_error(_lua);
 		};
+
 		return 0;
 	};
 
-
-
-
-
-	int scene_destructor(lua_State* _lua)
+	int lib_scene::ltype_scene::destructor(lua_State* _lua)
 	{
-		auto _ptr = lua_toscenedata(_lua, -1, 1);
-		_ptr->~Scene_Data();
+		auto _ptr = to_userdata(_lua, 1);
+		for (auto& w : _ptr->get_widgets())
+			luaL_unref(_lua, LUA_REGISTRYINDEX, w->lua_self());
+
+		std::destroy_at(_ptr);
 		return 0;
 	};
 
-
-
-	const luaL_Reg scene_lib[] =
+	lib_scene::ltype_scene::pointer lib_scene::ltype_scene::to_userdata(lua_State* _lua, int _idx)
 	{
-		luaL_Reg{ "new", &scene_new },
-		luaL_Reg{ "push", &scene_push },
-		luaL_Reg{ "__gc", &scene_destructor },
-		luaL_Reg{ NULL, NULL }
+		return lua::lua_toinstance<value_type>(_lua, _idx, tname());
 	};
 
-	int luaopen_engine_scene(lua_State* _lua)
+	int lib_scene::ltype_scene::lua_open(lua_State* _lua)
 	{
-		lua::lua_newclass(_lua, "SAEEngine.scene");
-		luaL_setfuncs(_lua, scene_lib, 0);
+		lua::lua_newclass(_lua, tname());
+		luaL_setfuncs(_lua, funcs_m, 0);
+		lua_pop(_lua, 1);
 
+		lua_newtable(_lua);
+		luaL_setfuncs(_lua, funcs_f, 0);
 		return 1;
 	};
 
 
 
 
-
-
-
+	int lib_scene::lua_open(lua_State* _lua)
+	{
+		ltype_scene::lua_open(_lua);
+		return 1;
+	};
 
 }

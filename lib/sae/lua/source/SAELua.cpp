@@ -1,6 +1,5 @@
 #include "SAELua.h"
 
-#include <new>
 #include <cassert>
 
 namespace sae::lua
@@ -127,6 +126,26 @@ namespace sae::lua
 		return n;
 	};
 	
+	void lua_append(lua_State* _lua, int _idx)
+	{
+		assert(lua_istable(_lua, _idx));
+		auto _len = lua_getlen(_lua, _idx);
+		lua_seti(_lua, _idx, _len + 1);
+	};
+	
+	void lua_append_copy(lua_State* _lua, int _tableIdx, int _valueIdx)
+	{
+		lua_pushvalue(_lua, _valueIdx);
+		lua_append(_lua, _tableIdx);
+	};
 
+
+}
+
+
+namespace sae::lua
+{
+
+	
 
 }

@@ -7,14 +7,35 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
+#include <iostream>
+#include <unordered_set>
+
 namespace sae::engine
 {
+
 	struct GFXObject
 	{
+	public:
+		
+		std::vector<int>& get_decorators() noexcept { return this->decorators_; };
+		const std::vector<int>& get_decorators() const noexcept { return this->decorators_; };
+
+		int lua_self() const noexcept { return this->self_; };
+		void set_self(int _self) noexcept { this->self_ = _self; };
+
 		virtual bool good() const = 0;
 		virtual void update() = 0;
 		virtual void destroy() = 0;
-		virtual ~GFXObject() = default;
+		virtual ~GFXObject() 
+		{
+#ifdef SAE_ENGINE_DESTRUCTOR_DEBUG
+			std::cout << "~GFXObject()"; 
+#endif
+		};
+
+	private:
+		int self_ = 0;
+		std::vector<int> decorators_{};
 	};
 
 	struct color_rgba
@@ -50,6 +71,8 @@ namespace sae::engine
 
 		void set_size(size2D _s) noexcept;
 		size2D get_size() const noexcept;
+
+		bool intersects(int16_t _x, int16_t _y) const noexcept;
 
 		virtual bool good() const = 0;
 		virtual void update() = 0;

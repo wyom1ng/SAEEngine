@@ -66,6 +66,8 @@ namespace sae::engine
 	*/
 	int lua_safecall(lua_State* _lua, int _args, int _rets, int _f);
 
+	void stackDump(lua_State* L, std::ostream& _ostr);
+
 
 	struct Window;
 	struct Lua

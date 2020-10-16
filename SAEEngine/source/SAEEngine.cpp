@@ -48,25 +48,48 @@ namespace sae::engine
 namespace sae::engine
 {
 
+	namespace
+	{
+		int handle_lua_call_error(lua_State* _lua, int _err)
+		{
+#ifdef SAE_ENGINE_HARD_ERRORS
+			if (_err != LUA_OK)
+				stackDump(_lua, std::cout);
+
+			assert(_err == LUA_OK);
+#elif defined(SAE_ENGINE_USE_EXCEPTIONS)
+			switch (_err)
+			{
+			case LUA_OK:
+				return _err;
+			case LUA_ERRRUN:
+				throw std::runtime_error{ std::string{lua_tostring(_lua, -1)} };
+			default:
+				throw std::runtime_error{ "lua_pcall() error" };
+			};
+#endif
+			return _err;
+		};
+		int handle_lua_call_error(lua_State* _lua, int _err, std::nothrow_t) noexcept
+		{
+#ifdef SAE_ENGINE_HARD_ERRORS
+			assert(_err == LUA_OK);
+#endif
+			return _err;
+		};
+	};
+
 	int lua_safecall(lua_State* _lua, int _args, int _rets, int _f, std::nothrow_t) noexcept
 	{
-		return lua_pcall(_lua, _args, _rets, _f);
+		auto _err = lua_pcall(_lua, _args, _rets, _f);
+		return handle_lua_call_error(_lua, _err);
 	};
 
 #ifdef SAE_ENGINE_USE_EXCEPTIONS
 	int lua_safecall(lua_State* _lua, int _args, int _rets, int _f)
 	{
 		auto _err = lua_pcall(_lua, _args, _rets, _f);
-		switch (_err)
-		{
-		case LUA_OK:
-			break;
-		case LUA_ERRRUN:
-			throw std::runtime_error{ std::string{lua_tostring(_lua, -1)} };
-		default:
-			throw std::runtime_error{ "lua_pcall() error" };
-		};
-		return _err;
+		return handle_lua_call_error(_lua, _err);
 	};
 #else
 	int lua_safecall(lua_State* _lua, int _args, int _rets, int _f) noexcept
@@ -74,6 +97,38 @@ namespace sae::engine
 		return lua_safecall(_lua, _args, _rets, _f, std::nothrow);
 	};
 #endif
+
+
+	void stackDump(lua_State* L, std::ostream& _ostr)
+	{
+		int i;
+		int top = lua_gettop(L);
+		for (i = 1; i <= top; i++)
+		{
+			int t = lua_type(L, i);
+			switch (t)
+			{
+
+			case LUA_TSTRING:
+				_ostr << lua_tostring(L, i);
+				break;
+			case LUA_TBOOLEAN:
+				_ostr << std::boolalpha << lua_toboolean(L, i) << std::noboolalpha;
+				break;
+			case LUA_TNUMBER:
+				_ostr << lua_tonumber(L, i);
+				break;
+			default:
+				_ostr << lua_typename(L, t);
+				break;
+			};
+			_ostr << "  ";
+		};
+
+		_ostr << std::endl;
+
+	};
+
 
 };
 
@@ -150,7 +205,7 @@ namespace sae::engine
 
 		auto _ptr = lua_getwindow(_lua);
 		_ptr->update();
-
+		
 		auto _endTop = lua_gettop(_lua);
 		assert(_beginTop == _endTop);
 	};
@@ -249,7 +304,7 @@ namespace sae::engine
 		luaopen_engine_os(_lua);
 		lua_setfield(_lua, t, "os");
 
-		luaopen_engine_scene(_lua);
+		assert(lib_scene::lua_open(_lua) == 1);
 		lua_setfield(_lua, t, "scene");
 
 		assert(lib_gfx::lua_open(_lua) == 1);
@@ -264,14 +319,14 @@ namespace sae::engine
 		assert(lib_texture::lua_open(_lua) == 1);
 		lua_setfield(_lua, t, "texture");
 
-
+		assert(lib_ui::lua_open(_lua) == 1);
+		lua_setfield(_lua, t, "ui");
 
 		lua_newtable(_lua);
 		lua_pushstring(_lua, EXTENSIONS_KEY);
 		lua_pushvalue(_lua, -2);
 		lua_settable(_lua, LUA_REGISTRYINDEX);
 		lua_setfield(_lua, t, "ext");
-
 
 		return 1;
 	};

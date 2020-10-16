@@ -40,6 +40,7 @@ namespace sae::engine
 
 	int dofile(lua_State* _lua, const std::filesystem::path& _path, std::nothrow_t) noexcept
 	{
+		lua_gc(_lua, LUA_GCCOLLECT);
 		auto _err = luaL_loadfile(_lua, _path.string().c_str());
 		if (_err != LUA_OK)
 		{
@@ -52,6 +53,8 @@ namespace sae::engine
 #ifdef SAE_ENGINE_USE_EXCEPTIONS
 	int dofile(lua_State* _lua, const std::filesystem::path& _path)
 	{
+		auto _beginTop = lua_gettop(_lua);
+		lua_gc(_lua, LUA_GCCOLLECT);
 		auto _err = luaL_loadfile(_lua, _path.string().c_str());
 		if (_err != LUA_OK)
 		{
@@ -59,7 +62,12 @@ namespace sae::engine
 			return _err;
 		};
 		set_current_path(_lua, _path);
-		return lua_safecall(_lua, 0, LUA_MULTRET, 0);
+		auto _res = lua_safecall(_lua, 0, LUA_MULTRET, 0);
+
+		auto _endTop = lua_gettop(_lua);
+		assert(_beginTop == _endTop);
+
+		return _res;
 	};
 #else
 	int dofile(lua_State* _lua, const std::filesystem::path& _path) noexcept
@@ -95,7 +103,7 @@ namespace sae::engine
 	int lib_fs::ltype_Path::destructor(lua_State* _lua)
 	{
 		auto _ptr = to_userdata(_lua, 1);
-		_ptr->~Path_Data();
+		std::destroy_at(_ptr);
 		return 0;
 	};
 
