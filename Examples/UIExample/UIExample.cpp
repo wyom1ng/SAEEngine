@@ -18,7 +18,8 @@ int main()
 	
 	try
 	{
-		_engine.run_script("C:\\Users\\jonat\\Source\\Repos\\SAEEngine\\Examples\\UIExample\\engineStart.lua");
+		auto root = std::filesystem::path(PROJECT_ROOT);
+		_engine.run_script(root / "Examples/UIExample/engineStart.lua");
 	}
 	catch (const std::runtime_error& _e)
 	{

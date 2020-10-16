@@ -22,7 +22,8 @@ int main()
 	
 	try 
 	{
-		auto _err = _engine.run_script("C:\\Users\\jonat\\source\\repos\\SAEEngine\\Examples\\LuaAPI\\engineStart.lua");
+		auto root = std::filesystem::path(PROJECT_ROOT);
+		auto _err = _engine.run_script(root / "Examples/LuaAPI/engineStart.lua");
 	}
 	catch (const std::runtime_error& e)
 	{

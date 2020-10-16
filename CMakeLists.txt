@@ -14,6 +14,10 @@ endif()
 
 configure_file("SAEEngineConfig.h.in" "SAEEngineConfig.h")
 
+add_definitions(
+        -DPROJECT_ROOT="${CMAKE_CURRENT_LIST_DIR}"
+)
+
 add_subdirectory("lib")
 add_subdirectory("SAEEngine")
 add_subdirectory("Examples")
