@@ -130,6 +130,7 @@ namespace sae::engine
 	void WidgetObject::set_color(color_rgba _col) noexcept
 	{
 		this->color_ = _col;
+		this->update();
 	};
 	color_rgba WidgetObject::get_color() const noexcept
 	{
@@ -139,6 +140,7 @@ namespace sae::engine
 	void WidgetObject::set_position(position2D _pos) noexcept
 	{
 		this->position_ = _pos;
+		this->update();
 	};
 	position2D WidgetObject::get_position() const noexcept
 	{
@@ -148,6 +150,7 @@ namespace sae::engine
 	void WidgetObject::set_size(size2D _s) noexcept
 	{
 		this->size_ = _s;
+		this->update();
 	};
 	size2D WidgetObject::get_size() const noexcept
 	{
@@ -283,6 +286,152 @@ namespace sae::engine
 
 
 }
+
+namespace sae::engine
+{
+
+	bool Widget_Sprite::good() const
+	{
+		return this->vao_.good();
+	};
+	void Widget_Sprite::update()
+	{
+		auto _c = this->get_color();
+		for (auto p = this->cols_.data(); p < (this->cols_.data() + this->cols_.size()); p += 4)
+		{
+			*(p + 0) = _c.r;
+			*(p + 1) = _c.g;
+			*(p + 2) = _c.b;
+			*(p + 3) = _c.a;
+		};
+		this->cols_.update(0, this->cols_.size());
+
+		auto _pos = this->get_position();
+		auto _size = this->get_size();
+		auto p = this->pos_.data();
+
+		p[0] = _pos.x;
+		p[1] = _pos.y;
+		p[2] = _pos.z;
+
+		p[3] = _pos.x;
+		p[4] = _pos.y + _size.height;
+		p[5] = _pos.z;
+
+		p[6] = _pos.x + _size.width;
+		p[7] = _pos.y;
+		p[8] = _pos.z;
+
+		p[9] = _pos.x + _size.width;
+		p[10] = _pos.y + _size.height;
+		p[11] = _pos.z;
+
+		this->pos_.update(0, this->pos_.size());
+	};
+	void Widget_Sprite::draw(const glm::mat4& _projectionMat)
+	{
+		this->shader_->bind();
+		glBindTexture(GL_TEXTURE_2D, texture_id_);
+
+		this->vao_.bind();
+		glUniformMatrix4fv(this->projection_uniform_, 1, GL_FALSE, &_projectionMat[0][0]);
+		this->indices_.bind();
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, NULL);
+		this->vao_.unbind();
+
+	};
+	void Widget_Sprite::destroy()
+	{
+		glDeleteTextures(1, &this->texture_id_);
+	};
+
+	Widget_Sprite::Widget_Sprite(Shader_Data* _shader, Texture* _tex) : 
+		shader_{ _shader }, image_{ _tex }
+	{
+
+		assert((bool)_tex);
+
+#ifdef SAE_ENGINE_HARD_ERRORS
+		assert(this->shader_ != nullptr);
+#else
+#ifdef SAE_ENGINE_USE_EXCEPTIONS
+		throw std::runtime_error{ "no shader was set" };
+#else
+		this->vao_ = 0;
+		return;
+#endif
+#endif
+
+		assert(!glGetError());
+
+		
+
+		glGenTextures(1, &this->texture_id_);
+		glBindTexture(GL_TEXTURE_2D, this->texture_id_);
+
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this->image_->width(), this->image_->height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, this->image_->data());
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+
+
+		this->projection_uniform_ = glGetUniformLocation(this->shader_->id(), "ProjectionMatrix");
+		this->vao_.bind();
+
+		assert(this->vao_.good());
+		assert(this->pos_.good());
+		assert(this->cols_.good());
+		assert(this->indices_.good());
+
+		this->pos_attr_.enable();
+		this->pos_.bind();
+		this->pos_attr_.set();
+		this->pos_.realloc_buffer();
+		assert(!glGetError());
+
+		this->col_attr_.enable();
+		this->cols_.bind();
+		this->col_attr_.set();
+		this->cols_.realloc_buffer();
+		assert(!glGetError());
+
+		this->uv_attr_.enable();
+		this->uvs_.bind();
+		this->uv_attr_.set();
+		this->uvs_.realloc_buffer();
+		assert(!glGetError());
+
+		this->indices_.bind();
+		this->indices_.realloc_buffer();
+
+		auto _glError = glGetError();
+		if (_glError != GL_NO_ERROR)
+		{
+#ifdef SAE_ENGINE_HARD_ERRORS
+			abort();
+#ifdef SAE_ENGINE_USE_EXCEPTIONS
+			throw std::runtime_error{ "OpenGL error : " + std::to_string(_glError) };
+#else
+			this->vao_ = 0;
+#endif
+#endif
+		};
+
+		this->vao_.unbind();
+
+
+
+	};
+	Widget_Sprite::~Widget_Sprite()
+	{
+#ifdef SAE_ENGINE_DESTRUCTOR_DEBUG
+		std::cout << "~Widget_Sprite()\n";
+#endif
+	};
+
+}
+
 
 
 namespace sae::engine
@@ -502,7 +651,36 @@ namespace sae::engine
 		lua_pop(_lua, 1);
 		return 0;
 	};
+	
 
+}
+
+namespace sae::engine
+{
+
+	int lib_gfx::ltype_Sprite::new_f(lua_State* _lua)
+	{
+		auto _shader = lib_shader::to_shader(_lua, 1);
+		auto _texture = lib_texture::to_texture(_lua, 2);
+		auto _ptr = lua::lua_newinstance<value_type>(_lua, tname(), _shader, _texture);
+		return 1;
+	};
+
+	lib_gfx::ltype_Sprite::pointer lib_gfx::ltype_Sprite::to_userdata(lua_State* _lua, int _idx)
+	{
+		return lua::lua_toinstance<value_type>(_lua, _idx, tname());
+	};
+
+	int lib_gfx::ltype_Sprite::lua_open(lua_State* _lua)
+	{
+		lua::lua_newclass(_lua, tname());
+		lua::lua_inherit(_lua, ltype_WidgetObject::tname(), -1);
+		lua_pop(_lua, 1);
+
+		lua_newtable(_lua);
+		luaL_setfuncs(_lua, funcs_f, 0);
+		return 1;
+	};
 
 }
 
@@ -516,6 +694,9 @@ namespace sae::engine
 
 		assert(ltype_GFXObject::lua_open(_lua) == 0);
 		assert(ltype_WidgetObject::lua_open(_lua) == 0);
+		
+		assert(ltype_Sprite::lua_open(_lua) == 1);
+		lua_setfield(_lua, -2, "sprite");
 
 		assert(luaopen_engine_gfx_rectangle(_lua) == 1);
 		lua_setfield(_lua, -2, "rectangle");

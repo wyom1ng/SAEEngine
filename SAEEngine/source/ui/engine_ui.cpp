@@ -8,7 +8,6 @@ namespace sae::engine
 	int UIButton::invoke(lua_State* _lua, int _nargs) noexcept(noexcept(lua_safecall(nullptr, 0, 0, 0)))
 	{
 		auto _beginTop = lua_gettop(_lua);
-
 		auto _findex = (lua_gettop(_lua) - _nargs) + 1;
 
 		lua_settop(_lua, lua_gettop(_lua) + 2);

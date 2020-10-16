@@ -173,7 +173,7 @@ namespace sae::engine
 
 		assert(lua_getglobal(this->lua(), "SAEEngine") == LUA_TTABLE);
 		lua_getfield(this->lua(), -1, "window");
-		auto _ptr = lua_towindow(this->lua(), -1, 1);
+		auto _ptr = lib_window::to_window(this->lua(), -1);
 		lua_pop(this->lua(), 2);
 
 		auto _endTop = lua_gettop(this->lua());
@@ -203,7 +203,7 @@ namespace sae::engine
 			lua_pop(_lua, 1);
 		};
 
-		auto _ptr = lua_getwindow(_lua);
+		auto _ptr = lib_window::to_window(_lua);
 		_ptr->update();
 		
 		auto _endTop = lua_gettop(_lua);
@@ -295,7 +295,7 @@ namespace sae::engine
 		lua_newtable(_lua);
 		auto t = lua_gettop(_lua);
 
-		luaopen_engine_window(_lua);
+		assert(lib_window::lua_open(_lua) == 1);
 		lua_setfield(_lua, t, "window");
 
 		assert(lib_io::lua_open(_lua) == 1);
