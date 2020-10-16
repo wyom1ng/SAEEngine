@@ -80,8 +80,24 @@ namespace sae::engine
 
 	struct velocity_t : public basic_unit 
 	{
-		duration_t dt{};
+		using basic_unit::basic_unit;
 	};
+
+	struct acceleration_t : public basic_unit
+	{
+		using basic_unit::basic_unit;
+	};
+
+	struct force_t : public basic_unit
+	{
+		using basic_unit::basic_unit;
+	};
+
+	struct mass_t
+	{
+		magnitude_t mag;
+	};
+
 
 
 	distance_t operator-(const position_t& lhs, const position_t& rhs) noexcept;
@@ -124,33 +140,97 @@ namespace sae::engine
 	velocity_t operator-(const velocity_t& rhs, const velocity_t& lhs) noexcept;
 	velocity_t& operator-=(velocity_t& rhs, const velocity_t& lhs) noexcept;
 
-
-
-
-
-
 	template <typename _Rep, typename _Period>
 	velocity_t operator/(const distance_t& lhs, std::chrono::duration<_Rep, _Period> rhs)
 	{
-		return velocity_t{ lhs.dir, lhs.mag, std::chrono::duration_cast<duration_t>(rhs) };
+		return velocity_t{ lhs.dir, lhs.mag / (magnitude_t)std::chrono::duration_cast<duration_t>(rhs).count() };
 	};
 
-	
-
-
-
-
-
-
-
-
-
-	class PhysicsObject
+	template <typename _Rep, typename _Period>
+	distance_t operator*(const velocity_t& lhs, std::chrono::duration<_Rep, _Period> rhs)
 	{
-
-
+		auto _adjustedMag = lhs.mag * (magnitude_t)std::chrono::duration_cast<duration_t>(rhs).count();
+		return distance_t{ lhs.dir, _adjustedMag };
 	};
 
+
+
+	acceleration_t operator+(const acceleration_t& rhs, const acceleration_t& lhs) noexcept;
+	acceleration_t& operator+=(acceleration_t& rhs, const acceleration_t& lhs) noexcept;
+
+	acceleration_t operator-(const acceleration_t& rhs, const acceleration_t& lhs) noexcept;
+	acceleration_t& operator-=(acceleration_t& rhs, const acceleration_t& lhs) noexcept;
+
+	template <typename _Rep, typename _Period>
+	acceleration_t operator/(const velocity_t& lhs, std::chrono::duration<_Rep, _Period> rhs)
+	{
+		return acceleration_t{ lhs.dir, lhs.mag / (magnitude_t)std::chrono::duration_cast<duration_t>(rhs).count() };
+	};
+
+	template <typename _Rep, typename _Period>
+	velocity_t operator*(const acceleration_t& lhs, std::chrono::duration<_Rep, _Period> rhs)
+	{
+		auto _adjustedMag = lhs.mag * (magnitude_t)std::chrono::duration_cast<duration_t>(rhs).count();
+		return acceleration_t{ lhs.dir, _adjustedMag };
+	};
+
+
+
+	force_t operator+(const force_t& rhs, const force_t& lhs) noexcept;
+	force_t& operator+=(force_t& rhs, const force_t& lhs) noexcept;
+
+	force_t operator-(const force_t& rhs, const force_t& lhs) noexcept;
+	force_t& operator-=(force_t& rhs, const force_t& lhs) noexcept;
+
+
+	force_t operator*(const acceleration_t& lhs, const mass_t& rhs);
+	force_t operator*(const mass_t& lhs, const acceleration_t& rhs);
+
+	acceleration_t operator/(const force_t& lhs, const mass_t& rhs);
+	mass_t operator/(const force_t& lhs, const acceleration_t& rhs);
+
+
+
+
+
+
+	mass_t operator+(const mass_t& rhs, const mass_t& lhs) noexcept;
+	mass_t& operator+=(mass_t& rhs, const mass_t& lhs) noexcept;
+
+	mass_t operator-(const mass_t& rhs, const mass_t& lhs) noexcept;
+	mass_t& operator-=(mass_t& rhs, const mass_t& lhs) noexcept;
+
+
+
+
+
+
+	struct PhysicsObject
+	{
+		position_t pos_;
+		velocity_t vel_;
+		mass_t mass_;
+	};
+
+	template <typename _Rep, typename _Period>
+	PhysicsObject& apply(PhysicsObject& lhs, const acceleration_t& rhs, std::chrono::duration<_Rep, _Period> dt)
+	{
+		lhs.vel_ += (rhs * dt);
+		return lhs;
+	};
+
+	template <typename _Rep, typename _Period>
+	PhysicsObject& apply(PhysicsObject& lhs, const force_t& rhs, std::chrono::duration<_Rep, _Period> dt)
+	{
+		return apply(lhs, rhs / lhs.mass_, dt);
+	};
+
+	template <typename _Rep, typename _Period>
+	PhysicsObject& update(PhysicsObject& lhs, std::chrono::duration<_Rep, _Period> dt)
+	{
+		lhs.pos_ += (lhs.vel_ * dt);
+		return lhs;
+	};
 
 
 

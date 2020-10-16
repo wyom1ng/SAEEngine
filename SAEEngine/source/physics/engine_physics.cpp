@@ -75,9 +75,127 @@ namespace sae::engine
 
 
 
+	velocity_t operator+(const velocity_t& rhs, const velocity_t& lhs) noexcept
+	{
+		auto _vec = rhs.as_vec() + lhs.as_vec();
+		return velocity_t{ glm::normalize(_vec), glm::distance(_vec, {}) };
+	};
+	velocity_t& operator+=(velocity_t& rhs, const velocity_t& lhs) noexcept
+	{
+		auto _vec = rhs.as_vec() + lhs.as_vec();
+		rhs.dir = glm::normalize(_vec);
+		rhs.mag = glm::distance(_vec, {});
+		return rhs;
+	};
+
+	velocity_t operator-(const velocity_t& rhs, const velocity_t& lhs) noexcept
+	{
+		auto _vec = rhs.as_vec() - lhs.as_vec();
+		return velocity_t{ glm::normalize(_vec), glm::distance(_vec, {}) };
+	};
+	velocity_t& operator-=(velocity_t& rhs, const velocity_t& lhs) noexcept
+	{
+		auto _vec = rhs.as_vec() - lhs.as_vec();
+		rhs.dir = glm::normalize(_vec);
+		rhs.mag = glm::distance(_vec, {});
+		return rhs;
+	};
+
+
+	acceleration_t operator+(const acceleration_t& rhs, const acceleration_t& lhs) noexcept
+	{
+		auto _vec = rhs.as_vec() + lhs.as_vec();
+		return acceleration_t{ glm::normalize(_vec), glm::distance(_vec, {}) };
+	};
+	acceleration_t& operator+=(acceleration_t& rhs, const acceleration_t& lhs) noexcept
+	{
+		auto _vec = rhs.as_vec() + lhs.as_vec();
+		rhs.dir = glm::normalize(_vec);
+		rhs.mag = glm::distance(_vec, {});
+		return rhs;
+	};
+
+	acceleration_t operator-(const acceleration_t& rhs, const acceleration_t& lhs) noexcept
+	{
+		auto _vec = rhs.as_vec() - lhs.as_vec();
+		return acceleration_t{ glm::normalize(_vec), glm::distance(_vec, {}) };
+	};
+	acceleration_t& operator-=(acceleration_t& rhs, const acceleration_t& lhs) noexcept
+	{
+		auto _vec = rhs.as_vec() - lhs.as_vec();
+		rhs.dir = glm::normalize(_vec);
+		rhs.mag = glm::distance(_vec, {});
+		return rhs;
+	};
 
 
 
 
+
+
+	force_t operator+(const force_t& rhs, const force_t& lhs) noexcept
+	{
+		auto _vec = rhs.as_vec() + lhs.as_vec();
+		return force_t{ glm::normalize(_vec), glm::distance(_vec, {}) };
+	};
+	force_t& operator+=(force_t& rhs, const force_t& lhs) noexcept
+	{
+		auto _vec = rhs.as_vec() + lhs.as_vec();
+		rhs.dir = glm::normalize(_vec);
+		rhs.mag = glm::distance(_vec, {});
+		return rhs;
+	};
+
+	force_t operator-(const force_t& rhs, const force_t& lhs) noexcept
+	{
+		auto _vec = rhs.as_vec() - lhs.as_vec();
+		return force_t{ glm::normalize(_vec), glm::distance(_vec, {}) };
+	};
+	force_t& operator-=(force_t& rhs, const force_t& lhs) noexcept
+	{
+		auto _vec = rhs.as_vec() - lhs.as_vec();
+		rhs.dir = glm::normalize(_vec);
+		rhs.mag = glm::distance(_vec, {});
+		return rhs;
+	};
+
+	force_t operator*(const acceleration_t& lhs, const mass_t& rhs)
+	{
+		return force_t{ lhs.dir, (lhs.mag * rhs.mag) };
+	};
+	force_t operator*(const mass_t& lhs, const acceleration_t& rhs)
+	{
+		return rhs * lhs;
+	};
+
+	acceleration_t operator/(const force_t& lhs, const mass_t& rhs)
+	{
+		return acceleration_t{ lhs.dir , lhs.mag / rhs.mag };
+	};
+	mass_t operator/(const force_t& lhs, const acceleration_t& rhs)
+	{
+		
+	};
+
+
+	mass_t operator+(const mass_t& rhs, const mass_t& lhs) noexcept
+	{
+		return mass_t{ rhs.mag + lhs.mag };
+	};
+	mass_t& operator+=(mass_t& rhs, const mass_t& lhs) noexcept
+	{
+		rhs.mag += lhs.mag;
+		return rhs;
+	};
+
+	mass_t operator-(const mass_t& rhs, const mass_t& lhs) noexcept
+	{
+		return mass_t{ rhs.mag - lhs.mag };
+	};
+	mass_t& operator-=(mass_t& rhs, const mass_t& lhs) noexcept
+	{
+		rhs.mag -= lhs.mag;
+		return rhs;
+	};
 
 }
