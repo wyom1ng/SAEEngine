@@ -109,97 +109,115 @@ namespace sae::engine
 	};
 
 
-
-	window_data* lua_towindow(lua_State* _lua, int _idx, int _arg);
-	window_data* lua_getwindow(lua_State* _lua);
-
-	// window.open(width, height, title, [monitor])
-	int window_open(lua_State* _lua);
-
-	// window.close()
-	int window_close(lua_State* _lua);
-
-	// window.get_size() -> width, height
-	int window_get_size(lua_State* _lua);
-
-	// window.set_size(width, height)
-	int window_set_size(lua_State* _lua);
-
-	// window.iconify()
-	int window_iconify(lua_State* _lua);
-
-	// window.attention()
-	int window_attention(lua_State* _lua);
-
-	// window.hide()
-	int window_hide(lua_State* _lua);
-
-	// window.show()
-	int window_show(lua_State* _lua);
-
-	// window.focus()
-	int window_focus(lua_State* _lua);
-
-	// window.push_scene(Scene_Data)
-	int window_push_scene(lua_State* _lua);
-
-	// window.pop_scene()
-	int window_pop_scene(lua_State* _lua);
-
-	// window.scene_stack_size() -> integer
-	int window_scene_stack_size(lua_State* _lua);
-
-	// window.has_active_scene() -> bool
-	int window_has_active_scene(lua_State* _lua);
-
-	// window.push_shader(Shader_Data)
-	int window_push_shader(lua_State* _lua);
-
-	// window.erase_shader(Shader_Data)
-	int window_erase_shader(lua_State* _lua);
-
-	// window.get_shader(name) -> Shader_Data
-	int window_get_shader(lua_State* _lua);
-
-	// window.set_callback(name, function)
-	int window_set_callback(lua_State* _lua);
-
-
-
-	// window:__gc
-	int window_destructor(lua_State* _lua);
-
-
-
-	static const luaL_Reg window_lib_m[] =
+	struct lib_window
 	{
-		luaL_Reg{ "__gc", &window_destructor },
-		luaL_Reg{ "close", &window_close },
-		luaL_Reg{ "get_size", &window_get_size},
-		luaL_Reg{ "set_size", &window_set_size },
-		luaL_Reg{ "iconify", &window_iconify},
-		luaL_Reg{ "attention", &window_attention },
-		luaL_Reg{ "show", &window_show },
-		luaL_Reg{ "hide", &window_hide },
-		luaL_Reg{ "focus", &window_focus },
-		luaL_Reg{ "open", &window_open },
+	private:
 
-		luaL_Reg{ "push_scene", &window_push_scene },
-		luaL_Reg{ "pop_scene", &window_pop_scene },
-		luaL_Reg{ "get_scene_stack_size", &window_scene_stack_size },
-		luaL_Reg{ "has_active_scene", &window_has_active_scene },
+		// window.open(width, height, title, [monitor])
+		static int window_open(lua_State* _lua);
 
-		luaL_Reg{ "push_shader", &window_push_shader },
-		luaL_Reg{ "erase_shader", &window_erase_shader },
-		luaL_Reg{ "get_shader", &window_get_shader },
+		// window.close()
+		static int window_close(lua_State* _lua);
 
-		luaL_Reg{ "set_callback", &window_set_callback },
+		// window.get_size() -> width, height
+		static int window_get_size(lua_State* _lua);
 
-		luaL_Reg{ NULL, NULL }
+		// window.set_size(width, height)
+		static int window_set_size(lua_State* _lua);
+
+		// window.iconify()
+		static int window_iconify(lua_State* _lua);
+
+		// window.attention()
+		static int window_attention(lua_State* _lua);
+
+		// window.hide()
+		static int window_hide(lua_State* _lua);
+
+		// window.show()
+		static int window_show(lua_State* _lua);
+
+		// window.focus()
+		static int window_focus(lua_State* _lua);
+
+		// window.push_scene(Scene_Data)
+		static int window_push_scene(lua_State* _lua);
+
+		// window.pop_scene()
+		static int window_pop_scene(lua_State* _lua);
+
+		// window.scene_stack_size() -> integer
+		static int window_scene_stack_size(lua_State* _lua);
+
+		// window.has_active_scene() -> bool
+		static int window_has_active_scene(lua_State* _lua);
+
+		// window.push_shader(Shader_Data)
+		static int window_push_shader(lua_State* _lua);
+
+		// window.erase_shader(Shader_Data)
+		static int window_erase_shader(lua_State* _lua);
+
+		// window.get_shader(name) -> Shader_Data
+		static int window_get_shader(lua_State* _lua);
+
+		// window.set_callback(name, function)
+		static int window_set_callback(lua_State* _lua);
+
+		// window.get_key(keyNumber) -> integer (button action)
+		static int window_get_key(lua_State* _lua);
+
+		// window.get_cursor_pos() -> { x, y }
+		static int window_get_cursor_pos(lua_State* _lua);
+
+		// window:__gc
+		static int window_destructor(lua_State* _lua);
+
+		constexpr static inline luaL_Reg funcs_f[] =
+		{
+			luaL_Reg{ "__gc", &window_destructor },
+			luaL_Reg{ "close", &window_close },
+			luaL_Reg{ "get_size", &window_get_size},
+			luaL_Reg{ "set_size", &window_set_size },
+			luaL_Reg{ "iconify", &window_iconify},
+			luaL_Reg{ "attention", &window_attention },
+			luaL_Reg{ "show", &window_show },
+			luaL_Reg{ "hide", &window_hide },
+			luaL_Reg{ "focus", &window_focus },
+			luaL_Reg{ "open", &window_open },
+
+			luaL_Reg{ "push_scene", &window_push_scene },
+			luaL_Reg{ "pop_scene", &window_pop_scene },
+			luaL_Reg{ "get_scene_stack_size", &window_scene_stack_size },
+			luaL_Reg{ "has_active_scene", &window_has_active_scene },
+
+			luaL_Reg{ "get_key", &window_get_key},
+			luaL_Reg{ "get_cursor_pos", &window_get_cursor_pos},
+
+
+			luaL_Reg{ "push_shader", &window_push_shader },
+			luaL_Reg{ "erase_shader", &window_erase_shader },
+			luaL_Reg{ "get_shader", &window_get_shader },
+
+			luaL_Reg{ "set_callback", &window_set_callback },
+
+			luaL_Reg{ NULL, NULL }
+		};
+		
+		constexpr static inline auto TYPENAME = "SAEEngine.window";
+
+	public:
+		constexpr static inline const char* tname() noexcept { return TYPENAME; };
+
+		using value_type = window_data;
+		using pointer = value_type*;
+
+		static pointer to_window(lua_State* _lua, int _idx);
+		static pointer to_window(lua_State* _lua);
+
+		static int lua_open(lua_State* _lua);
+
 	};
-
-	int luaopen_engine_window(lua_State* _lua);
-
 
 
 

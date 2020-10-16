@@ -14,9 +14,11 @@ int main()
 	_engine.set_ostream(&std::cout);
 	_engine.set_istream(&std::cin);
 
+	luaL_openlibs(_engine.lua());
+	
 	try
 	{
-		_engine.run_script("C:\\Users\\jonat\\Source\\Repos\\SAEEngine\\Examples\\UIExample\\createUIElement.lua");
+		_engine.run_script("C:\\Users\\jonat\\Source\\Repos\\SAEEngine\\Examples\\UIExample\\engineStart.lua");
 	}
 	catch (const std::runtime_error& _e)
 	{

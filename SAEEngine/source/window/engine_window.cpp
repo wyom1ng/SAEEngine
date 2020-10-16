@@ -323,21 +323,6 @@ namespace sae::engine
 	};
 
 
-	window_data* lua_towindow(lua_State* _lua, int _idx, int _arg)
-	{
-		return lua::lua_toinstance<window_data>(_lua, -1, "SAEEngine.window");
-	};
-	window_data* lua_getwindow(lua_State* _lua)
-	{
-		LUACHECK_BEGIN(_lua);
-		lua_getglobal(_lua, "SAEEngine");
-		lua_getfield(_lua, -1, "window");
-		auto _ptr = lua_towindow(_lua, -1, 1);
-		lua_pop(_lua, 2);
-		LUACHECK_END(_lua, 0);
-		return _ptr;
-	};
-
 	void window_data::push(Shader_Data* _shader)
 	{
 		this->shaders_.insert({ _shader->name(), _shader });
@@ -458,7 +443,7 @@ namespace sae::engine
 
 
 	// window.open(width, height, title, [monitor])
-	int window_open(lua_State* _lua)
+	int lib_window::window_open(lua_State* _lua)
 	{
 		LUACHECK_BEGIN(_lua);
 
@@ -494,17 +479,17 @@ namespace sae::engine
 	};
 
 	// window.close()
-	int window_close(lua_State* _lua)
+	int lib_window::window_close(lua_State* _lua)
 	{
-		auto _ptr = lua_getwindow(_lua);
+		auto _ptr = to_window(_lua);
 		_ptr->window_.close();
 		return 0;
 	};
 
 	// window.get_size() -> width, height
-	int window_get_size(lua_State* _lua)
+	int lib_window::window_get_size(lua_State* _lua)
 	{
-		auto _ptr = lua_getwindow(_lua);
+		auto _ptr = to_window(_lua);
 		int _w = 0;
 		int _h = 0;
 		glfwGetFramebufferSize(_ptr->window_, &_w, &_h);
@@ -514,64 +499,64 @@ namespace sae::engine
 	};
 
 	// window.set_size(width, height)
-	int window_set_size(lua_State* _lua)
+	int lib_window::window_set_size(lua_State* _lua)
 	{
 		int _w = lua_tointeger(_lua, -2);
 		int _h = lua_tointeger(_lua, -1);
-		auto _ptr = lua_getwindow(_lua);
+		auto _ptr = to_window(_lua);
 		glfwSetWindowSize(_ptr->window_, _w, _h);
 		return 0;
 	};
 
 	// window.iconify()
-	int window_iconify(lua_State* _lua)
+	int lib_window::window_iconify(lua_State* _lua)
 	{
-		auto _ptr = lua_getwindow(_lua);
+		auto _ptr = to_window(_lua);
 		glfwIconifyWindow(_ptr->window_);
 		return 0;
 	};
 
 	// window.attention()
-	int window_attention(lua_State* _lua)
+	int lib_window::window_attention(lua_State* _lua)
 	{
-		auto _ptr = lua_getwindow(_lua);
+		auto _ptr = to_window(_lua);
 		glfwRequestWindowAttention(_ptr->window_);
 		return 0;
 	};
 
 	// window.hide()
-	int window_hide(lua_State* _lua)
+	int lib_window::window_hide(lua_State* _lua)
 	{
-		auto _ptr = lua_getwindow(_lua);
+		auto _ptr = to_window(_lua);
 		glfwHideWindow(_ptr->window_);
 		return 0;
 	};
 
 	// window.show()
-	int window_show(lua_State* _lua)
+	int lib_window::window_show(lua_State* _lua)
 	{
-		auto _ptr = lua_getwindow(_lua);
+		auto _ptr = to_window(_lua);
 		glfwShowWindow(_ptr->window_);
 		return 0;
 	};
 
 	// window.focus()
-	int window_focus(lua_State* _lua)
+	int lib_window::window_focus(lua_State* _lua)
 	{
-		auto _ptr = lua_getwindow(_lua);
+		auto _ptr = to_window(_lua);
 		glfwFocusWindow(_ptr->window_);
 		return 0;
 	};
 
 	// window.push_scene(Scene_Data)
-	int window_push_scene(lua_State* _lua)
+	int lib_window::window_push_scene(lua_State* _lua)
 	{
 		auto _scene = lib_scene::to_scene(_lua, 1);
 		auto _beginTop = lua_gettop(_lua);
 		
 		lua_getglobal(_lua, "SAEEngine");
 		lua_getfield(_lua, -1, "window");
-		auto _window = lua_towindow(_lua, -1, 0);
+		auto _window = to_window(_lua, -1);
 
 		lua_getfield(_lua, -1, "scenes");
 		auto t = lua_gettop(_lua);
@@ -606,7 +591,7 @@ namespace sae::engine
 	};
 
 	// window.pop_scene()
-	int window_pop_scene(lua_State* _lua)
+	int lib_window::window_pop_scene(lua_State* _lua)
 	{
 		auto _beginTop = lua_gettop(_lua);
 
@@ -640,7 +625,7 @@ namespace sae::engine
 	};
 
 	// window.scene_stack_size() -> integer
-	int window_scene_stack_size(lua_State* _lua)
+	int lib_window::window_scene_stack_size(lua_State* _lua)
 	{
 		auto _beginTop = lua_gettop(_lua);
 
@@ -658,7 +643,7 @@ namespace sae::engine
 	};
 
 	// window.has_active_scene() -> bool
-	int window_has_active_scene(lua_State* _lua)
+	int lib_window::window_has_active_scene(lua_State* _lua)
 	{
 		auto _beginTop = lua_gettop(_lua);
 
@@ -676,14 +661,14 @@ namespace sae::engine
 	};
 
 	// window.push_shader(Shader_Data)
-	int window_push_shader(lua_State* _lua)
+	int lib_window::window_push_shader(lua_State* _lua)
 	{
 		auto _beginTop = lua_gettop(_lua);
 		auto _ptr = lib_shader::to_shader(_lua, 1);
 
 		lua_getglobal(_lua, "SAEEngine");
 		lua_getfield(_lua, -1, "window");
-		auto _window = lua_towindow(_lua, -1, 0);
+		auto _window = to_window(_lua, -1);
 		
 		lua_getfield(_lua, -1, "shaders");
 
@@ -701,7 +686,7 @@ namespace sae::engine
 	};
 	
 	// window.get_shader(name) -> Shader_Data
-	int window_get_shader(lua_State* _lua)
+	int lib_window::window_get_shader(lua_State* _lua)
 	{
 		auto _beginTop = lua_gettop(_lua);
 		auto _name = lua_tostring(_lua, 1);
@@ -721,14 +706,14 @@ namespace sae::engine
 	};
 
 	// window.erase_shader(Shader_Data)
-	int window_erase_shader(lua_State* _lua)
+	int lib_window::window_erase_shader(lua_State* _lua)
 	{
 		auto _beginTop = lua_gettop(_lua);
 		auto _ptr = lib_shader::to_shader(_lua, 1);
 
 		lua_getglobal(_lua, "SAEEngine");
 		lua_getfield(_lua, -1, "window");
-		auto _window = lua_towindow(_lua, -1, 0);
+		auto _window = to_window(_lua, -1);
 
 		lua_getfield(_lua, -1, "shaders");
 		lua_pushnil(_lua);
@@ -745,7 +730,7 @@ namespace sae::engine
 	};
 
 	// window.set_callback(name, function)
-	int window_set_callback(lua_State* _lua)
+	int lib_window::window_set_callback(lua_State* _lua)
 	{
 		auto _beginTop = lua_gettop(_lua);
 
@@ -757,7 +742,7 @@ namespace sae::engine
 
 		lua_getglobal(_lua, "SAEEngine");
 		lua_getfield(_lua, -1, "window");
-		auto _window = lua_towindow(_lua, -1, 0);
+		auto _window = to_window(_lua, -1);
 		lua_pop(_lua, 2);
 
 		if (!_window->is_valid_callback_key(_name))
@@ -788,23 +773,64 @@ namespace sae::engine
 
 	};
 
+	// window.get_key(keyNumber) -> integer (button action)
+	int lib_window::window_get_key(lua_State* _lua)
+	{
+		auto _key = luaL_checkinteger(_lua, 1);
+		auto _window = to_window(_lua);
+		lua::lua_push(_lua, glfwGetKey(_window->window_, _key));
+		return 1;
+	};
+
+	// window.get_cursor_pos() -> { x, y }
+	int lib_window::window_get_cursor_pos(lua_State* _lua)
+	{
+		auto _window = to_window(_lua);
+		double _x = 0.0f;
+		double _y = 0.0f;
+		
+		glfwGetCursorPos(_window->window_, &_x, &_y);
+
+		lua_newtable(_lua);
+
+		lua_pushinteger(_lua, (lua_Integer)_x);
+		lua_setfield(_lua, -2, "x");
+		lua_pushinteger(_lua, (lua_Integer)_y);
+		lua_setfield(_lua, -2, "y");
+
+		return 1;
+	};
 
 	// window:__gc
-	int window_destructor(lua_State* _lua)
+	int lib_window::window_destructor(lua_State* _lua)
 	{
-		auto _ptr = lua_towindow(_lua, -1, 1);
+		auto _ptr = to_window(_lua, 1);
 		_ptr->~window_data();
 		return 0;
 	};
 
-	
 
 
-	int luaopen_engine_window(lua_State* _lua)
+	lib_window::pointer lib_window::to_window(lua_State* _lua, int _idx)
 	{
-		lua::lua_newclass(_lua, "SAEEngine.window");
+		return lua::lua_toinstance<window_data>(_lua, _idx, tname());
+	};
+	lib_window::pointer lib_window::to_window(lua_State* _lua)
+	{
+		LUACHECK_BEGIN(_lua);
+		lua_getglobal(_lua, "SAEEngine");
+		lua_getfield(_lua, -1, "window");
+		auto _ptr = to_window(_lua, -1);
+		lua_pop(_lua, 2);
+		LUACHECK_END(_lua, 0);
+		return _ptr;
+	};
 
-		luaL_setfuncs(_lua, window_lib_m, 0);
+	int lib_window::lua_open(lua_State* _lua)
+	{
+		lua::lua_newclass(_lua, tname());
+
+		luaL_setfuncs(_lua, funcs_f, 0);
 
 		lua_newtable(_lua);
 		lua_setfield(_lua, -2, "scenes");
@@ -814,7 +840,6 @@ namespace sae::engine
 
 		lua_newtable(_lua);
 		lua_setfield(_lua, -2, "textures");
-
 
 		return 1;
 	};

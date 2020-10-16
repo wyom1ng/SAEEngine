@@ -4,6 +4,7 @@
 #include "SAEEngine_BaseTypes.h"
 
 #include "shader/engine_shader.h"
+#include "texture/engine_texture.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <array>
@@ -315,15 +316,15 @@ namespace sae::engine
 	struct Widget_Rectangle : public WidgetObject
 	{
 	public:
-		bool good() const final;
-		void update() final;
-		void draw(const glm::mat4& _projectionMat) final;
-		void destroy() final;
+		bool good() const;
+		void update();
+		void draw(const glm::mat4& _projectionMat);
+		void destroy();
 
 		Widget_Rectangle(Shader_Data* _shader);
 		~Widget_Rectangle();
 
-	private:
+	protected:
 		Shader_Data* shader_ = nullptr;
 
 		GLuint projection_uniform_ = 0;
@@ -365,6 +366,76 @@ namespace sae::engine
 			}
 		};
 
+	};
+
+	struct Widget_Sprite : public WidgetObject
+	{
+	public:
+		bool good() const;
+		void update();
+		void draw(const glm::mat4& _projectionMat);
+		void destroy();
+
+		Widget_Sprite(Shader_Data* _shader, Texture* _tex);
+		~Widget_Sprite();
+
+	private:
+		Shader_Data* shader_ = nullptr;
+
+		GLuint texture_id_ = 0;
+		Texture* image_ = nullptr;
+
+		GLuint projection_uniform_ = 0;
+
+		vertex_array_object vao_{};
+		vertex_attribute pos_attr_{ 0, 3, GL_FLOAT };
+		vertex_data_array<float_t> pos_
+		{
+			GL_ARRAY_BUFFER,
+			GL_STATIC_DRAW,
+			{
+				0.0f, 0.0f, 0.0f,
+				0.0f, 100.0f, 0.0f,
+				100.0f, 0.0f, 0.0f,
+				100.0f, 100.0f, 0.0f
+			}
+		};
+
+		vertex_attribute col_attr_{ 1, 4, GL_UNSIGNED_BYTE, true };
+		vertex_data_array<uint8_t> cols_
+		{
+			GL_ARRAY_BUFFER,
+			GL_STATIC_DRAW,
+			{
+				255, 255, 255, 255,
+				255, 255, 255, 255,
+				255, 255, 255, 255,
+				255, 255, 255, 255
+			}
+		};
+
+		vertex_attribute uv_attr_{ 2, 2, GL_FLOAT };
+		vertex_data_array<float_t> uvs_
+		{
+			GL_ARRAY_BUFFER,
+			GL_STATIC_DRAW,
+			{
+				0.0f, 0.0f,
+				0.0f, 1.0f,
+				1.0f, 0.0f,
+				1.0f, 1.0f
+			}
+		};
+
+		vertex_data_array<uint8_t> indices_
+		{
+			GL_ELEMENT_ARRAY_BUFFER,
+			GL_STATIC_DRAW,
+			{
+				0, 1, 2,
+				1, 3, 2
+			}
+		}; 
 
 	};
 
@@ -472,6 +543,36 @@ namespace sae::engine
 			static int lua_open(lua_State* _lua);
 
 		};
+
+
+		struct ltype_Sprite
+		{
+		private:
+
+			static int new_f(lua_State* _lua);
+
+			constexpr static inline luaL_Reg funcs_f[] = 
+			{
+				luaL_Reg{ "new", &new_f },
+				luaL_Reg{ NULL, NULL }
+			};
+
+			constexpr static inline auto TYPENAME = "SAEEngine.sprite";
+
+		public:
+
+			using value_type = Widget_Sprite;
+			using pointer = value_type*;
+
+			static pointer to_userdata(lua_State* _lua, int _idx);
+
+			constexpr static inline const char* tname() noexcept { return TYPENAME; };
+
+			static int lua_open(lua_State* _lua);
+
+		};
+
+
 
 		struct WorldObject
 		{
