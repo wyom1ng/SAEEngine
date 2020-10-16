@@ -21,20 +21,24 @@ local w0_ = engine.gfx.rectangle.new(sampleShader_)
 sptr_:push(w0_)
 
 local function key_callback(_key, _scancode, _action, _mods)
-	if(_key == 256 and _action == 0) then
+	if(_key == 256 and _action == 0) 
+	then
 		engine.fs.doAfter(path_ .. "otherScene.lua")
 		engine.window.pop_scene()
 	end
 end
 
-
 local function test_button_callback(_widget, _mbutton, _action, _mods)
-	if(_mbutton == 0) then
-		_widget:set_color({ r = 0, g = 255, b = 0, a = 255 })
-		_widget:update()
-	elseif(_mbutton == 1) then
-		_widget:set_color({ r = 255, g = 0, b = 0, a = 255 })
-		_widget:update()
+	if(_mbutton == 0 and _action == 1)
+	then
+			_widget:set_color({ r = 0, g = 255, b = 0, a = 255 })
+			_widget:update()
+			w0ispressed_ = true
+	elseif(_mbutton == 0 and _action == 0) 
+	then
+			_widget:set_color({ r = 255, g = 0, b = 0, a = 255 })
+			_widget:update()
+			w0ispressed_ = false
 	end
 end
 

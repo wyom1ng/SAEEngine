@@ -169,6 +169,12 @@ namespace sae::lua
 	int lua_getlen(lua_State* _lua, int _idx);
 
 
+	// Appends the element on the top of the stack to the table at _idx
+	void lua_append(lua_State* _lua, int _idx);
+
+	// Appends a copy of the element at _valueIdx to the end of the table at _tableIdx
+	void lua_append_copy(lua_State* _lua, int _tableIdx, int _valueIdx);
+
 
 
 	struct cfunction
@@ -226,6 +232,30 @@ namespace sae::lua
 
 
 
+	/*
+		Food for thought
+	 
+	struct lua_ref
+	{
+	public:
+
+
+
+		lua_ref(lua_State* _lua, int _i) :
+			ref_{ luaL_ref(_lua, _i) }, 
+			lua_{ _lua }, i_{ _i }
+		{};
+		~lua_ref()
+		{
+			luaL_unref(this->lua_, this->i_, this->ref_);
+		};
+
+	private:
+		int i_ = 0;
+		int ref_ = 0;
+		lua_State* lua_ = nullptr;
+	};
+	*/
 
 	
 

@@ -48,25 +48,48 @@ namespace sae::engine
 namespace sae::engine
 {
 
+	namespace
+	{
+		int handle_lua_call_error(lua_State* _lua, int _err)
+		{
+#ifdef SAE_ENGINE_HARD_ERRORS
+			if (_err != LUA_OK)
+				stackDump(_lua, std::cout);
+
+			assert(_err == LUA_OK);
+#elif defined(SAE_ENGINE_USE_EXCEPTIONS)
+			switch (_err)
+			{
+			case LUA_OK:
+				return _err;
+			case LUA_ERRRUN:
+				throw std::runtime_error{ std::string{lua_tostring(_lua, -1)} };
+			default:
+				throw std::runtime_error{ "lua_pcall() error" };
+			};
+#endif
+			return _err;
+		};
+		int handle_lua_call_error(lua_State* _lua, int _err, std::nothrow_t) noexcept
+		{
+#ifdef SAE_ENGINE_HARD_ERRORS
+			assert(_err == LUA_OK);
+#endif
+			return _err;
+		};
+	};
+
 	int lua_safecall(lua_State* _lua, int _args, int _rets, int _f, std::nothrow_t) noexcept
 	{
-		return lua_pcall(_lua, _args, _rets, _f);
+		auto _err = lua_pcall(_lua, _args, _rets, _f);
+		return handle_lua_call_error(_lua, _err);
 	};
 
 #ifdef SAE_ENGINE_USE_EXCEPTIONS
 	int lua_safecall(lua_State* _lua, int _args, int _rets, int _f)
 	{
 		auto _err = lua_pcall(_lua, _args, _rets, _f);
-		switch (_err)
-		{
-		case LUA_OK:
-			break;
-		case LUA_ERRRUN:
-			throw std::runtime_error{ std::string{lua_tostring(_lua, -1)} };
-		default:
-			throw std::runtime_error{ "lua_pcall() error" };
-		};
-		return _err;
+		return handle_lua_call_error(_lua, _err);
 	};
 #else
 	int lua_safecall(lua_State* _lua, int _args, int _rets, int _f) noexcept
@@ -182,7 +205,7 @@ namespace sae::engine
 
 		auto _ptr = lua_getwindow(_lua);
 		_ptr->update();
-
+		
 		auto _endTop = lua_gettop(_lua);
 		assert(_beginTop == _endTop);
 	};

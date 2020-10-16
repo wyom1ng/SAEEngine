@@ -71,9 +71,14 @@ namespace sae::engine
 	int lib_scene::ltype_scene::push(lua_State* _lua)
 	{
 		auto _ptr = to_userdata(_lua, 1);
+
 		if (lua::lua_isbaseof(_lua, 2, lib_gfx::ltype_WidgetObject::tname()))
 		{
-			_ptr->push_back(lib_gfx::to_widgetobject(_lua, 2));
+			auto _obj = lib_gfx::to_widgetobject(_lua, 2);
+			lua_pushvalue(_lua, 2);
+			auto _self = luaL_ref(_lua, LUA_REGISTRYINDEX);
+			_obj->set_self(_self);
+			_ptr->push_back(_obj);
 		}
 		else if (lua::lua_isbaseof(_lua, 2, lib_ui::ltype_button::tname()))
 		{
@@ -82,13 +87,21 @@ namespace sae::engine
 		else if (lua::lua_isbaseof(_lua, 2, "SAEEngine.WorldObject"))
 		{
 			abort();
+		}
+		else
+		{
+			return lua_error(_lua);
 		};
+
 		return 0;
 	};
 
 	int lib_scene::ltype_scene::destructor(lua_State* _lua)
 	{
 		auto _ptr = to_userdata(_lua, 1);
+		for (auto& w : _ptr->get_widgets())
+			luaL_unref(_lua, LUA_REGISTRYINDEX, w->lua_self());
+
 		std::destroy_at(_ptr);
 		return 0;
 	};

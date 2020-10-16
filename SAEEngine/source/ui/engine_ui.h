@@ -19,21 +19,24 @@ namespace sae::engine
 	struct UIButton
 	{
 		int invoke(lua_State* _lua, int _nargs) noexcept(noexcept(lua_safecall(nullptr, 0, 0, 0)));
-		int widget_ref_;
 		int callback_ref_;
 		bool is_enabled_;
 		WidgetObject* ptr_ = nullptr;
+		~UIButton();
 	};
 
 
 	struct UIHandler
 	{
 	public:
+
+
 		void push_back(UIButton* _b);
 		void erase(UIButton* _b);
 		void clear() noexcept;
 
 		UIButton* find_best_match(int16_t _cursorX, int16_t _cursorY) const;
+		~UIHandler();
 
 	private:
 		std::vector<UIButton*> elements_{};

@@ -16,13 +16,14 @@ namespace sae::engine
 	{
 	public:
 
+		const auto& get_widgets() const noexcept { return this->widgets_; };
+
+
 		UIHandler* get_ui_handler();
 		const UIHandler* get_ui_handler() const;
 
 		void push_back(WidgetObject* _obj);
-
 		void erase(WidgetObject* _obj);
-
 		void clear() noexcept;
 
 		void draw();

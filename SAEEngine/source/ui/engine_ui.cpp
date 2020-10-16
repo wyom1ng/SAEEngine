@@ -17,11 +17,13 @@ namespace sae::engine
 		lua_rawgeti(_lua, LUA_REGISTRYINDEX, this->callback_ref_);
 		lua_replace(_lua, _findex);
 
-		lua_rawgeti(_lua, LUA_REGISTRYINDEX, this->widget_ref_);
+		lua_rawgeti(_lua, LUA_REGISTRYINDEX, this->ptr_->lua_self());
 		lua_replace(_lua, _findex + 1);
 	
+		assert(lua_gettop(_lua) == (_nargs + 2));
+
 		auto _res = lua_safecall(_lua, _nargs + 1, 0, 0);
-		
+
 		auto _endTop = lua_gettop(_lua);
 		if (_res == LUA_ERRRUN)
 			--_endTop;
@@ -29,6 +31,13 @@ namespace sae::engine
 		assert(_beginTop == (_endTop + _nargs));
 
 		return _res;
+	};
+
+	UIButton::~UIButton()
+	{
+#ifdef SAE_ENGINE_DESTRUCTOR_DEBUG
+		std::cout << "~UIButton()\n";
+#endif
 	};
 
 
@@ -77,6 +86,14 @@ namespace sae::engine
 
 	};
 
+	UIHandler::~UIHandler()
+	{
+		this->clear();
+#ifdef SAE_ENGINE_DESTRUCTOR_DEBUG
+		std::cout << "~UIHandler()\n";
+#endif
+	};
+
 }
 
 namespace sae::engine
@@ -89,9 +106,7 @@ namespace sae::engine
 		auto _beginTop = lua_gettop(_lua);
 
 		auto _widget = lib_gfx::to_widgetobject(_lua, 1);
-		lua_pushvalue(_lua, 1);
-		auto _widgetRef = luaL_ref(_lua, LUA_REGISTRYINDEX);
-
+		
 		bool _enabled = true;
 		if (lua_gettop(_lua) == 3)
 		{
@@ -100,8 +115,11 @@ namespace sae::engine
 
 		lua_pushvalue(_lua, 2);
 		auto _ref = luaL_ref(_lua, LUA_REGISTRYINDEX);
-		auto _ptr = lua::lua_newinstance<value_type>(_lua, tname(), _widgetRef, _ref, _enabled);
+		auto _ptr = lua::lua_newinstance<value_type>(_lua, tname(), _ref, _enabled, _widget);
 		_ptr->ptr_ = _widget;
+		
+		lua_pushvalue(_lua, -1);
+		_widget->get_decorators().push_back(luaL_ref(_lua, LUA_REGISTRYINDEX));
 
 		auto _endTop = lua_gettop(_lua);
 		assert(_beginTop == (_endTop - 1));
@@ -147,7 +165,6 @@ namespace sae::engine
 	int lib_ui::ltype_button::destructor(lua_State* _lua)
 	{
 		auto _ptr = to_userdata(_lua, 1);
-		luaL_unref(_lua, LUA_REGISTRYINDEX, _ptr->widget_ref_);
 		luaL_unref(_lua, LUA_REGISTRYINDEX, _ptr->callback_ref_);
 		std::destroy_at(_ptr);
 		return 0;
