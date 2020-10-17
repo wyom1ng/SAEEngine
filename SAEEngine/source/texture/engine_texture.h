@@ -67,7 +67,7 @@ namespace sae::engine
 		struct base_pixel_view
 		{
 		protected:
-			constexpr inline void _Check_Bounds() const noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
+			constexpr inline void _Check_Bounds() const 
 			{
 #if SAE_ENGINE_DEBUG_LEVEL > 0
 				assert(this->at_ != nullptr);
@@ -75,7 +75,7 @@ namespace sae::engine
 				assert(this->at_ <= this->end_);
 #endif
 			};
-			constexpr inline void _Check_Value() const noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
+			constexpr inline void _Check_Value() const 
 			{
 #if SAE_ENGINE_DEBUG_LEVEL > 0
 				assert(this->at_ != nullptr);
@@ -99,7 +99,7 @@ namespace sae::engine
 				return this->at_ != nullptr;
 			};
 
-			constexpr pointer data() const noexcept(noexcept(_Check_Value()))
+			constexpr pointer data() const
 			{
 				this->_Check_Bounds();
 				return this->at_;
@@ -109,7 +109,7 @@ namespace sae::engine
 				return this->stride_;
 			};
 
-			constexpr const_reference at(uint32_t i) const noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
+			constexpr const_reference at(uint32_t i) const 
 			{
 #if SAE_ENGINE_DEBUG_LEVEL > 0
 				this->_Check_Value();
@@ -131,68 +131,68 @@ namespace sae::engine
 				return (lhs.at_ != rhs) && (lhs.stride_ == rhs.stride_);
 			};
 
-			friend inline constexpr bool operator>(base_pixel_view lhs, base_pixel_view rhs) noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
+			friend inline constexpr bool operator>(base_pixel_view lhs, base_pixel_view rhs) 
 			{
 				assert(lhs.stride_ == rhs.stride_);
 				return (lhs.at_ > rhs.at_);
 			};
-			friend inline constexpr bool operator<(base_pixel_view lhs, base_pixel_view rhs) noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
+			friend inline constexpr bool operator<(base_pixel_view lhs, base_pixel_view rhs) 
 			{
 				assert(lhs.stride_ == rhs.stride_);
 				return (lhs.at_ < rhs.at_);
 			};
-			friend inline constexpr bool operator>=(base_pixel_view lhs, base_pixel_view rhs) noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
+			friend inline constexpr bool operator>=(base_pixel_view lhs, base_pixel_view rhs) 
 			{
 				assert(lhs.stride_ == rhs.stride_);
 				return (lhs.at_ >= rhs.at_);
 			};
-			friend inline constexpr bool operator<=(base_pixel_view lhs, base_pixel_view rhs) noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
+			friend inline constexpr bool operator<=(base_pixel_view lhs, base_pixel_view rhs) 
 			{
 				assert(lhs.stride_ == rhs.stride_);
 				return (lhs.at_ <= rhs.at_);
 			};
 
-			friend inline constexpr std::ptrdiff_t operator-(base_pixel_view lhs, base_pixel_view rhs) noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
+			friend inline constexpr std::ptrdiff_t operator-(base_pixel_view lhs, base_pixel_view rhs) 
 			{
-				assert(lhs.stride_ == _rhs.stride_);
+				assert(lhs.stride_ == rhs.stride_);
 				return ((lhs.at_ - rhs.at_) / lhs.stride_);
 			};
 	
-			constexpr base_pixel_view operator+(size_t n) const noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
+			constexpr base_pixel_view operator+(size_t n) const 
 			{
 				auto _out = *this;
 				_out.at_ += (n * this->stride_);
 				_out._Check_Bounds();
 				return _out;
 			};
-			base_pixel_view& operator+=(uint32_t n) noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
+			base_pixel_view& operator+=(uint32_t n) 
 			{
 				this->at_ += (n * this->stride_);
 				this->_Check_Bounds();
 				return *this;
 			};
 
-			constexpr base_pixel_view operator-(uint32_t n) const noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
+			constexpr base_pixel_view operator-(uint32_t n) const 
 			{
 				auto _out = *this;
 				_out.at_ -= (n * this->stride_);
 				_out._Check_Bounds();
 				return _out;
 			};
-			base_pixel_view& operator-=(uint32_t n) noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
+			base_pixel_view& operator-=(uint32_t n) 
 			{
 				this->at_ -= (n * this->stride_);
 				this->_Check_Bounds();
 				return *this;
 			};
 
-			base_pixel_view& operator++() noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
+			base_pixel_view& operator++() 
 			{
 				this->at_ += this->stride_;
 				this->_Check_Bounds();
 				return *this;
 			};
-			base_pixel_view& operator++(int) noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
+			base_pixel_view& operator++(int) 
 			{
 				auto _out = *this;
 				this->at_ += this->stride_;
@@ -200,13 +200,13 @@ namespace sae::engine
 				return _out;
 			};
 
-			base_pixel_view& operator--() noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
+			base_pixel_view& operator--() 
 			{
 				this->at_ -= this->stride_;
 				this->_Check_Bounds();
 				return *this;
 			};
-			base_pixel_view& operator--(int) noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
+			base_pixel_view& operator--(int) 
 			{
 				auto _out = *this;
 				this->at_ -= this->stride_;
@@ -270,7 +270,7 @@ namespace sae::engine
 		struct pixel_view : public base_pixel_view<uint8_t>
 		{
 
-			reference at(uint8_t i) noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
+			reference at(uint8_t i) 
 			{
 #if SAE_ENGINE_DEBUG_LEVEL > 0
 				this->_Check_Value();
@@ -278,7 +278,7 @@ namespace sae::engine
 #endif
 				return *(this->at_ + i);
 			};
-			reference operator[](uint8_t i) noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
+			reference operator[](uint8_t i) 
 			{
 				return this->at(i);
 			};
@@ -302,7 +302,7 @@ namespace sae::engine
 		};
 
 
-		inline pixel_view view_begin() noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
+		inline pixel_view view_begin() 
 		{
 			auto _at = this->data_.data();
 			return pixel_view{ _at, this->stride()
@@ -311,7 +311,7 @@ namespace sae::engine
 #endif		
 			};
 		};
-		inline const_pixel_view view_begin() const noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
+		inline const_pixel_view view_begin() const 
 		{
 			auto _at = this->data_.data();
 			return const_pixel_view{ _at, this->stride()
@@ -320,7 +320,7 @@ namespace sae::engine
 #endif		
 			};
 		};
-		inline const_pixel_view view_cbegin() const noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
+		inline const_pixel_view view_cbegin() const 
 		{
 			auto _at = this->data_.data();
 			return const_pixel_view{ _at, this->stride()
@@ -330,7 +330,7 @@ namespace sae::engine
 			};
 		};
 
-		inline pixel_view view_end() noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
+		inline pixel_view view_end() 
 		{
 			auto _at = this->data_.data() + this->data_.size();
 			return pixel_view{ _at, this->stride()
@@ -339,7 +339,7 @@ namespace sae::engine
 #endif		
 			};
 		};
-		inline const_pixel_view view_end() const noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
+		inline const_pixel_view view_end() const 
 		{
 			auto _at = this->data_.data() + this->data_.size();
 			return const_pixel_view{ _at, this->stride()
@@ -348,7 +348,7 @@ namespace sae::engine
 #endif		
 			};
 		};
-		inline const_pixel_view view_cend() const noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
+		inline const_pixel_view view_cend() const 
 		{
 			auto _at = this->data_.data() + this->data_.size();
 			return const_pixel_view{ _at, this->stride()

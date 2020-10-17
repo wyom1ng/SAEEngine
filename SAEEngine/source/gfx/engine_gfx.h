@@ -232,7 +232,7 @@ namespace sae::engine
 			auto _out = this->data();
 			for (auto& p : _itList)
 			{
-				this->alloc_.construct(_out, std::move(p));
+				std::construct_at(_out, std::move(p));
 				++_out;
 			};
 		};

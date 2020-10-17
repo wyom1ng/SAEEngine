@@ -29,7 +29,6 @@ int main()
 	while (_engine.good())
 	{
 		_engine.update();
-		std::this_thread::sleep_for(std::chrono::milliseconds(16));
 	};
 
 	return 0;

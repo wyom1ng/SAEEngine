@@ -188,18 +188,16 @@ namespace sae
 				return (this->good_pointer());
 			};
 
-			template <typename ReturnT, typename... Args>
 			constexpr functor_impl(ReturnT(*_func)(Args...)) :
 				ptr_{ new freeFunctionPtr_t<ReturnT, Args...>{_func} },
 				member_function_{ false }
 			{};
-			template <class ScopeT, typename ReturnT, typename... Args>
+			template <class ScopeT>
 			constexpr functor_impl(ReturnT(ScopeT::* _func)(Args...), ScopeT* _p = nullptr) :
 				ptr_{ new memberFunctionPtr_t<ReturnT, ScopeT, Args...>{_func, _p} },
 				member_function_{ true }
 			{};
 
-			template <typename ReturnT, typename... Args>
 			functor_impl& operator=(ReturnT(*_func)(Args...))
 			{
 				delete ptr_;
@@ -207,7 +205,7 @@ namespace sae
 				this->member_function_ = false;
 				return *this;
 			};
-			template <class ScopeT, typename ReturnT, typename... Args>
+			template <class ScopeT>
 			functor_impl& operator=(std::pair<ReturnT(ScopeT::*)(Args...), ScopeT*>&& _memberFunc)
 			{
 				delete ptr_;

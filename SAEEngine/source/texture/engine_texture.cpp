@@ -159,8 +159,7 @@ namespace sae::engine
 	int lib_texture::gc(lua_State* _lua)
 	{
 		auto _ptr = to_texture(_lua, 1);
-		using value_type = std::remove_pointer_t<decltype(to_texture(std::declval<lua_State*>(), std::declval<int>()))>; // for shits and giggles
-		_ptr->~value_type();
+		std::destroy_at(_ptr);
 		return 0;
 	};
 

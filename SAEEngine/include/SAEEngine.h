@@ -14,10 +14,10 @@
 
 namespace std
 {
-	template<class CharT, class Traits = std::char_traits<CharT>>
+	template<class CharT, class Traits>
 	class basic_ostream;
 
-	template<class CharT, class Traits = std::char_traits<CharT>>
+	template<class CharT, class Traits>
 	class basic_istream;
 
 	using ostream = basic_ostream<char>;

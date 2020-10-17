@@ -9,13 +9,14 @@
 #include <string_view>
 #include <string>
 #include <vector>
+#include <cmath>
 
 namespace sae::lua
 {
 
 	
 	int lualib_tostring_f(lua_State* _lua);
-	constexpr static inline luaL_Reg lualib_tostring{ "tostring", &lualib_tostring_f };
+	constexpr inline luaL_Reg lualib_tostring{ "tostring", &lualib_tostring_f };
 
 
 
@@ -33,78 +34,78 @@ namespace sae::lua
 
 
 	struct nil_t {};
-	constexpr static inline nil_t nil{};
+	constexpr inline nil_t nil{};
 	
 
 	template <typename T>
 	void lua_push(lua_State* _lua, const T& _v);
 
 	template <>
-	static inline void lua_push(lua_State* _lua, const uint8_t& _v)
+	inline void lua_push(lua_State* _lua, const uint8_t& _v)
 	{
 		lua_pushinteger(_lua, (lua_Integer)_v);
 	};
 	template <>
-	static inline void lua_push(lua_State* _lua, const uint16_t& _v)
+	inline void lua_push(lua_State* _lua, const uint16_t& _v)
 	{
 		lua_pushinteger(_lua, (lua_Integer)_v);
 	};
 	template <>
-	static inline void lua_push(lua_State* _lua, const uint32_t& _v)
+	inline void lua_push(lua_State* _lua, const uint32_t& _v)
 	{
 		lua_pushinteger(_lua, (lua_Integer)_v);
 	};
 	template <>
-	static inline void lua_push(lua_State* _lua, const uint64_t& _v)
-	{
-		lua_pushinteger(_lua, (lua_Integer)_v);
-	};
-
-	template <>
-	static inline void lua_push(lua_State* _lua, const int8_t& _v)
-	{
-		lua_pushinteger(_lua, (lua_Integer)_v);
-	};
-	template <>
-	static inline void lua_push(lua_State* _lua, const int16_t& _v)
-	{
-		lua_pushinteger(_lua, (lua_Integer)_v);
-	};
-	template <>
-	static inline void lua_push(lua_State* _lua, const int32_t& _v)
-	{
-		lua_pushinteger(_lua, (lua_Integer)_v);
-	};
-	template <>
-	static inline void lua_push(lua_State* _lua, const int64_t& _v)
+	inline void lua_push(lua_State* _lua, const uint64_t& _v)
 	{
 		lua_pushinteger(_lua, (lua_Integer)_v);
 	};
 
 	template <>
-	static inline void lua_push(lua_State* _lua, const float_t& _v)
+	inline void lua_push(lua_State* _lua, const int8_t& _v)
+	{
+		lua_pushinteger(_lua, (lua_Integer)_v);
+	};
+	template <>
+	inline void lua_push(lua_State* _lua, const int16_t& _v)
+	{
+		lua_pushinteger(_lua, (lua_Integer)_v);
+	};
+	template <>
+	inline void lua_push(lua_State* _lua, const int32_t& _v)
+	{
+		lua_pushinteger(_lua, (lua_Integer)_v);
+	};
+	template <>
+	inline void lua_push(lua_State* _lua, const int64_t& _v)
+	{
+		lua_pushinteger(_lua, (lua_Integer)_v);
+	};
+
+	template <>
+	inline void lua_push(lua_State* _lua, const float_t& _v)
 	{
 		lua_pushnumber(_lua, _v);
 	};
 	template <>
-	static inline void lua_push(lua_State* _lua, const double_t& _v)
+	inline void lua_push(lua_State* _lua, const double_t& _v)
 	{
 		lua_pushnumber(_lua, _v);
 	};
 	template <>
-	static inline void lua_push(lua_State* _lua, const long double& _v)
+	inline void lua_push(lua_State* _lua, const long double& _v)
 	{
 		lua_pushnumber(_lua, _v);
 	};
 
 	template <>
-	static inline void lua_push(lua_State* _lua, const char* const& _v)
+	inline void lua_push(lua_State* _lua, const char* const& _v)
 	{
 		lua_pushstring(_lua, _v);
 	};
 
 	template <>
-	static inline void lua_push(lua_State* _lua, const nil_t& _v)
+	inline void lua_push(lua_State* _lua, const nil_t& _v)
 	{
 		lua_pushnil(_lua);
 	};
@@ -123,19 +124,19 @@ namespace sae::lua
 	void* lua_downcast(lua_State* _lua, int _idx, const char* _baseName);
 
 	template <typename T> requires std::is_default_constructible<T>::value
-		static inline T* lua_newudata(lua_State* _lua)
+		inline T* lua_newudata(lua_State* _lua)
 	{
 		return new (lua_newuserdata(_lua, sizeof(T))) T{};
 	};
 
 	template <typename T, typename... CArgs>
-	static inline T* lua_newudata(lua_State* _lua, CArgs... _arg)
+	inline T* lua_newudata(lua_State* _lua, CArgs... _arg)
 	{
 		return new (lua_newuserdata(_lua, sizeof(T))) T{ _arg... };
 	};
 
 	template <typename T> requires std::is_default_constructible<T>::value
-		static inline T* lua_newinstance(lua_State* _lua, const char* _parentName)
+		inline T* lua_newinstance(lua_State* _lua, const char* _parentName)
 	{
 		auto _out = lua_newudata<T>(_lua);
 		luaL_getmetatable(_lua, _parentName);
@@ -143,7 +144,7 @@ namespace sae::lua
 		return _out;
 	};
 	template <typename T, typename... CArgs>
-	static inline T* lua_newinstance(lua_State* _lua, const char* _parentName, CArgs... _arg)
+	inline T* lua_newinstance(lua_State* _lua, const char* _parentName, CArgs... _arg)
 	{
 		auto _out = lua_newudata<T, CArgs...>(_lua, _arg...);
 		luaL_getmetatable(_lua, _parentName);
@@ -152,7 +153,7 @@ namespace sae::lua
 	};
 
 	template <typename T>
-	static inline T* lua_toinstance(lua_State* _lua, int _idx, const char* _tname)
+	inline T* lua_toinstance(lua_State* _lua, int _idx, const char* _tname)
 	{
 		void* ud = lua::lua_downcast(_lua, _idx, _tname);
 		if (ud == nullptr)
