@@ -5,3 +5,8 @@ add_library(SAEEngine STATIC "source/SAEEngine.cpp" "include/SAEEngine.h" "sourc
 
 target_include_directories(SAEEngine PUBLIC ${PROJECT_BINARY_DIR} "include" PRIVATE "source")
 target_link_libraries(SAEEngine PUBLIC liblua glfw glm glad SAELib SAELua PRIVATE lodepng)
+
+install(TARGETS SAEEngine DESTINATION "lib")
+install(FILES "include/SAEEngine.h" "include/SAEEngine_BaseTypes.h" DESTINATION "include")
+
+enable_testing()
