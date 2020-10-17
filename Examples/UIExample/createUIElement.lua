@@ -29,6 +29,7 @@ local allWidgets_ = {}
 engine.fs.dofile(path_ .. "widgetHelper.lua")
 
 function test_button_callback(_widget, _mbutton, _action, _mods)
+	engine.io.println(_mbutton)
 	if(_mbutton == 0 and _action == 0) then
 		if(is_bound(_widget) == false) then
 			bind_widget(_widget)
@@ -43,6 +44,7 @@ function test_button_callback(_widget, _mbutton, _action, _mods)
 				return
 			end
 		end
+		_widget:destroy()
 	end
 end
 

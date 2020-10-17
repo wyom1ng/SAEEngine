@@ -35,6 +35,11 @@
           "name": "GLFW_BUILD_EXAMPLES",
           "value": "False",
           "type": "BOOL"
+        },
+        {
+          "name": "CMAKE_INSTALL_PREFIX",
+          "value": "${projectDir}\\out\\install\\x64-Debug",
+          "type": "PATH"
         }
       ]
     },
