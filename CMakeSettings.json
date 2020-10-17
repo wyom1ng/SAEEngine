@@ -12,13 +12,13 @@
       "ctestCommandArgs": "",
       "variables": [
         {
-          "name": "SAEEngine_USE_EXCEPTIONS",
-          "value": "False",
+          "name": "SAE_ENGINE_OVERRIDE_GLFW_VERSION",
+          "value": "false",
           "type": "BOOL"
         },
         {
-          "name": "SAEEngine_OVERRIDE_LUA_VERSION",
-          "value": "False",
+          "name": "SAE_ENGINE_OVERRIDE_LUA_VERSION",
+          "value": "false",
           "type": "BOOL"
         },
         {
@@ -40,6 +40,11 @@
           "name": "CMAKE_INSTALL_PREFIX",
           "value": "${projectDir}\\out\\install\\x64-Debug",
           "type": "PATH"
+        },
+        {
+          "name": "SAE_ENGINE_HARD_ERRORS",
+          "value": "true",
+          "type": "BOOL"
         }
       ]
     },
@@ -71,6 +76,18 @@
       "name": "x86-Debug",
       "generator": "Ninja",
       "configurationType": "Debug",
+      "buildRoot": "${projectDir}\\out\\build\\${name}",
+      "installRoot": "${projectDir}\\out\\install\\${name}",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "inheritEnvironments": [ "msvc_x86" ],
+      "variables": []
+    },
+    {
+      "name": "x86-Release",
+      "generator": "Ninja",
+      "configurationType": "Release",
       "buildRoot": "${projectDir}\\out\\build\\${name}",
       "installRoot": "${projectDir}\\out\\install\\${name}",
       "cmakeCommandArgs": "",

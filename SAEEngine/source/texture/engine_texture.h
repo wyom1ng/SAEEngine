@@ -67,7 +67,7 @@ namespace sae::engine
 		struct base_pixel_view
 		{
 		protected:
-			constexpr inline void _Check_Bounds() const noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
+			constexpr inline void is_valid_pointer_check() const noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
 			{
 #if SAE_ENGINE_DEBUG_LEVEL > 0
 				assert(this->at_ != nullptr);
@@ -75,7 +75,7 @@ namespace sae::engine
 				assert(this->at_ <= this->end_);
 #endif
 			};
-			constexpr inline void _Check_Value() const noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
+			constexpr inline void is_valid_value_check() const noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
 			{
 #if SAE_ENGINE_DEBUG_LEVEL > 0
 				assert(this->at_ != nullptr);
@@ -99,9 +99,9 @@ namespace sae::engine
 				return this->at_ != nullptr;
 			};
 
-			constexpr pointer data() const noexcept(noexcept(_Check_Value()))
+			constexpr pointer data() const noexcept(noexcept(is_valid_value_check()))
 			{
-				this->_Check_Bounds();
+				this->is_valid_pointer_check();
 				return this->at_;
 			};
 			constexpr uint32_t stride() const noexcept
@@ -112,7 +112,7 @@ namespace sae::engine
 			constexpr const_reference at(uint32_t i) const noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
 			{
 #if SAE_ENGINE_DEBUG_LEVEL > 0
-				this->_Check_Value();
+				this->is_valid_value_check();
 				assert(i < this->stride_);
 #endif
 				return *(this->at_ + i);
@@ -154,7 +154,7 @@ namespace sae::engine
 
 			friend inline constexpr std::ptrdiff_t operator-(base_pixel_view lhs, base_pixel_view rhs) noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
 			{
-				assert(lhs.stride_ == _rhs.stride_);
+				assert(lhs.stride_ == rhs.stride_);
 				return ((lhs.at_ - rhs.at_) / lhs.stride_);
 			};
 	
@@ -162,13 +162,13 @@ namespace sae::engine
 			{
 				auto _out = *this;
 				_out.at_ += (n * this->stride_);
-				_out._Check_Bounds();
+				_out.is_valid_pointer_check();
 				return _out;
 			};
 			base_pixel_view& operator+=(uint32_t n) noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
 			{
 				this->at_ += (n * this->stride_);
-				this->_Check_Bounds();
+				this->is_valid_pointer_check();
 				return *this;
 			};
 
@@ -176,41 +176,41 @@ namespace sae::engine
 			{
 				auto _out = *this;
 				_out.at_ -= (n * this->stride_);
-				_out._Check_Bounds();
+				_out.is_valid_pointer_check();
 				return _out;
 			};
 			base_pixel_view& operator-=(uint32_t n) noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
 			{
 				this->at_ -= (n * this->stride_);
-				this->_Check_Bounds();
+				this->is_valid_pointer_check();
 				return *this;
 			};
 
 			base_pixel_view& operator++() noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
 			{
 				this->at_ += this->stride_;
-				this->_Check_Bounds();
+				this->is_valid_pointer_check();
 				return *this;
 			};
 			base_pixel_view& operator++(int) noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
 			{
 				auto _out = *this;
 				this->at_ += this->stride_;
-				this->_Check_Bounds();
+				this->is_valid_pointer_check();
 				return _out;
 			};
 
 			base_pixel_view& operator--() noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
 			{
 				this->at_ -= this->stride_;
-				this->_Check_Bounds();
+				this->is_valid_pointer_check();
 				return *this;
 			};
 			base_pixel_view& operator--(int) noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
 			{
 				auto _out = *this;
 				this->at_ -= this->stride_;
-				this->_Check_Bounds();
+				this->is_valid_pointer_check();
 				return _out;
 			};
 
@@ -273,7 +273,7 @@ namespace sae::engine
 			reference at(uint8_t i) noexcept((SAE_ENGINE_DEBUG_LEVEL == 0))
 			{
 #if SAE_ENGINE_DEBUG_LEVEL > 0
-				this->_Check_Value();
+				this->is_valid_value_check();
 				assert(i < this->stride_);
 #endif
 				return *(this->at_ + i);
